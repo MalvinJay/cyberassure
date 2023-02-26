@@ -1,7 +1,33 @@
 import React from "react";
 import Image from "next/image";
+import { Dropdown, Space } from 'antd';
+import Link from "next/link";
 
 const header = () => {
+
+  const dropdownItems = [
+    {
+      key: '1',
+      label: (
+        <Link href="/app/profile">Profile</Link>
+      )
+    },
+    {
+      key: '2',
+      label: (
+        <Link href="/app/settings">Settings</Link>
+      )
+    }
+  ];
+
+  const MenuOverlay = () => (
+    dropdownItems.map((el, index) => (
+      <div className="px-3 py-1 hover:bg-slate-50" key={index}>
+        {el.label}
+      </div>
+    ))
+  )
+
   return (
     <div className="sticky z-10 top-0 h-16 border-b bg-white px-6 lg:py-2.5">
       <div className="flex items-center justify-between space-x-4">
@@ -48,32 +74,43 @@ const header = () => {
             </svg>
           </div>
 
-          <div className="flex items-center dropdown">
-            <Image
-              className="rounded-full"
-              src="/assets/images/user_avatar.svg"
-              width={47}
-              height={47}
-              alt="user"
-            />
-            <div className="flex items-center justify-center">
-              <p className="px-4 mb-0 font-medium">
-                Daniel <br /> Ameyaw
-              </p>
-              <svg
-                width="13"
-                height="9"
-                viewBox="0 0 13 9"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12.5417 0.897317C12.3153 0.672861 12.0091 0.546875 11.6898 0.546875C11.3706 0.546875 11.0644 0.672861 10.838 0.897317L6.50005 5.16347L2.22255 0.897317C1.99615 0.672861 1.6899 0.546875 1.37067 0.546875C1.05145 0.546875 0.745196 0.672861 0.5188 0.897317C0.405545 1.00935 0.315651 1.14264 0.254306 1.28949C0.19296 1.43635 0.161377 1.59387 0.161377 1.75296C0.161377 1.91205 0.19296 2.06957 0.254306 2.21642C0.315651 2.36328 0.405545 2.49657 0.5188 2.6086L5.64213 7.71834C5.75446 7.8313 5.88811 7.92095 6.03535 7.98213C6.1826 8.04332 6.34053 8.07482 6.50005 8.07482C6.65956 8.07482 6.8175 8.04332 6.96475 7.98213C7.11199 7.92095 7.24564 7.8313 7.35797 7.71834L12.5417 2.6086C12.655 2.49657 12.7449 2.36328 12.8062 2.21642C12.8676 2.06957 12.8991 1.91205 12.8991 1.75296C12.8991 1.59387 12.8676 1.43635 12.8062 1.28949C12.7449 1.14264 12.655 1.00935 12.5417 0.897317Z"
-                  fill="black"
-                />
-              </svg>
+          {/* <Dropdown
+            overlay={MenuOverlay}
+            trigger="click"
+            overlayClassName="p-0"
+            placement="bottomRight"
+          >
+          </Dropdown> */}
+
+          <Link href="/app/profile">
+            <div className="flex items-center dropdown">
+              <Image
+                className="rounded-full"
+                src="/assets/images/user_avatar.svg"
+                width={47}
+                height={47}
+                alt="user"
+              />
+
+              <div className="flex items-center justify-center">
+                <p className="px-4 mb-0 font-medium">
+                  Daniel <br /> Ameyaw
+                </p>
+                <svg
+                  width="13"
+                  height="9"
+                  viewBox="0 0 13 9"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12.5417 0.897317C12.3153 0.672861 12.0091 0.546875 11.6898 0.546875C11.3706 0.546875 11.0644 0.672861 10.838 0.897317L6.50005 5.16347L2.22255 0.897317C1.99615 0.672861 1.6899 0.546875 1.37067 0.546875C1.05145 0.546875 0.745196 0.672861 0.5188 0.897317C0.405545 1.00935 0.315651 1.14264 0.254306 1.28949C0.19296 1.43635 0.161377 1.59387 0.161377 1.75296C0.161377 1.91205 0.19296 2.06957 0.254306 2.21642C0.315651 2.36328 0.405545 2.49657 0.5188 2.6086L5.64213 7.71834C5.75446 7.8313 5.88811 7.92095 6.03535 7.98213C6.1826 8.04332 6.34053 8.07482 6.50005 8.07482C6.65956 8.07482 6.8175 8.04332 6.96475 7.98213C7.11199 7.92095 7.24564 7.8313 7.35797 7.71834L12.5417 2.6086C12.655 2.49657 12.7449 2.36328 12.8062 2.21642C12.8676 2.06957 12.8991 1.91205 12.8991 1.75296C12.8991 1.59387 12.8676 1.43635 12.8062 1.28949C12.7449 1.14264 12.655 1.00935 12.5417 0.897317Z"
+                    fill="black"
+                  />
+                </svg>
+              </div>
             </div>
-          </div>
+          </Link>
         </div>
       </div>
     </div>

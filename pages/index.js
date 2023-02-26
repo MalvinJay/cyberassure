@@ -1,3 +1,4 @@
+import DefaultLayout from '@/components/Layouts/defaultLayout'
 import Head from 'next/head'
 
 import styles from '../styles/Home.module.css'
@@ -11,11 +12,28 @@ export default function Home() {
         <link rel="icon" href="/logo.png" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to OrgPosture!
-        </h1>
-      </main>
+      <DefaultLayout>
+        <main className={styles.main}>
+          <section class="bg-default dark:bg-gray-900 h-screen flex items-center">
+            <div class="grid px-4 lg:gap-8 xl:gap-0 lg:grid-cols-12">
+                <div class="mr-auto place-self-center lg:col-span-7">
+                    <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl dark:text-white md:pr-20">
+                    Gain 360 degrees oversight on Enterprise security posture.
+                    </h1>
+                    <p class="max-w-2xl mt-6 mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-4xl dark:text-gray-400 md:pr-20">
+                      Make security decisions through metrics and data 
+                    </p>
+                </div>
+                <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
+                  <img 
+                    src="/assets/images/hero_1.svg" 
+                    alt="mockup" 
+                  />
+                </div>                
+            </div>
+          </section>        
+        </main>
+      </DefaultLayout>
     </div>
   )
 }
