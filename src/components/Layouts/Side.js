@@ -215,7 +215,7 @@ const Side = () => {
         </div>
 
         <div className="p-5">
-          <Link href="/app/KRIs/create">
+          <Link href="/app/KRIs/new">
             <button className="w-full h-10 text-white bg-primary rounded-lg border-0 py-2 px-4 focus:outline-none hover:bg-primary/90 text-lg flex justify-between items-center">
               <span>Create KRI</span>
               <svg

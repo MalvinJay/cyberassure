@@ -4,7 +4,7 @@ import AppLayout from "../../../src/components/Layouts/appLayout";
 
 const { RangePicker } = DatePicker;
 
-const create = () => {
+const NewTask = () => {
   const rangePresets = [
     {
       label: 'Datepicker',
@@ -30,35 +30,31 @@ const create = () => {
 
   const viewership = [
     {
-      name: "Executive Management",
-      type: "corporate"
+      name: "High",
+      value: "high"
     },
     {
-      name: "All Employees",
-      type: "corporate"
+      name: "Medium",
+      value: "medium"
     },
     {
-      name: "Only Me",
-      type: "personal"
-    },
-    {
-      name: "Access List",
-      type: "corporate"
-    },
+      name: "Low",
+      value: "low"
+    }
   ]
 
   return (
     <AppLayout>
       <div className="w-full lg:w-10/12 ml-0 py-5 px-8">
-        <h3 className="text-3xl font-bold">Create KRI</h3>
+        <h3 className="text-3xl font-bold">Create Task</h3>
 
         <form className="py-6 bg-white rounded">
-          <div className="">
+          <div className="mb-4 w-1/2 md:mb-0 pr-4">
             <label
               className="block mb-2 text-sm font-bold text-gray-700"
               for="email"
             >
-              Objective Title
+              Task
             </label>
             <input
               className="w-full px-3 py-3 mb-3 text-sm leading-tight text-gray-700 border border-primary/80 rounded appearance-none focus:outline-none focus:shadow-outline"
@@ -74,11 +70,11 @@ const create = () => {
                 className="block mb-2 text-sm font-bold text-gray-700"
                 for="firstName"
               >
-                Who is this objective for
+                Who is this task for
               </label>
               <Select 
                 className="w-full h-10 text-sm leading-tight text-gray-700 border-primary/80 rounded appearance-none focus:outline-none focus:shadow-outline"
-                placeholder="Title of what uyou want to achieve"
+                placeholder="Select team member"
                 size="large"
                 style={{ height: '43px' }}
               >
@@ -107,11 +103,11 @@ const create = () => {
                 className="block mb-2 text-sm font-bold text-gray-700"
                 for="firstName"
               >
-                Who can view this KRI
+                Level of Priority
               </label>
               <Select 
                 className="w-full h-10 text-sm leading-tight text-gray-700 border-primary/80 rounded appearance-none focus:outline-none focus:shadow-outline"
-                placeholder="Only me"
+                placeholder="Select Priority"
                 size="large"
                 style={{ height: '43px' }}
               >
@@ -122,7 +118,7 @@ const create = () => {
             </div>
           </div>          
 
-          <div className="mb-4 md:flex md:items-center space-x-10">
+          <div className="mb-4 md:flex md:items-center space-x-10 !hidden">
             <Button type="text" className="border-none flex items-center space-x-4 p-0 hover:px-2 text-lg">
               <span>Add extra detials </span>
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -143,7 +139,7 @@ const create = () => {
 
           <div className="mb-4 text-end">
             <button
-              className="w-40 px-4 py-2 font-bold text-white bg-[#198754] rounded-lg focus:outline-none focus:shadow-outline"
+              className="w-40 px-4 py-2 font-bold text-white bg-primary rounded-md focus:outline-none focus:shadow-outline"
               type="button"
             >
               Create
@@ -155,4 +151,4 @@ const create = () => {
   );
 };
 
-export default create;
+export default NewTask;
