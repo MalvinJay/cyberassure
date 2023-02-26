@@ -1,4 +1,5 @@
 import React from "react";
+import ExportEntity from "./ExportEntity";
 
 const AuthHead = () => {
   return (
@@ -21,8 +22,8 @@ const AuthHead = () => {
             </div>
             <div className="pl-10 leading-snug">
             <div className="leading-tight">
-                <span className="font-bold text-base">Daniel Ameyaw</span> <br />
-                <span className="text-black/60 leading-snug font-semibold">Innovare</span>
+                <h3 className="font-bold text-base mb-0">Daniel Ameyaw</h3>
+                <p className="text-black/60 leading-snug font-semibold p-0 m-0 text-center">Innovare</p>
             </div>
             </div>
         </div>
@@ -48,44 +49,48 @@ const AuthHead = () => {
             </div>
         </div>
 
-        <div className="space-x-5 flex">
+        <div className="space-x-5 flex items-center">
             <div className="flex">
-            <span className="text-[#878787] font-bold">Month</span>
-            <div className="flex items-center pl-2">
-                June
-                <svg
-                width="12"
-                height="9"
-                viewBox="0 0 12 9"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                >
-                <path
-                    d="M6.1548 8.71582L0.495195 0.0468597H11.8144L6.1548 8.71582Z"
-                    fill="#0883C7"
-                />
-                </svg>
-            </div>
+                <span className="text-[#878787] font-bold">Month</span>
+
+                <div className="flex items-center pl-2">
+                    June
+                    <svg
+                    width="12"
+                    height="9"
+                    viewBox="0 0 12 9"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    >
+                    <path
+                        d="M6.1548 8.71582L0.495195 0.0468597H11.8144L6.1548 8.71582Z"
+                        fill="#0883C7"
+                    />
+                    </svg>
+                </div>
             </div>
 
             <div className="flex items-center">
-            <span className="text-[#878787] font-bold">Year</span>
-            <div className="flex items-center pl-2">
-                2022
-                <svg
-                width="12"
-                height="9"
-                viewBox="0 0 12 9"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                >
-                <path
-                    d="M6.1548 8.71582L0.495195 0.0468597H11.8144L6.1548 8.71582Z"
-                    fill="#0883C7"
-                />
-                </svg>
+                <span className="text-[#878787] font-bold">Year</span>
+
+                <div className="flex items-center pl-2">
+                    2022
+                    <svg
+                    width="12"
+                    height="9"
+                    viewBox="0 0 12 9"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    >
+                    <path
+                        d="M6.1548 8.71582L0.495195 0.0468597H11.8144L6.1548 8.71582Z"
+                        fill="#0883C7"
+                    />
+                    </svg>
+                </div>
             </div>
-            </div>
+
+            <ExportEntity />
         </div>
       </div>
     </div>
