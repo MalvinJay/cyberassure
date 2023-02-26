@@ -1,5 +1,17 @@
+/* @import "antd.custom.scss"; */
+
 @tailwind base;
 @tailwind components;
+
+.ant-select-selector {
+  height: inherit !important;
+  @apply border-primary/80 rounded !important;
+}
+
+/* .ant-btn-primary:hover {
+  background-color: ;
+} */
+
 @tailwind utilities;
 
 html,
@@ -27,4 +39,39 @@ a {
     color: white;
     background: black;
   }
+}
+
+/* Custom */
+.ant-select-selector {
+  height: inherit !important;
+}
+.risk table {
+  background: #F9F9F9 !important;
+  font-weight: 700 !important;
+}
+.risk .ant-table-wrapper .ant-table-thead > tr> th {
+  font-weight: 700 !important;
+}
+.risk .ant-table-wrapper .ant-table-tbody > tr > td {
+  padding: 5px 16px !important;
+  border: none !important
+}
+.kri-update .ant-table-container,
+.kri-update table,
+.kri-update .ant-table-wrapper .ant-table-thead, 
+.kri-update .ant-table-wrapper .ant-table-thead > tr > th, 
+.kri-update .ant-table-wrapper .ant-table-tbody > tr > td, 
+.kri-update .ant-table-wrapper .ant-table-tbody  {
+  color: black !important;
+  font-weight: 700;
+  background: #D9D9D9 !important;
+  border-radius: 0 !important;
+  border-color: black !important;
+}
+.kri-update .ant-table-wrapper .ant-table-tbody >tr.ant-table-row:hover>td {
+  background-color: transparent !important;
+  border-color: black !important;
+}
+div[data-highcharts-chart="1"] {
+  height: inherit !important;
 }
