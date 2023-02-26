@@ -93,10 +93,9 @@ const Dashboard = () => {
                 <div className="min-w-32 flex justify-end mt-4">
                   <Button 
                     href={`/app/KRIs/update/innovare`} 
-                    size="large" 
                     type="primary" 
                     shape="default" 
-                    className="bg-primary text-white px-16 rounded-none"
+                    className="bg-primary text-white px-16 rounded-none font-bold text-base flex items-center"
                   >
                     Update KRI
                   </Button>

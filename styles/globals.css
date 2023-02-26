@@ -22,6 +22,10 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  @apply m-0 p-0 !important;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -68,9 +72,20 @@ a {
   border-radius: 0 !important;
   border-color: black !important;
 }
-.kri-update .ant-table-wrapper .ant-table-tbody >tr.ant-table-row:hover>td {
+/* .kri-update .ant-table-wrapper .ant-table-tbody > tr.ant-table-row:hover>td {
   background-color: transparent !important;
   border-color: black !important;
+} */
+.risk-register .ant-table-wrapper .ant-table-thead > tr > th {
+  background: #3789B4 !important;
+}
+.risk-register .ant-table-wrapper .ant-table-thead > tr > th::before {
+ width: 0!important; 
+}
+.risk-register .ant-table-wrapper .ant-table-tbody > tr > td, 
+.risk-register .ant-table-wrapper .ant-table-thead > tr > th {
+  margin: 10px !important;
+  border: 3px solid white !important
 }
 div[data-highcharts-chart="1"] {
   height: inherit !important;

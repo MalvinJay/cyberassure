@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import { Button } from 'antd'
-import { CaretDownOutlined, PlusCircleOutlined } from '@ant-design/icons'
+import { CaretDownOutlined, CaretUpOutlined, PlusCircleOutlined } from '@ant-design/icons'
 
-import KRIUpdate from "../../components/Misc/KRIUpdate";
+import KRITable from "./KRITable";
 import AddComment from './AddComment';
 
 const KRIItem = ({ 
@@ -18,6 +18,51 @@ const KRIItem = ({
 }) => {
     const router = useRouter();
     const [revealKRIs, setrevealKRIs] = useState(false);
+
+    const columns = [
+        {
+          title: "Key Results",
+          dataIndex: "results",
+          key: "results",
+        },
+        {
+          title: "Description",
+          dataIndex: "description",
+          key: "description",
+        },
+        {
+          title: "Status",
+          dataIndex: "status",
+          key: "status",
+        },
+        {
+          title: "Comment",
+          dataIndex: "comment",
+          key: "comment",
+        },
+        {
+          title: "Upload Evidence",
+          dataIndex: "evidence",
+          key: "evidence",
+        },
+    ];
+    
+    const dataSource = [
+    {
+        results: "OBDX Project",
+        description: "New Ecobank Online Banking Portal",
+        status: "At Risk",
+        comment: "There is no budget to progress with project",
+        evidence: "upload file",
+    },
+    {
+        results: "OBDX Project",
+        description: "New Ecobank Online Banking Portal",
+        status: "At Risk",
+        comment: "There is no budget to progress with project",
+        evidence: "upload file",
+    },
+    ];    
     
     const handleClick = () => {
         if (showTime && showAddkey) router.push(`/app/KRIs/approve?q=${slug_id?.toLowerCase()}`)
@@ -44,7 +89,7 @@ const KRIItem = ({
                             <Button type="text" className="p-4 mt-1 flex items-center space-x-2" onClick={() => { setrevealKRIs(!revealKRIs)}}>
                                 <PlusCircleOutlined />
                                 <span>Add a new key result</span>
-                                <CaretDownOutlined />
+                                {revealKRIs ? <CaretUpOutlined /> : <CaretDownOutlined  />}
                             </Button>
                         )}
                     </div>
@@ -66,7 +111,10 @@ const KRIItem = ({
 
         {revealKRIs && (
             <div className="pb-10 px-10">
-                <KRIUpdate />
+                <KRITable 
+                    columns={columns}
+                    dataSource={dataSource}
+                />
 
                 <div className="pt-2 flex justify-between items-start">
                     <AddComment />
