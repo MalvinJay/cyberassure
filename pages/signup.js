@@ -5,7 +5,7 @@ import DefaultLayout from '../src/components/Layouts/defaultLayout'
 const Signup = () => {
   return (
     <DefaultLayout>
-        <section className="w-full flex justify-center items-center pb-12">
+        <section className="w-full flex justify-center items-center pb-12 max-w-screen-xl mx-auto">
           <div className="w-full md:w-1/2 lg:w-1/3 flex flex-col md:py-8 mt-8 md:mt-0 mx-auto text-lg">
             <h2 className="text-primary text-lg md:text-3xl mb-2 font-medium title-font text-center">
               Sign up to get started

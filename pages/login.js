@@ -43,7 +43,7 @@ const Signin = () => {
 
   return (
     <DefaultLayout>
-      <section className="body-font relative">
+      <section className="max-w-screen-xl mx-auto body-font relative">
         <div className="container px-5 mx-auto flex sm:flex-nowrap flex-wrap">
           <div className="lg:w-3/5 md:w-1/2 py-10 relative flex justify-center items-center">
             <p className="text-4xl lg:text-5xl font-medium sm:pr-20 lg:pr-32 lg:pb-24">
