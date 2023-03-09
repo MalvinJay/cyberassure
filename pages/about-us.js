@@ -72,21 +72,33 @@ const ContactUs = () => {
                 We care about automating customers cybersecurity processes through the development of Key performance indicators and key risk indicators to ensure proactive risk controls whiles safeguarding the business in achieving its objectives.
               </p>
 
-              <div className="md:py-10 lg:py-16 relative">
+              <div className="md:py-16 lg:py-20 relative">
                 <h3 className="text-2xl text-black dark:text-white font-semibold">Our Values</h3>
+
+                <div className="absolute right-10 -top-2">
+                  <Image
+                    width={285}
+                    height={142}
+                    className="object-contain" 
+                    data-aos="fade-zoom-in"
+                    data-aos-anchor-placement="top-bottom" data-aos-duration="2000"
+                    src="/assets/images/About-Us/values.png" 
+                    alt="mockup" 
+                  />
+                </div>
 
                 <div className="flex flex-col leading-relaxed pt-2">
                   <span> 
-                    <b>Integrity</b> – We honor our word and commitment
+                    <b><i>Integrity</i></b> – We honor our word and commitment
                   </span>
                   <span> 
-                    <b>Collaboration</b> - We work closely with our clients to understand their unique security needs and challenges whiles staying up-to-date with the latest threats and trends.
+                    <b><i>Collaboration</i></b> - We work closely with our clients to understand their unique security needs and challenges whiles staying up-to-date with the latest threats and trends.
                   </span>
                   <span> 
-                    <b>Customer-focused</b> - We prioritize customer’s needs and requirements, and tailor our services to meet each client's unique needs. Our aim is to build long-lasting relationships with clients based on trust, communication, and mutual respect.
+                    <b><i>Customer-focused</i></b> - We prioritize customer’s needs and requirements, and tailor our services to meet each client's unique needs. Our aim is to build long-lasting relationships with clients based on trust, communication, and mutual respect.
                   </span>
                   <span> 
-                    <b>Excellence</b> – We aim to exceed expectations.       
+                    <b><i>Excellence</i></b> – We aim to exceed expectations.       
                   </span>
                 </div>
               </div>
