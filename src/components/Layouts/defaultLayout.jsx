@@ -12,11 +12,11 @@ const DefaultLayout = ({ children }) => {
 			<Image src="/logo_wide.png" width={253} height={31} className="object-contain" alt="logo" />
           </a>
 
-          <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center font-medium">
-            <a className="mr-5 hover:text-gray-900">Home</a>
-            <a className="mr-5 hover:text-gray-900">Products</a>
-            <a className="mr-5 hover:text-gray-900">About Us</a>
-            <a className="mr-5 hover:text-gray-900">Contact</a>
+          <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center font-medium space-x-5">
+            <Link href="/" className="hover:underline hover:text-gray-900">Home</Link>
+            <Link href="/products" className="hover:underline hover:text-gray-900">Products</Link>
+            <Link href="/about-us" className="hover:underline hover:text-gray-900">About Us</Link>
+			<Link href="/contact-us" className="hover:underline hover:text-gray-900">Contact</Link>
           </nav>
 
 		  <div>
