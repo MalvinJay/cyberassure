@@ -14,7 +14,7 @@ const DefaultLayout = ({ children }) => {
 
           <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center font-medium space-x-5">
             <Link href="/" className="hover:underline hover:text-gray-900">Home</Link>
-            <Link href="/products" className="hover:underline hover:text-gray-900">Products</Link>
+            <Link href="/consulting" className="hover:underline hover:text-gray-900">Products</Link>
             <Link href="/about-us" className="hover:underline hover:text-gray-900">About Us</Link>
 			<Link href="/contact-us" className="hover:underline hover:text-gray-900">Contact</Link>
           </nav>
