@@ -8,13 +8,15 @@ const DefaultLayout = ({ children }) => {
     <div className="min-h-screen">
       <header className="body-font">
         <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-          <a className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+          
+		  <Link href="/" className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
 			<Image src="/logo_wide.png" width={253} height={31} className="object-contain" alt="logo" />
-          </a>
+          </Link>
 
           <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center font-medium space-x-5">
-            <Link href="/" className="hover:underline hover:text-gray-900">Home</Link>
-            <Link href="/consulting" className="hover:underline hover:text-gray-900">Products</Link>
+            <Link href="/platform" className="hover:underline hover:text-gray-900">Platform</Link>
+            <Link href="/consulting" className="hover:underline hover:text-gray-900">Consulting</Link>
+            <Link href="/partners" className="hover:underline hover:text-gray-900">Partners</Link>
             <Link href="/about-us" className="hover:underline hover:text-gray-900">About Us</Link>
 			<Link href="/contact-us" className="hover:underline hover:text-gray-900">Contact</Link>
           </nav>

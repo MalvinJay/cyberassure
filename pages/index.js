@@ -6,7 +6,7 @@ const Index = () => {
   return (
     <div className="">
       <Head>
-        <title>RGPosture | Cyberassure</title>
+        <title>Home | OrgPosture</title>
         <meta name="description" content="" />
         <link rel="icon" href="/logo.png" />
       </Head>
@@ -136,7 +136,7 @@ const Index = () => {
                 </ul>                
               </div>
 
-              <div className="text-2xl col-span-4 col-end-12" data-aos="fade-left">
+              <div className="text-2xl col-span-4 col-end-12" data-aos="fade-up">
                 <h3 className="font-semibold pl-5">Capabilities</h3>
                 <ul className="lg:pl-2 list-disc pt-6">
                   <li>Security Convergence </li>

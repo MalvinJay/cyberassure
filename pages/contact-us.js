@@ -30,7 +30,7 @@ const ContactUs = () => {
                     />
                 </div>
                 <div className="px-4 flex items-start pt-10">
-                    <div className="w-full sm:w-8/12">
+                    <div className="w-full sm:w-8/12 pb-10 xl:pb-20">
                         <div className='pl-10'><h3 className='text-2xl text-primary'>Contact Us</h3></div>
 
                         <form className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-5">
@@ -93,7 +93,7 @@ const ContactUs = () => {
                             </div>   
                             <div className="relative"></div>                         
 
-                            <div className="pb-4">
+                            <div className="py-4">
                                 <button className="w-full sm:w-auto sm:px-4 lg:px-6 h-12 text-white bg-primary rounded-lg border-0 py-2 focus:outline-none hover:bg-primary/90 text-lg flex justify-between items-center"
                                     onClick={(e) => handleAuth(e)}
                                 >
@@ -113,7 +113,7 @@ const ContactUs = () => {
 
                                 <div className="pt-5 text-black">
                                     <Checkbox>
-                                        <div>I agree to receive communication from OrgPosture</div>
+                                        <div className='text-sm font-medium'>I agree to receive communication from OrgPosture</div>
                                     </Checkbox>
                                 </div>
                             </div>
@@ -123,17 +123,17 @@ const ContactUs = () => {
                     <div className="w-full sm:w-7/12 text-center font-medium">
                         <h3 className='text-2xl text-primary'>Contact Our Office</h3>
 
-                        <p className="pt-5">
+                        <p className="pt-5 leading-relaxed">
                             Headquarters <br />
                             Block C9, Sakumono <br />
                             Accra - Ghana
                             <br />
 
-                            Tel: +233 24 693 6458  <br />
+                            Tel: <a href="tel:+233246936458" className='hover:underline'>+233 24 693 6458</a> <br />
 
-                            Inquires: info@orgposture.com <br />
+                            Inquires: <a href="mailto:info@orgposture.com" className='hover:underline'>info@orgposture.com</a> <br />
 
-                            Sales: sales@orgposture.com <br />
+                            Sales: <a href="sales@orgposture.com" className='hover:underline'>sales@orgposture.com</a> <br />
                             <br />
 
                             UK Office  <br />

@@ -18,7 +18,7 @@ const Signup = () => {
               <Link href="/login" className="text-primary">Login</Link>
             </p>
             
-            <form className="">
+            <form className="" data-aos="fade-up" data-aos-duration="800">
               <div className="relative mb-5">
                 <input 
                   type="text" 

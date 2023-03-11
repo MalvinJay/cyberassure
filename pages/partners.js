@@ -30,7 +30,7 @@ const Partners = () => {
           </div>
 
           <div class="max-w-screen-xl mx-auto px-4 md:px-10 md:py-10 lg:py-16">
-            <div className="" data-aos="fade-down">
+            <div className="" data-aos="fade-up" data-aos-duration="800">
               <p className="font-semibold leading-loose text-2xl text-center pb-10 mx-auto">
                 <span>
                   All our products and services seeks to serve one purpose
@@ -58,7 +58,7 @@ const Partners = () => {
 
             <div className="w-full sm:w-8/12 mx-auto pt-10">
               <div className="pl-10">
-                <h3 className="text-2xl text-primary font-semibold">
+                <h3 className="text-2xl text-primary dark:text-white font-semibold">
                   Get Started Today
                 </h3>
               </div>
@@ -136,7 +136,7 @@ const Partners = () => {
 
                 <div className="pb-4">
                   <button
-                    className="w-full sm:w-auto sm:px-4 lg:px-6 h-12 text-white bg-primary rounded-lg border-0 py-2 focus:outline-none hover:bg-primary/90 text-lg flex justify-between items-center"
+                    className="w-full sm:w-auto sm:px-4 lg:px-6 h-10 text-white bg-primary rounded-lg border-0 py-2 focus:outline-none hover:bg-primary/90 text-lg flex justify-between items-center"
                     onClick={(e) => handleAuth(e)}
                   >
                     <span>Submit</span>
