@@ -74,7 +74,7 @@ const RiskRegister = () => {
 
         <div className="w-full pt-32 pb-20 px-8">
           <div className="flex justify-between items-center">
-            <Link href="/app/KRIs/create">
+            <Link href="/app/KRIs/new">
               <button className="h-10 text-white bg-primary rounded-lg border-0 py-2 px-4 focus:outline-none hover:bg-primary/90 text-lg space-x-4 inline-flex items-center">
                 <span>Create Risk Register</span>
                 <svg
