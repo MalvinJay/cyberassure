@@ -1,49 +1,14 @@
 import DefaultLayout from '@/components/Layouts/defaultLayout'
-import { Button } from 'antd'
 import Head from 'next/head'
 import Image from 'next/image'
 
 const Platform = () => {
-  const orgPostureList = [
-    {
-      image: "/assets/images/Platform/enterprise.png",
-      info: "End-to-End visibility of your enterprise "
-    },
-    {
-      image: "/assets/images/Platform/focus.png",
-      info: "Focus on key risk and prioritize"
-    },
-    {
-      image: "/assets/images/Platform/control.png",
-      info: "Set Comprehensive controls in line with standards "
-    }
-  ];
-
-  const resources = [
-    {
-      info: "The Power of Key Risk Indicators in Technology Risk Management",
-      link: "#"
-    },
-    {
-      info: "Lessons learnt from Log4J",
-      link: "#"
-    },
-    {
-      info: "Reaching the cutting edge of Cybersecurity - The Buffett Reputation Razor",
-      link: "#"
-    },
-    {
-      info: "Principal-Agent Problem in  Cybersecurity",
-      link: "#"
-    },
-  ];
-
   return (
     <div className="">
       <Head>
-        <title>Platform | RGPosture</title>
-        <meta name="description" content="We help you set your Corporate Goals, Measure your Progress and Achieve Results" />
-        <link rel="icon" href="logo.svg" />
+        <title>Platform | OrgPosture</title>
+        <meta name="description" content="We help you set your Corporate Goals, Measure your Progress and  Achieve Results" />
+        <link rel="icon" href="/logo.png" />
       </Head>
 
       <DefaultLayout>
@@ -51,16 +16,34 @@ const Platform = () => {
           <section class="w-full bg-default dark:bg-gray-900 md:h-screen flex items-center">
             <div class="max-w-screen-xl mx-auto grid px-4 lg:gap-8 xl:gap-0 md:grid-cols-12">
               <div class="mr-auto place-self-center lg:col-span-7">
-                  <h1 class="max-w-2xl mb-4 text-4xl font-extrabold md:text-5xl !leading-tight dark:text-white md:pr-20">
-                    We help you set your Corporate Goals, Measure your Progress and
-                    &nbsp;<span className="text-primary">Achieve Results</span>
+                  <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl dark:text-white md:pr-20">
+                  Gain 360 degrees oversight on Enterprise security posture.
                   </h1>
-                  <div className="space-x-5 pt-10">
-                    <Button type="primary" className="text-lg bg-primary text-white h-10 px-12 dark:text-black dark:bg-white">
-                      Get Started
-                    </Button>
-                    <Button type="default" className="text-lg text-primary border-primary h-10 px-6 dark:text-white dark:border-white">See how it works</Button>
-                  </div>
+                  <p class="max-w-2xl mt-6 mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-4xl dark:text-gray-400 md:pr-20">
+                    Make security decisions through metrics and data 
+                  </p>
+              </div>
+              <div class="lg:mt-0 lg:col-span-5 lg:flex">
+                <Image
+                  width={678}
+                  height={402}
+                  className="object-contain" 
+                  data-aos="fade-zoom-in"
+                  data-aos-anchor-placement="top-bottom" data-aos-duration="2000"
+                  src="/assets/images/hero_1.svg" 
+                  alt="mockup" 
+                />
+              </div>                
+            </div>
+          </section>    
+
+          <section class="w-full bg-white dark:bg-gray-900 flex items-center py-4 md:py-16 lg:py-24">
+            <div class="max-w-screen-xl mx-auto grid px-4 lg:gap-8 lg:gap-x-0 xl:gap-y-12 md:grid-cols-12">
+              <div class="mr-auto place-self-center lg:col-span-7">
+                <p class="font-medium dark:text-white md:pr-20 lg:pr-40 !leading-normal text-lg lg:text-4xl" data-aos="fade-right">
+                  Automate Cyber and Information Security within the enterprise without chasing 
+                  process and system owners.
+                </p>
               </div>
               <div class="lg:mt-0 lg:col-span-5 lg:flex">
                 <Image
@@ -68,138 +51,105 @@ const Platform = () => {
                   height={402}
                   className="object-contain" 
                   data-aos="fade-up" data-aos-duration="1500"
-                  src="/assets/images/platform.png" 
-                  alt="platform" 
+                  src="/assets/images/automate_security.svg" 
+                  alt="automate_security" 
                 />
-              </div>                
-            </div>
-          </section>    
+              </div>  
 
-          <section class="w-full bg-white dark:bg-gray-900 py-4 md:py-16">
-            <div class="max-w-screen-xl mx-auto px-4">
-              <div className="w-full sm:w-2/3 xl:w-1/2 mx-auto" 
-                data-aos="fade-up"
-              >
-                <div className="font-semibold leading-snug text-3xl text-center pb-10 mx-auto" style={{ textShadow: '2px 4px 4px rgba(0, 0, 0, 0.25)'}}>
-                  <p>Experience the most efficient enterprise risk management solution </p>
+              <div class="col-start-1 lg:col-end-6 lg:flex lg:py-16">
+                <Image
+                  width={482}
+                  height={461}
+                  className="object-contain" 
+                  data-aos="fade-up" data-aos-duration="1500"
+                  src="/assets/images/kri_status.svg" 
+                  alt="automate_security" 
+                />                
+              </div>   
+              <div class="ml-auto place-self-center col-span-5 col-end-13">
+                <p class="font-medium dark:text-white md:px-10 lg:px-20 !leading-snug text-lg lg:text-3xl" data-aos="fade-right">
+                  Identify inefficiencies and improve security posture.
+                </p>
+              </div>  
+
+              <div class="mr-auto place-self-center lg:col-span-6 mt-4">
+                <p class="font-medium dark:text-white md:pr-20 text-lg lg:text-3xl" data-aos="fade-right">
+                  Integrate security risk indicators through APIs into platforms and security solutions. 
+                  Prioritize risk and response capabilities. 
+                </p>
+              </div>
+              <div class="lg:mt-0 lg:col-span-6 lg:flex lg:py-16">
+                <Image
+                  width={678}
+                  height={402}
+                  className="object-contain" 
+                  src="/assets/images/partners.svg" 
+                  data-aos="zoom-in-down" data-aos-duration="1500"
+                  alt="automate_security" 
+                />
+              </div> 
+            </div>
+          </section>  
+
+          <section class="w-full bg-white dark:bg-gray-900 flex items-center py-4 md:pb-16 lg:pb-24">
+            <div class="max-w-screen-xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-12">
+              <div className="md:pr-16 xl:pr-24 col-start-1 col-end-13 md:col-end-7">
+                <h2 className="leading-normal text-lg lg:text-4xl font-medium">Task Management</h2>
+                
+                <Image
+                  width={678}
+                  height={402}
+                  className="object-contain" 
+                  src="/assets/images/team_management.svg" 
+                  data-aos="zoom-in" data-aos-duration="1500"
+                  alt="team_managment" 
+                />
+              </div>
+              <div className="text-2xl col-span-4 col-end-12" data-aos="fade-left">
+                <p className="leading-normal pb-5">
+                  Keep an eye on assigned security risk tasks to colleagues and ensure efficiency in security and compliance.
                   <br />
-                  <p>Strengthen your security posture</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="max-w-screen-xl mx-auto">
-              <div className="text-primary dark:text-white pt-10 pl-10">
-                <h2 className="text-4xl text-primary dark:text-white font-semibold">Orgposture</h2>
-                <p className='text-lg pt-2'>Make data driven security decisions</p>
-              </div>
-
-              <div className="w-full grid sm:grid-cols-2 md:grid-cols-3 gap-10 lg:gap-20 px-4 py-4 md:py-16">
-                {orgPostureList.map((el, index) => (
-                  <div class="text-center mx-auto flex flex-col items-center space-y-10" key={index}>
-                    <Image
-                      width={108}
-                      height={102}
-                      className="object-contain"
-                      data-aos="fade-up" data-aos-duration="1500"
-                      src={el.image}
-                      alt={el.name}
-                    />
-
-                    <p class="w-full lg:w-2/3 mx-auto text-center font-medium dark:text-white !leading-normal text-lg" data-aos="fade-up">
-                      {el.info}
-                    </p>                  
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div class="max-w-screen-xl mx-auto">
-              <div className="w-full sm:w-2/3 xl:w-2/5 mx-auto" data-aos="fade-up">
-                <h2 className="font-bold leading-snug text-3xl text-center mx-auto">
-                  Manage security strategy, people, process and technology  on one platform
-                </h2>
-              </div>
-
-              <div className="grid px-4 lg:gap-8 lg:gap-x-0 xl:gap-y-12 md:grid-cols-12 pt-10">
-                <div class="mr-auto col-start-1 lg:col-end-7" data-aos="fade-up" data-aos-duration="1500">
-                  <Image
-                    width={600}
-                    height={312}
-                    className="object-contain" 
-                    src="/assets/images/Platform/manage_security.png" 
-                    alt="automate_security" 
-                  />
-
-                  <div className='pt-5'>
-                    <h3 className="text-xl text-black dark:text-white font-bold">Report improvements to leadership</h3>
-                    
-                    <p className="leading-relaxed text-black dark:text-white pt-3 text-lg font-medium">
-                      Use historical report to track and maintain progress, identify regressions, and report to leaderships teams. Using measurable data, clearly demonstrate the progress you’re making to better secure your environment.
-                    </p>
-                  </div>
-                </div>
-
-                <div class="col-span-5 col-end-13" data-aos="fade-up" data-aos-duration="1500">
-                  <Image
-                    width={452}
-                    height={319}
-                    className="object-contain" 
-                    src="/assets/images/Platform/management_lifecycle.svg"
-                    alt="lifecycle" 
-                  />
-
-                  <p className="leading-relaxed text-black dark:text-white pt-3 text-lg font-medium">
-                    Improve their security posture by providing discoverability, visibility, guidance, and control in line with security standards and frameworks
-                  </p>
-                </div>
-
-                <div class="mr-auto col-start-1 lg:col-end-7" data-aos="fade-up" data-aos-duration="1500">
-                  <Image
-                    width={600}
-                    height={312}
-                    className="object-contain" 
-                    src="/assets/images/Platform/protect.png" 
-                    alt="protect_security" 
-                  />
-
-                  <p className="leading-relaxed text-black dark:text-white pt-5 text-base font-medium">
-                    Protect your organization from threats and proactively implement controls to mitigate risk.
-                  </p>                
-                </div>
-
-                <div class="col-span-5 col-end-13" data-aos="fade-up" data-aos-duration="1500">
-                  <Image
-                    width={452}
-                    height={319}
-                    className="object-contain"
-                    src="/assets/images/Platform/KRI-highlights.png"
-                    alt="lifecycle" 
-                  />
-
-                  <p className="leading-relaxed text-black dark:text-white pt-5 text-base font-medium">
-                    Gain access to robust visualizations of metrics and trends, integration with other security products and much more.
-                  </p>
-                </div>
-
-              </div>
-            </div>
-
-            <div class="max-w-screen-xl mx-auto px-4 py-4 md:py-16">
-              <h2 className="font-bold leading-snug text-3xl text-center mx-auto">
-                Resources
-              </h2>
-
-              <div className="w-full grid sm:grid-cols-2 md:grid-cols-2 gap-10 pt-10">
-                {resources.map((el, index) => (
-                  <div className='w-full sm:w-2/3 lg:w-3/4 mx-auto text-lg space-x-2' key={index}>
-                    <span>{el.info}</span>
-                    <Button type='primary' className='bg-primary rounded-md text-white dark:text-black dark:bg-white'>Read More</Button>
-                  </div>
-                ))}
+                  Automate security within your department through task management workflow
+                </p>
+                <h3 className="font-semibold">Key Features</h3>
+                <ul className="lg:pl-10 list-disc">
+                  <li>Tasks can be linked in security policies / key risk indicators / KPIs</li>
+                  <li>Tasks are integrated into risk management framework</li>
+                  <li>Email Notification</li>
+                  <li>End to End visibility of tasks for all team members</li>
+                </ul>
               </div>
             </div>
           </section>
+
+          <section class="w-full bg-white dark:bg-gray-900 flex items-center py-4 md:pb-16 lg:pb-24">
+            <div class="max-w-screen-xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-12">
+              <div className="md:pr-16 col-start-1 col-end-13 md:col-end-7 border-r border-black">
+                <h3 className="font-semibold ml-10 text-2xl">Benefits of OrgPosture Platform</h3>
+                <ul className="lg:pl-2 list-disc pt-6 text-xl">
+                  <li>Meet regulatory responsibilities by quickly ascertaining enterprise’s measures to guard against cyber attacks ​</li>
+                  <li>Capture summarized data that enables informed and more productive conversations with the firm’s Cyber Security and Risk   Management leadership </li>
+                  <li>Identify areas that need improvement and potential investments and practices to address</li>
+                  <li>Deliver meaningful data that executives and board members can easily consume and incorporate into your risk management conversations and save over 50% of the time it would regularly take you</li>
+                  <li>Demonstrate periodic progress against cyber risk management goals and the practices such as cyber training, investments in technology, etc., contributing to these advancements​</li>
+                  <li>Provide data-driven business cases for additional investments to further protect the firm’s critical assets</li>
+                </ul>                
+              </div>
+
+              <div className="text-2xl col-span-4 col-end-12" data-aos="fade-up">
+                <h3 className="font-semibold pl-5">Capabilities</h3>
+                <ul className="lg:pl-2 list-disc pt-6">
+                  <li>Security Convergence </li>
+                  <li>Improved Security Culture</li>
+                  <li>Enhanced Employee Engagement </li>
+                  <li>Reduced Cyber Attacks</li>
+                  <li>Good return on investments (ROI)</li>
+                  <li>Data analytics - Data does not lie</li>
+                  <li>Simplification through risk automation</li>
+                </ul>
+              </div>
+            </div>
+          </section>          
         </main>
       </DefaultLayout>
     </div>

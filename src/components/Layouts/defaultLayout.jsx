@@ -14,7 +14,7 @@ const DefaultLayout = ({ children }) => {
           </Link>
 
           <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center font-medium space-x-5">
-            <Link href="/platform" className="hover:underline hover:text-gray-900">Platform</Link>
+            <Link href="/" className="hover:underline hover:text-gray-900">Home</Link>
             <Link href="/consulting" className="hover:underline hover:text-gray-900">Consulting</Link>
             <Link href="/partners" className="hover:underline hover:text-gray-900">Partners</Link>
             <Link href="/about-us" className="hover:underline hover:text-gray-900">About Us</Link>
@@ -23,7 +23,11 @@ const DefaultLayout = ({ children }) => {
 
 		  <div>
 			<nav className="flex flex-wrap items-center text-base justify-center font-medium space-x-5">
-				<Button type="primary" className="bg-primary text-white rounded-md text-base flex items-center justify-center shadow-none !p-4">Schedule a Demo</Button>
+				<Button 
+					type="primary" 
+					className="bg-primary text-white rounded-md text-base flex items-center justify-center shadow-none px-4 h-10">
+					Schedule a Demo
+				</Button>
 				<Link href="/login" className="hover:text-gray-900 hover:underline">Log In</Link>
 				<Link href="/signup" className="hover:text-gray-900 hover:underline">Register</Link>
           	</nav>
