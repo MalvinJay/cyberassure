@@ -23,7 +23,7 @@ const DefaultLayout = ({ children }) => {
 
 		  <div>
 			<nav className="flex flex-wrap items-center text-base justify-center font-medium space-x-5">
-				<Button type="primary" size="large" className="bg-primary text-white rounded-lg shadow-none">Schedule a Demo</Button>
+				<Button type="primary" size="large" className="bg-primary text-white rounded-lg shadow-none !px-4">Schedule a Demo</Button>
 				<Link href="/login" className="hover:text-gray-900 hover:underline">Log In</Link>
 				<Link href="/signup" className="hover:text-gray-900 hover:underline">Register</Link>
           	</nav>
