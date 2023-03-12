@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import React, { useState } from "react";
 import DefaultLayout from "@/components/Layouts/defaultLayout";
 import { Select } from "antd";
@@ -89,16 +90,16 @@ const ContactUs = () => {
 
                 <div className="flex flex-col leading-relaxed pt-2">
                   <span> 
-                    <b><i>Integrity</i></b> – We honor our word and commitment
+                    <b><i>Integrity</i></b> - We honor our word and commitment
                   </span>
                   <span> 
                     <b><i>Collaboration</i></b> - We work closely with our clients to understand their unique security needs and challenges whiles staying up-to-date with the latest threats and trends.
                   </span>
                   <span> 
-                    <b><i>Customer-focused</i></b> - We prioritize customer’s needs and requirements, and tailor our services to meet each client's unique needs. Our aim is to build long-lasting relationships with clients based on trust, communication, and mutual respect.
+                    <b><i>Customer-focused</i></b> - We prioritize customer's needs and requirements, and tailor our services to meet each client's unique needs. Our aim is to build long-lasting relationships with clients based on trust, communication, and mutual respect.
                   </span>
                   <span> 
-                    <b><i>Excellence</i></b> – We aim to exceed expectations.       
+                    <b><i>Excellence</i></b> - We aim to exceed expectations.       
                   </span>
                 </div>
               </div>
