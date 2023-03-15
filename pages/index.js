@@ -41,9 +41,17 @@ const Index = () => {
   return (
     <div className="">
       <Head>
-        <title>Home | OrgPosture</title>
+        <title>Home | Orgposture</title>
         <meta name="description" content="We help you set your Corporate Goals, Measure your Progress and Achieve Results" />
         <link rel="icon" href="logo.svg" />
+        <link rel="canonical" href="/" />
+        <meta property="og:title" content="Home | Orgposture" key="title" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:site_name" content="Orgposture" />
+        <meta property="og:type" content="website" />
+        <meta property="og:description" content="We help you set your Corporate Goals, Measure your Progress and Achieve Results" />
+        <meta property="og:image" content="/assets/images/platform.png" />
+        <meta property="og:url" content="/" />
       </Head>
 
       <DefaultLayout>
