@@ -2,17 +2,19 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { Button, Progress } from 'antd';
 
-import AppLayout from "../../src/components/Layouts/appLayout";
-import AuthHead from "../../src/components/Misc/AuthHead";
-import DashboardFilter from "../../src/components/Misc/DashboardHead";
-import SRHighlists from "../../src/components/Misc/SRHighlists";
-import ChartComponent from "../../src/components/Misc/ChartComponent";
-import AddComment from "../../src/components/Misc/AddComment";
+import AppLayout from "@/components/Layouts/appLayout";
+import AuthHead from "@/components/Misc/AuthHead";
+import DashboardFilter from "@/components/Misc/DashboardHead";
+import SRHighlists from "@/components/Misc/SRHighlists";
+import ChartComponent from "@/components/Misc/ChartComponent";
+import AddComment from "@/components/Misc/AddComment";
 
 const Dashboard = () => {
   const [defaultView] = useState(false);
   const [securedScore, setsecuredScore] = useState(0);
   const [change, setchange] = useState('-5');
+
+  // Get infomation here via swr
   
   return (
     <AppLayout>

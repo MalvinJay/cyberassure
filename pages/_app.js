@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react';
 import { ThemeProvider } from 'next-themes'
 import { DefaultSeo } from 'next-seo'
-import Aos from "aos";
+import { notification } from 'antd';
+import AOS from "aos";
+
 import '../styles/globals.css'
 import "aos/dist/aos.css";
-import { notification } from 'antd';
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
-    Aos.init({
+    AOS.init({
       easing: "ease-out-cubic",
       once: true,
       offset: 50,

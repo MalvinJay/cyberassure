@@ -6,7 +6,7 @@ const token = Cookies.get("token");
 
 export const urls = {
     production: `https://api.dev.orgposture.com/`,
-    development: `https://api.dev.orgposture.com/`,
+    development: `https://api.dev.orgposture.com/`
 }
 
 const api = axios.create({

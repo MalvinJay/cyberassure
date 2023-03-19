@@ -13,7 +13,6 @@ const VerifyAuth = ({
   handleVerifyComplete=()=>{}
 }) => {
   // const router = useRouter();
-
   const [code, setcode] = useState("");
   const [load, setload] = useState(false);
 
@@ -21,7 +20,7 @@ const VerifyAuth = ({
     // Send OTP to phone
     setload(true);
 
-    api.post('/user/confirm-sign-up', { email, code })
+    api.post('/user/resend-otp', { email })
     .then(() => {
       setload(false);
       notification.success({ message: "Otp sent successfully" });
@@ -39,13 +38,14 @@ const VerifyAuth = ({
     api.post('/user/confirm-sign-up', { email, code })
     .then(() => {
       setload(false)
-      notification.success({ message: "verification completed" });
+      notification.success({ message: "Verification completed" });
 
       setshow(false)
       handleVerifyComplete()
     }, (error) => {
       setload(false) 
       notification.error({ message: error?.response?.data?.message || 'Error verify email, please try again' })
+      handleVerifyComplete()
     })
   }
 
@@ -56,12 +56,12 @@ const VerifyAuth = ({
   return (
       <Modal
         className="w-full sm:w-1/2 md:w-64"
-        visible={show}
+        open={show}
         closable={false}
         centered
         footer={null}
         onCancel={() => {
-            setshow(false);
+          setshow(false);
         }}
       >
       <section className="w-full mx-auto bg-white">
@@ -98,8 +98,8 @@ const VerifyAuth = ({
               onChange={(e)=>{ setcode(e)}}
               numInputs={6}
               shouldAutoFocus
-              inputStyle="!w-[100%] text-2xl lg:text-4xl font-bold p-0 h-[80%] border-none text-black bg-transparent !ring-0"
-              className="w-16 h-16 flex items-center justify-center text-center px-3 outline-none rounded-xl border border-gray-200 text-lg bg-white bg-default mr-4"
+              inputStyle="!w-[100%] text-2xl lg:text-4xl font-bold p-0 h-[80%] border-none text-black bg-transparent !ring-0 !outline-none"
+              className="w-16 h-16 flex items-center justify-center text-center px-3 outline-none rounded-xl border border-gray-200 text-lg bg-default mr-4"
             />
           </div>
 
@@ -107,7 +107,7 @@ const VerifyAuth = ({
 
         <div className="pt-12 pb-6 space-y-5">
           <button type="link" className="text-base font-medium hover:underline text-prime"
-            onClick={() => handleResend()}
+            onClick={() => handlePhoneOTPSend()}
           >
             Resend Code
           </button>

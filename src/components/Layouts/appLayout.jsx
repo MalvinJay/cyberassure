@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import Header from "./Header";
 import Side from "./Side";
 import 'antd/dist/reset.css';
@@ -23,4 +23,4 @@ const AppLayout = ({ children }) => {
   );
 };
 
-export default AppLayout;
+export default memo(AppLayout);

@@ -7,7 +7,8 @@ import { Button, Form, Input, notification } from 'antd'
 import api from "../services/config"
 
 import DefaultLayout from '../src/components/Layouts/defaultLayout'
-import VerifyAuth from '@/components/Misc/VerifyAuth';
+import VerifyAuth from "@/components/Misc/VerifyAuth";
+import Cookies from 'js-cookie';
 
 const Signin = () => {
   const [form] = Form.useForm();
@@ -44,12 +45,12 @@ const Signin = () => {
       form.validateFields();
 
       setloading(true);
-      const formData = { ...values };
-
+      
       api.post('/user/login', formData)
-      .then(() => {
+      .then((res) => {
         setloading(false);
         notification.success({ message: "Logic Success" });
+        Cookies.set('token', res.data?.message)
         setTimeout(() => {
           router.push('/app/dashboard');
           setloading(false);
@@ -65,7 +66,9 @@ const Signin = () => {
     }
   };
 
-  const onFinishFailed = () => {
+  const handleVerifyComplte = () => {
+    router.push('/app/dashboard');
+    setloading(false);
   }
 
   return (
@@ -100,32 +103,33 @@ const Signin = () => {
                 <Form
                   form={form}
                   className="grid grid-cols-1" 
-                  data-aos="fade-up" data-aos-duration="800"
+                  // data-aos="zoom-in" data-aos-duration="500"
                   onFinish={onFinish}
-                  onFinishFailed={onFinishFailed}
                   autoComplete="off"                  
                 >
-                  <Form.Item className="relative">
-                    <input 
+                  <Form.Item name="email" rules={[ {required: true, message: 'Email is required'}]}>
+                    <Input 
                       type="email" 
-                      id="email" 
+                      label=""
                       name="email" 
                       className="w-full h-12 rounded-lg border border-gray-1 focus:border-primary focus:ring-2 focus:ring-indigo-900 text-base outline-none py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"  
                       placeholder="Email"
                     />
                   </Form.Item>
-                  <Form.Item className="relative">
-                    <input 
+
+                  <Form.Item name="password" rules={[ {required: true, message: 'Password is required'}]}>
+                    <Input.Password
                       type="password" 
-                      id="pass" 
-                      name="pass" 
+                      label="" 
+                      name="password" 
                       className="w-full h-12 rounded-lg border border-gray-1 focus:border-primary focus:ring-2 focus:ring-indigo-900 text-base outline-none py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"  
                       placeholder="Password"
                     />
-                    <div className="w-full text-right pt-2">
-                      <Link href='/forgot-password' className='font-medium text-primary'>Forgot Password</Link>
-                    </div>
                   </Form.Item>
+
+                  <div className="w-full text-right">
+                    <Link href='/forgot-password' className='font-medium text-primary'>Forgot Password</Link>
+                  </div>
 
                   <div className="pb-4">
                     <Button type="primary" className="w-full sm:w-auto sm:px-4 lg:px-6 h-12 text-white bg-primary rounded-lg border-0 py-2 focus:outline-none hover:bg-primary/90 text-lg flex justify-between items-center"
@@ -187,7 +191,7 @@ const Signin = () => {
           show={show}
           email="johndoe@gmail.com"
           setshow={setshow}
-          handleVerifyComplete={() => {}}
+          handleVerifyComplete={handleVerifyComplte}
         />
       </DefaultLayout>
     </>

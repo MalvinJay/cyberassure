@@ -1,31 +1,55 @@
 import React from "react";
 import Image from "next/image";
-import { Dropdown, Space } from 'antd';
 import Link from "next/link";
+import { useRouter } from 'next/router';
+import { Dropdown } from "antd";
 
-const header = () => {
+const Header = () => {
+  const router = useRouter();
 
   const dropdownItems = [
     {
       key: '1',
       label: (
-        <Link href="/app/profile">Profile</Link>
+        <Link href="/app/profile" className="py-1 text-base">
+          Profile
+        </Link>
       )
     },
     {
       key: '2',
       label: (
-        <Link href="/app/settings">Settings</Link>
+        <Link href="/app/settings" className="py-1 text-base">
+          Settings
+        </Link>
       )
-    }
+    },
+    {
+      key: '3',
+      label: (
+        <div className="py-1 text-base"
+          onClick={() => {
+            handleLogout()
+          }}
+        >
+          Logout
+        </div>
+      )
+    },
   ];
 
+  const handleLogout = () => {
+    router.push('/')
+  }
+
   const MenuOverlay = () => (
-    dropdownItems.map((el, index) => (
-      <div className="px-3 py-1 hover:bg-slate-50" key={index}>
-        {el.label}
-      </div>
-    ))
+    <div className="relative">
+      {dropdownItems.map((el, index) => (
+        <div className="px-3 py-1 hover:bg-slate-50" key={index}>
+          {el.label}
+        </div>
+      ))}
+    </div>
   )
 
   return (
@@ -74,16 +98,14 @@ const header = () => {
             </svg>
           </div>
 
-          {/* <Dropdown
-            overlay={MenuOverlay}
+          <Dropdown
+            href="/app/profile"
+            menu={{ items: dropdownItems }}
             trigger="click"
             overlayClassName="p-0"
             placement="bottomRight"
           >
-          </Dropdown> */}
-
-          <Link href="/app/profile">
-            <div className="flex items-center dropdown">
+            <div className="flex items-center dropdown cursor-pointer">
               <Image
                 className="rounded-full"
                 src="/assets/images/user_avatar.svg"
@@ -110,11 +132,11 @@ const header = () => {
                 </svg>
               </div>
             </div>
-          </Link>
+          </Dropdown>
         </div>
       </div>
     </div>
   );
 };
 
-export default header;
+export default Header;

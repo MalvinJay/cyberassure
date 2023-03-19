@@ -2,8 +2,6 @@ import React, { useState, useMemo, memo } from 'react'
 import Link from 'next/link'
 import { Button, Form, Input, notification } from 'antd'
 import api from "../services/config"
-import { useRequest } from '../hooks/useRequest'
-import axios from 'axios';
 
 import DefaultLayout from '../src/components/Layouts/defaultLayout'
 
@@ -19,9 +17,8 @@ const Signup = () => {
       form.validateFields();
 
       setloading(true);
-      const formData = { ...values };
 
-      api.post('/user/create', formData)
+      api.post('/user/create', { ...values })
       .then((res) => {
         setloading(false);
         notification.success({ message: "Successfully Created User" })
