@@ -7,11 +7,14 @@ import { Button, Form, Input, notification } from 'antd'
 import api from "../services/config"
 
 import DefaultLayout from '../src/components/Layouts/defaultLayout'
+import VerifyAuth from '@/components/Misc/VerifyAuth';
 
 const Signin = () => {
   const [form] = Form.useForm();
   const router = useRouter();
+
   const [loading, setloading] = useState(false);
+  const [show, setshow] = useState(false);
 
   const socialAuth = [
     {
@@ -55,6 +58,7 @@ const Signin = () => {
         setloading(false);
         console.error('Error posting user info:', error)
         notification.error({ message: "Error Logging in" })
+        setshow(true);
       })
     } catch (error) {
       console.error('Error validating fields:', error);
@@ -178,6 +182,13 @@ const Signin = () => {
             </div>
           </div>
         </section>
+
+        <VerifyAuth 
+          show={show}
+          email="johndoe@gmail.com"
+          setshow={setshow}
+          handleVerifyComplete={() => {}}
+        />
       </DefaultLayout>
     </>
   )
