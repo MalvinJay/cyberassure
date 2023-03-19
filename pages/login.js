@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
 import Image from 'next/image';
 import Link from 'next/link'
-import { useRouter } from 'next/router';
-import DefaultLayout from '../src/components/Layouts/defaultLayout'
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { Button, Form, Input, notification } from 'antd'
+import api from "../services/config"
+
+import DefaultLayout from '../src/components/Layouts/defaultLayout'
 
 const Signin = () => {
+  const [form] = Form.useForm();
   const router = useRouter();
   const [loading, setloading] = useState(false);
 
@@ -32,14 +36,32 @@ const Signin = () => {
     },
   ];
 
-  const handleAuth = (e) => {
-    e.preventDefault();
-    setloading(true);
+  const onFinish = async (values) => {
+    try {
+      form.validateFields();
 
-    setTimeout(() => {
-      router.push('/app/dashboard');
-      setloading(false);
-    }, 2000);
+      setloading(true);
+      const formData = { ...values };
+
+      api.post('/user/login', formData)
+      .then(() => {
+        setloading(false);
+        notification.success({ message: "Logic Success" });
+        setTimeout(() => {
+          router.push('/app/dashboard');
+          setloading(false);
+        }, 2000);
+      }, (error) => {
+        setloading(false);
+        console.error('Error posting user info:', error)
+        notification.error({ message: "Error Logging in" })
+      })
+    } catch (error) {
+      console.error('Error validating fields:', error);
+    }
+  };
+
+  const onFinishFailed = () => {
   }
 
   return (
@@ -71,8 +93,15 @@ const Signin = () => {
                   Sign in to your account to continue
                 </p>
 
-                <form className="">
-                  <div className="relative mb-5">
+                <Form
+                  form={form}
+                  className="grid grid-cols-1" 
+                  data-aos="fade-up" data-aos-duration="800"
+                  onFinish={onFinish}
+                  onFinishFailed={onFinishFailed}
+                  autoComplete="off"                  
+                >
+                  <Form.Item className="relative">
                     <input 
                       type="email" 
                       id="email" 
@@ -80,8 +109,8 @@ const Signin = () => {
                       className="w-full h-12 rounded-lg border border-gray-1 focus:border-primary focus:ring-2 focus:ring-indigo-900 text-base outline-none py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"  
                       placeholder="Email"
                     />
-                  </div>
-                  <div className="relative mb-3">
+                  </Form.Item>
+                  <Form.Item className="relative">
                     <input 
                       type="password" 
                       id="pass" 
@@ -92,11 +121,12 @@ const Signin = () => {
                     <div className="w-full text-right pt-2">
                       <Link href='/forgot-password' className='font-medium text-primary'>Forgot Password</Link>
                     </div>
-                  </div>
+                  </Form.Item>
 
                   <div className="pb-4">
-                    <button className="w-full sm:w-auto sm:px-4 lg:px-6 h-12 text-white bg-primary rounded-lg border-0 py-2 focus:outline-none hover:bg-primary/90 text-lg flex justify-between items-center"
-                      onClick={(e) => handleAuth(e)}
+                    <Button type="primary" className="w-full sm:w-auto sm:px-4 lg:px-6 h-12 text-white bg-primary rounded-lg border-0 py-2 focus:outline-none hover:bg-primary/90 text-lg flex justify-between items-center"
+                      htmlType="submit"
+                      // onClick={(e) => handleAuth(e)}
                     >
                       <span>Login</span>
 
@@ -110,7 +140,7 @@ const Signin = () => {
                           <path d="M16.7071 8.70711C17.0976 8.31658 17.0976 7.68342 16.7071 7.29289L10.3431 0.928932C9.95262 0.538408 9.31946 0.538408 8.92893 0.928932C8.53841 1.31946 8.53841 1.95262 8.92893 2.34315L14.5858 8L8.92893 13.6569C8.53841 14.0474 8.53841 14.6805 8.92893 15.0711C9.31946 15.4616 9.95262 15.4616 10.3431 15.0711L16.7071 8.70711ZM0 9H16V7H0V9Z" fill="white"/>
                         </svg>
                       }
-                    </button>
+                    </Button>
                   </div>
 
                   <p className='w-full text-center font-black text-lg pb-4'>Or</p>
@@ -136,7 +166,7 @@ const Signin = () => {
                       </span>
                     </button>
                   ))}
-                </form>
+                </Form>
               </div>
 
               <div className='mt-4 pt-4 border-t border-gray-1'>

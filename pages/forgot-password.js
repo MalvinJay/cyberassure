@@ -1,9 +1,6 @@
 import React, { useState, useMemo, memo } from 'react'
-import Link from 'next/link'
 import { Button, Form, Input, notification } from 'antd'
 import api from "../services/config"
-import { useRequest } from '../hooks/useRequest'
-import axios from 'axios';
 
 import DefaultLayout from '../src/components/Layouts/defaultLayout'
 
@@ -21,14 +18,14 @@ const Signup = () => {
       setloading(true);
       const formData = { ...values };
 
-      api.post('/user/create', formData)
+      api.post('/user/forgot-email', formData)
       .then((res) => {
         setloading(false);
         notification.success({ message: "Successfully Created User" })
       }, (error) => {
         console.error('Error posting user info:', error)
         setloading(false);
-        notification.error({ message: "Error creating user" })
+        notification.error({ message: "Error sending reset link" })
       })
     } catch (error) {
       console.error('Error validating fields:', error);
@@ -43,17 +40,15 @@ const Signup = () => {
 
   return (
     <DefaultLayout>
-      <section className="w-full flex justify-center items-center pb-12 max-w-screen-xl mx-auto">
+      <section className="w-full flex justify-center items-center pb-12 max-w-screen-xl mx-auto"
+        style={{ minHeight: 'calc(100vh - 9.2rem)'}}
+      >
         <div className="w-full md:w-1/2 lg:w-1/3 flex flex-col md:py-8 mt-8 md:mt-0 mx-auto text-lg">
           <h2 className="text-primary text-lg md:text-3xl mb-2 font-medium title-font text-center">
-            Sign up to get started
+            Forgot Password
           </h2>
-          <p className="leading-relaxed text-center mb-2 font-medium">
-            Create a secure account  to get started 
-          </p>
-          <p className="leading-relaxed text-center mt-1 mb-5 font-medium">
-            Already having an account? &nbsp;
-            <Link href="/login" className="text-primary">Login</Link>
+          <p className="leading-relaxed text-center mt-1 mb-10 font-medium">
+            We will send you instruction to reset your password
           </p>
           
           <Form 
@@ -65,42 +60,6 @@ const Signup = () => {
             autoComplete="off"
           >
             <Form.Item
-              name="first_name"
-              rules={[ {required: true, message: 'Please input your firstname'}]}
-            >
-              <Input 
-                type="text" 
-                id="first_name" 
-                name="first_name" 
-                className="w-full h-12 rounded-lg border border-gray-1 focus:border-primary focus:ring-2 focus:ring-indigo-900 text-base outline-none py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"  
-                placeholder="First name"
-              />
-            </Form.Item>
-            <Form.Item
-              name="last_name"
-              rules={[ {required: true, message: 'Please input your lastname'}]}
-            >
-              <Input 
-                type="text" 
-                id="last_name" 
-                name="last_name" 
-                className="w-full h-12 rounded-lg border border-gray-1 focus:border-primary focus:ring-2 focus:ring-indigo-900 text-base outline-none py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"  
-                placeholder="Last name"
-              />
-            </Form.Item>
-            <Form.Item
-              name="business_name"
-              rules={[ {required: true, message: 'Please input your business name'}]}
-            >
-              <Input 
-                type="text" 
-                id="business_name" 
-                name="business_name" 
-                className="w-full h-12 rounded-lg border border-gray-1 focus:border-primary focus:ring-2 focus:ring-indigo-900 text-base outline-none py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"  
-                placeholder="Business Name"
-              />
-            </Form.Item>
-            <Form.Item
               name="email"
               rules={[ {required: true, message: 'Please input your email'}]}
             >
@@ -111,23 +70,12 @@ const Signup = () => {
                 className="w-full h-12 rounded-lg border border-gray-1 focus:border-primary focus:ring-2 focus:ring-indigo-900 text-base outline-none py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"  
                 placeholder="Email"
               />
-            </Form.Item>   
-            <Form.Item
-              name="password"
-              rules={[ {required: true, message: 'Please input your password'}]}
-            >
-              <Input.Password
-                id="password" 
-                name="password" 
-                className="w-full h-12 rounded-lg border border-gray-1 focus:border-primary focus:ring-2 focus:ring-indigo-900 text-base outline-none py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"  
-                placeholder="Password"
-              />
-            </Form.Item>               
+            </Form.Item>                 
 
             <Button type="primary" className="w-full h-12 text-white bg-primary rounded-lg border-0 py-2 px-6 focus:outline-none hover:bg-primary/90 text-lg flex justify-between items-center"
              htmlType="submit"
             >
-              <span>Sign up</span>
+              <span>Reset</span>
 
               {loading ? 
                 <svg className="animate-spin ml-4 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -140,10 +88,6 @@ const Signup = () => {
                 </svg>
               }              
             </Button>
-
-            <p className="text-sm text-opacity-90 mt-3 text-center">
-              By confirming your email, you agree to our Terms of Service and that you have read and understood our Privacy Policy.
-            </p>
           </Form>
         </div>              
       </section>

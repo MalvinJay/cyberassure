@@ -4,6 +4,7 @@ import { DefaultSeo } from 'next-seo'
 import Aos from "aos";
 import '../styles/globals.css'
 import "aos/dist/aos.css";
+import { notification } from 'antd';
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
@@ -11,6 +12,12 @@ function MyApp({ Component, pageProps }) {
       easing: "ease-out-cubic",
       once: true,
       offset: 50,
+    });
+
+    notification.config({
+      placement: 'top',
+      bottom: 50,
+      // rtl: true,
     });
   }, [])
   

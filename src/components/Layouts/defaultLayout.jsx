@@ -1,9 +1,11 @@
-import React from "react";
+import React, { memo } from "react";
 import Link from 'next/link';
 import { Button } from "antd";
 import Image from "next/image";
 
 const DefaultLayout = ({ children }) => {
+  console.log('defaultLayout re-rendered');
+  
   return (
     <div className="min-h-screen">
       <header className="body-font">
@@ -70,4 +72,4 @@ const DefaultLayout = ({ children }) => {
   );
 };
 
-export default DefaultLayout;
+export default memo(DefaultLayout);
