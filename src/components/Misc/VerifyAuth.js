@@ -20,7 +20,7 @@ const VerifyAuth = ({
     // Send OTP to phone
     setload(true);
 
-    api.post('/user/resend-otp', { email })
+    api.post('/otp/resend', { email })
     .then(() => {
       setload(false);
       notification.success({ message: "Otp sent successfully" });
@@ -39,7 +39,6 @@ const VerifyAuth = ({
     .then(() => {
       setload(false)
       notification.success({ message: "Verification completed" });
-
       setshow(false)
       handleVerifyComplete()
     }, (error) => {
@@ -47,10 +46,6 @@ const VerifyAuth = ({
       notification.error({ message: error?.response?.data?.message || 'Error verify email, please try again' })
       handleVerifyComplete()
     })
-  }
-
-  const handleResend = () => {
-    handlePhoneOTPSend()
   }
 
   return (
@@ -102,11 +97,10 @@ const VerifyAuth = ({
               className="w-16 h-16 flex items-center justify-center text-center px-3 outline-none rounded-xl border border-gray-200 text-lg bg-default mr-4"
             />
           </div>
-
         </div>
 
         <div className="pt-12 pb-6 space-y-5">
-          <button type="link" className="text-base font-medium hover:underline text-prime"
+          <button type="link" className="text-base font-medium hover:underline text-primary"
             onClick={() => handlePhoneOTPSend()}
           >
             Resend Code

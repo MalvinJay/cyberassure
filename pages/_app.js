@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { ThemeProvider } from 'next-themes'
 import { DefaultSeo } from 'next-seo'
-import { notification } from 'antd';
+// import { notification } from 'antd';
 import AOS from "aos";
 
 import '../styles/globals.css'
@@ -15,11 +15,10 @@ function MyApp({ Component, pageProps }) {
       offset: 50,
     });
 
-    notification.config({
-      placement: 'top',
-      bottom: 50,
-      // rtl: true,
-    });
+    // notification.config({
+    //   placement: 'top',
+    //   bottom: 50
+    // });
   }, [])
   
   return (

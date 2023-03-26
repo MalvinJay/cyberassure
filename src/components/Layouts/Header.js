@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from 'next/router';
 import { Dropdown } from "antd";
+import Cookies from "js-cookie";
 
 const Header = () => {
   const router = useRouter();
@@ -39,6 +40,10 @@ const Header = () => {
   ];
 
   const handleLogout = () => {
+    Cookies.remove('token');
+    Cookies.remove('user');
+    localStorage.clear();
+    
     router.push('/')
   }
 

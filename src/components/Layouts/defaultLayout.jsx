@@ -4,10 +4,10 @@ import { Button } from "antd";
 import Image from "next/image";
 
 const DefaultLayout = ({ children }) => {
-  console.log('defaultLayout re-rendered');
+  console.log('DefaultLayout re-rendered');
   
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen relative">
       <header className="body-font">
         <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
           
@@ -37,11 +37,11 @@ const DefaultLayout = ({ children }) => {
         </div>
       </header>
 
-      <main className="">
+      <main className="pb-16">
 		{children}
 	  </main>
 
-      <footer className="bg-primary p-5">
+      <footer className="w-full absolute bottom-0 bg-primary p-5">
 		<div className="max-w-screen-xl mx-auto">
 			<div className="flex justify-between">
 				<h2 className="text-white text-sm">© 2022 orgposture.com All rights reserved</h2>

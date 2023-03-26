@@ -1,31 +1,44 @@
 import React, { useState, useMemo, memo } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { Button, Form, Input, notification } from 'antd'
 import api from "../services/config"
 
 import DefaultLayout from '../src/components/Layouts/defaultLayout'
-
+import VerifyAuth from "@/components/Misc/VerifyAuth";
 
 const Signup = () => {
+  const router = useRouter();
   const [form] = Form.useForm();
   const [loading, setloading] = useState(false);
+  const [show, setshow] = useState(false);
   
   const onFinish = async (values) => {
-    console.log('Success:', values);
-
     try {
       form.validateFields();
-
       setloading(true);
+      console.log('Signup Form:', values);
 
-      api.post('/user/create', { ...values })
+      api.post('/user/sign-up', { 
+        ...values,
+        role_id : 1
+      })
       .then((res) => {
         setloading(false);
-        notification.success({ message: "Successfully Created User" })
+
+        if (res.data.status) {
+          console.log('signup response:', res.data);
+          notification.success({ 
+            message: "Successfully Created User", 
+            description: "User created. Kindly proceed to verify your account" 
+          });
+          setshow(true);
+        }
       }, (error) => {
-        console.error('Error posting user info:', error)
         setloading(false);
-        notification.error({ message: "Error creating user" })
+        console.error('Error posting user info:', error)
+        setshow(true);
+        notification.error({ message: error?.response?.data?.message?.errorMessage || 'Error creating user, please try agian' })
       })
     } catch (error) {
       console.error('Error validating fields:', error);
@@ -35,6 +48,11 @@ const Signup = () => {
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
+
+  const handleVerifyComplte = () => {
+    setloading(false);
+    router.push('/app/dashboard');
+  }  
 
   console.log('signup re-rendered')
 
@@ -68,7 +86,7 @@ const Signup = () => {
               <Input 
                 type="text" 
                 id="first_name" 
-                name="first_name" 
+                label="first_name" 
                 className="w-full h-12 rounded-lg border border-gray-1 focus:border-primary focus:ring-2 focus:ring-indigo-900 text-base outline-none py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"  
                 placeholder="First name"
               />
@@ -80,7 +98,7 @@ const Signup = () => {
               <Input 
                 type="text" 
                 id="last_name" 
-                name="last_name" 
+                label="last_name" 
                 className="w-full h-12 rounded-lg border border-gray-1 focus:border-primary focus:ring-2 focus:ring-indigo-900 text-base outline-none py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"  
                 placeholder="Last name"
               />
@@ -92,7 +110,7 @@ const Signup = () => {
               <Input 
                 type="text" 
                 id="business_name" 
-                name="business_name" 
+                label="business_name" 
                 className="w-full h-12 rounded-lg border border-gray-1 focus:border-primary focus:ring-2 focus:ring-indigo-900 text-base outline-none py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"  
                 placeholder="Business Name"
               />
@@ -104,7 +122,7 @@ const Signup = () => {
               <Input 
                 type="email" 
                 id="email" 
-                name="email" 
+                label="email" 
                 className="w-full h-12 rounded-lg border border-gray-1 focus:border-primary focus:ring-2 focus:ring-indigo-900 text-base outline-none py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"  
                 placeholder="Email"
               />
@@ -115,7 +133,7 @@ const Signup = () => {
             >
               <Input.Password
                 id="password" 
-                name="password" 
+                label="password" 
                 className="w-full h-12 rounded-lg border border-gray-1 focus:border-primary focus:ring-2 focus:ring-indigo-900 text-base outline-none py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"  
                 placeholder="Password"
               />
@@ -128,7 +146,7 @@ const Signup = () => {
 
               {loading ? 
                 <svg className="animate-spin ml-4 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
               :
@@ -144,6 +162,13 @@ const Signup = () => {
           </Form>
         </div>              
       </section>
+
+      <VerifyAuth 
+        show={show}
+        setshow={setshow}
+        email={form.getFieldsValue()["email"]}
+        handleVerifyComplete={handleVerifyComplte}
+      />      
     </DefaultLayout>
   )
 }
