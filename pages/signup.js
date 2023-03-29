@@ -103,15 +103,15 @@ const Signup = () => {
               />
             </Form.Item>
             <Form.Item
-              name="business_name"
+              name="org_name"
               rules={[ {required: true, message: 'Please input your business name'}]}
             >
               <Input 
                 type="text" 
-                id="business_name" 
-                label="business_name" 
+                id="org_name" 
+                label="org_name" 
                 className="w-full h-12 rounded-lg border border-gray-1 focus:border-primary focus:ring-2 focus:ring-indigo-900 text-base outline-none py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"  
-                placeholder="Business Name"
+                placeholder="Organization Name"
               />
             </Form.Item>
             <Form.Item
