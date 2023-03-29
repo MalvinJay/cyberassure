@@ -17,7 +17,6 @@ const Signup = () => {
     try {
       form.validateFields();
       setloading(true);
-      console.log('Signup Form:', values);
 
       api.post('/user/sign-up', { 
         ...values,

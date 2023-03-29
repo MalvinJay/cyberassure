@@ -44,12 +44,10 @@ const Signin = () => {
     try {
       form.validateFields();
       setloading(true);
-      console.log('Form values:', values);
       
       api.post('/user/login', values)
       .then((res) => {
         setloading(false);
-        console.log('Login response:', res.data);
 
         if (res.data.status) {
           notification.success({ message: "Login Success" });
@@ -136,7 +134,7 @@ const Signin = () => {
                   </Form.Item>
 
                   <div className="w-full text-right">
-                    <Link href='/forgot-password' className='font-medium text-primary'>Forgot Password</Link>
+                    <Link href='/forgot-password' className='font-medium text-primary text-base'>Forgot Password</Link>
                   </div>
 
                   <div className="pb-4">
