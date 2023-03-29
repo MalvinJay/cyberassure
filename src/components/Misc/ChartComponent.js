@@ -31,7 +31,7 @@ const ChartComponent = ({ series }) => {
         },
         series: [{
             name: '',
-            data: [0, 5, 7, 6, 8, 2, 3],
+            data: [0, 0, 0, 0, 0, 0, 0],
             // lineWidth: 1,
             color: '#079669'
         }]       

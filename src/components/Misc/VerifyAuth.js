@@ -75,7 +75,7 @@ const VerifyAuth = ({
           </svg>
 
           <p className="p-4 pt-6">
-            Please enter the 4-digit security code that we've just sent to:{' '}
+            Please enter the 4-digit security code that we&apos;ve just sent to: &npbs;
             <b>{email}</b>
           </p>
         </div>

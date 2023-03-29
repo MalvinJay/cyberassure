@@ -54,7 +54,7 @@ const Signup = () => {
     router.push('/app/dashboard');
   }  
 
-  console.log('signup re-rendered')
+  // console.log('signup re-rendered')
 
   return (
     <DefaultLayout>

@@ -12,7 +12,7 @@ import AddComment from "@/components/Misc/AddComment";
 const Dashboard = () => {
   const [defaultView] = useState(false);
   const [securedScore, setsecuredScore] = useState(0);
-  const [change, setchange] = useState('-5');
+  const [change, setchange] = useState(0);
 
   // Get infomation here via swr
   

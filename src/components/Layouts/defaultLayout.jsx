@@ -4,7 +4,7 @@ import { Button } from "antd";
 import Image from "next/image";
 
 const DefaultLayout = ({ children }) => {
-  console.log('DefaultLayout re-rendered');
+//   console.log('DefaultLayout re-rendered');
   
   return (
     <div className="min-h-screen relative">

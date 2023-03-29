@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { Form, Input, Button, Select, DatePicker, notification } from "antd";
 import { useRequest } from "../../hooks/useRequest"
@@ -10,7 +10,8 @@ const { RangePicker } = DatePicker;
 
 const Profile = () => {
     const [form] = Form.useForm();
-    const [loading, setloading] = useState(false)
+    const [loading, setloading] = useState(false);
+    const [profileLoaded, setProfileLoaded] = useState(false);
 
     const rangePresets = [
         {
@@ -76,10 +77,15 @@ const Profile = () => {
 
     // Fetch user profile
     const url = "user/user-profile"
-    const { data, error } = useRequest(url, null, { method: 'POST'});
+    const { data, error } = useRequest(profileLoaded ? url : null, null, { method: 'GET'});
     console.log('Data:', data, 'Error:', error);
 
     console.log('Profile re-rendered');
+
+    useEffect(() => {
+        setProfileLoaded(true);
+    }, [])
+    
     
     return (
         <AppLayout>
