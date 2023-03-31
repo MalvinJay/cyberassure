@@ -51,21 +51,46 @@ const Signin = () => {
 
         if (res.data.status) {
           notification.success({ message: "Login Success" });
-          // Check if user is verified yet..
   
           // Set user auth stuff here in cookies
           Cookies.set('token', res?.data?.message?.access_token);
           Cookies.set('user', JSON.stringify(res?.data?.message));
           api.defaults.headers.Authorization = `Bearer ${res?.data?.message?.access_token}`
+
           router.push('/app/dashboard');
         } else {
-          notification.error({ message:  res?.response?.data?.message})
-          setshow(true);
+          notification.error({ message: <div className='capitalize'>{error?.response?.data?.message}</div> })
+          const { status_code } = error?.response?.data;
+
+          switch (status_code) {
+            case 1006:
+              setshow(true);
+              break;
+          
+            default:
+              break;
+          }
         }
       }, (error) => {
         setloading(false);
-        notification.error({ message: error?.response?.data?.message })
-        if (error?.response?.data?.message?.toLowerCase()?.includes("account disabled")) setshow(true)
+        notification.error({ message: <div className='capitalize'>{error?.response?.data?.message}</div> })
+
+        const { status_code } = error?.response?.data;
+
+        switch (status_code) {
+          case 1006:
+            setshow(true);
+            break;
+          case 1007:
+            // Do nothing, just display error message
+            break;
+        
+          default:
+            break;
+        }
+      })
+      .catch((error) => {
+        console.error('Error signing in:', error)
       })
     } catch (error) {
       console.error('Error validating fields:', error);
@@ -73,8 +98,8 @@ const Signin = () => {
   };
 
   const handleVerifyComplte = () => {
-    router.push('/app/dashboard');
     setloading(false);
+    router.push('/app/dashboard');
   }
 
   return (

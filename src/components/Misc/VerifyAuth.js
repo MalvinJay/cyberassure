@@ -35,7 +35,10 @@ const VerifyAuth = ({
   const handleVerify = (code) => {
     setload(true);
 
-    api.post('/user/confirm-sign-up', { email, code })
+    api.post('/user/confirm-sign-up', { 
+      email, 
+      otp_code: code 
+    })
     .then(() => {
       setload(false)
       notification.success({ message: "Verification completed" });
@@ -43,8 +46,7 @@ const VerifyAuth = ({
       handleVerifyComplete()
     }, (error) => {
       setload(false) 
-      notification.error({ message: error?.response?.data?.message || 'Error verify email, please try again' })
-      handleVerifyComplete()
+      notification.error({ message: <div className='capitalize'>{error?.response?.data?.message || 'Error verify email, please try again'}</div> })
     })
   }
 
@@ -75,8 +77,8 @@ const VerifyAuth = ({
           </svg>
 
           <p className="p-4 pt-6">
-            Please enter the 4-digit security code that we&apos;ve just sent to: &npbs;
-            <b>{email}</b>
+            Please enter the 4-digit security code that we&apos;ve just sent to: 
+            <b className='pl-1'>{email}</b>
           </p>
         </div>
 

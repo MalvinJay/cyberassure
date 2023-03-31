@@ -1,10 +1,15 @@
-import { Button, Select, DatePicker } from "antd";
-import React from "react";
+import React, { useState } from "react";
+import { Button, Select, Form, Input, DatePicker, notification } from 'antd'
+import api from "../../../services/config"
 import AppLayout from "../../../src/components/Layouts/appLayout";
 
 const { RangePicker } = DatePicker;
 
 const CreateKRI = () => {
+  const [form] = Form.useForm();
+
+  const [loading, setloading] = useState(false);
+
   const rangePresets = [
     {
       label: 'Datepicker',
@@ -47,79 +52,137 @@ const CreateKRI = () => {
     },
   ]
 
+  const onFinish = async (values) => {
+    try {
+      form.validateFields();
+      setloading(true);
+
+      // "objective_title": "Migrate all applications to the AWS1",
+      // "kri_type_id" : 2,
+      // "target_date": "2023-05-12 10:47:12",
+      // "comment": "This must be achieved ASAP"      
+      
+      api.post('/kri/create-kri', {
+        ...values,
+        kri_type_id: Number(values.kri_type_id),
+        target_date: values.target_date[1]
+      })
+      .then((res) => {
+        setloading(false);
+
+        if (res.data.status) {
+          notification.success({ message: "KRI Created Successfully" });
+        } else {
+          notification.error({ message:  res?.response?.data?.message})
+        }
+      }, (error) => {
+        setloading(false);
+        notification.error({ message: error?.response?.data?.message })
+      })
+      .catch((error) => {
+        console.error('Error creating kri:', error)
+      })
+    } catch (error) {
+      console.error('Error creating kri', error);
+    }
+  };  
+
   return (
     <AppLayout>
       <div className="w-full lg:w-10/12 ml-0 py-5 px-8">
         <h3 className="text-3xl font-bold">Create KRI</h3>
 
-        <form className="py-6 bg-white rounded">
-          <div className="">
-            <label
+        <Form 
+          form={form}
+          className="py-6 bg-white rounded"
+          onFinish={onFinish}
+          autoComplete="off"  
+          layout="vertical"
+        >
+          <Form.Item 
+            className="w-full mb-4"
+            name="objective_title"
+            label={
+              <span
               className="block mb-2 text-sm font-bold text-gray-700"
-              for="email"
             >
               Objective Title
-            </label>
-            <input
+            </span>
+            }
+            rules={[ {required: true, message: 'Provide objective for this KRI'}]}
+          >
+            <Input
+              name="objective"
               className="w-full px-3 py-3 mb-3 text-sm leading-tight text-gray-700 border border-primary/80 rounded appearance-none focus:outline-none focus:shadow-outline"
-              id="email"
-              type="email"
-              placeholder="Title of what uyou want to achieve "
+              type="text"
+              placeholder="Title of what you want to achieve "
             />
-          </div>  
+          </Form.Item>  
 
           <div className="mb-4 md:flex md:justify-between">
-            <div className="mb-4 w-1/2 md:mb-0 pr-4">
-              <label
-                className="block mb-2 text-sm font-bold text-gray-700"
-                for="firstName"
-              >
-                Who is this objective for
-              </label>
+            <Form.Item className="mb-4 w-1/2 md:mb-0 pr-4" 
+              name="kri_type_id"
+              label={
+                <span className="block mb-2 text-sm font-bold text-gray-700">
+                  Who is this objective for
+                </span>
+              }
+              rules={[ {required: true, message: 'Provide target audience'}]}
+            >
               <Select 
                 className="w-full h-10 text-sm leading-tight text-gray-700 border-primary/80 rounded appearance-none focus:outline-none focus:shadow-outline"
                 placeholder="Title of what uyou want to achieve"
                 size="large"
                 style={{ height: '43px' }}
               >
-                <Select.Option value="personal">My personal objective</Select.Option>
-                <Select.Option value="corporate">Corporate Key Risk Indicator</Select.Option>
+                <Select.Option value="1">My personal objective</Select.Option>
+                <Select.Option value="2">Corporate Key Risk Indicator</Select.Option>
               </Select>
-            </div>
+            </Form.Item>
 
-            <div className="w-1/2 pl-4">
-              <label
-                className="block mb-2 text-sm font-bold text-gray-700"
-                for="lastName"
-              >
-                Target Date
-              </label>
+            <Form.Item className="w-1/2 pl-4" 
+              label={
+                <span className="block mb-2 text-sm font-bold text-gray-700">
+                  Target Date
+                </span>
+              }
+              name="target_date"
+              rules={[ {required: true, message: 'Provide target date'}]}
+            >
               <RangePicker
+                onChange={(date1, dates2) => {
+                  console.log('date1:', date1, 'dates2:', dates2);
+                }}
                 className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border border-primary/80 rounded appearance-none focus:outline-none focus:shadow-outline"
                 presets={rangePresets}
               />
-            </div>
+            </Form.Item>
           </div>
 
           <div className="mb-4 md:flex md:justify-between">
-            <div className="mb-4 w-1/2 md:mb-0 pr-4">
-              <label
-                className="block mb-2 text-sm font-bold text-gray-700"
-                for="firstName"
-              >
-                Who can view this KRI
-              </label>
-              <Select 
+            <Form.Item 
+              className="mb-4 w-1/2 md:mb-0 pr-4"
+              name="comment"
+              label={
+                <span
+                  className="block mb-2 text-sm font-bold text-gray-700"
+                >
+                  Who can view this KRI
+                </span>
+              }
+              rules={[ {required: true, message: 'Select who can view this KRI'}]}
+            >
+              <Select
                 className="w-full h-10 text-sm leading-tight text-gray-700 border-primary/80 rounded appearance-none focus:outline-none focus:shadow-outline"
                 placeholder="Only me"
                 size="large"
                 style={{ height: '43px' }}
               >
                 {viewership.map((el, index) => (
-                  <Select.Option key={index}>{el.name}</Select.Option>
+                  <Select.Option value={el.name} key={index}>{el.name}</Select.Option>
                 ))}
               </Select>              
-            </div>
+            </Form.Item>
           </div>          
 
           <div className="mb-4 md:flex md:items-center space-x-10">
@@ -141,15 +204,17 @@ const CreateKRI = () => {
             </div>
           </div>
 
-          <div className="mb-4 text-end">
-            <button
-              className="w-40 px-4 py-2 font-bold text-white bg-[#198754] rounded-lg focus:outline-none focus:shadow-outline"
-              type="button"
+          <div className="mb-4 flex items-center justify-end">
+            <Button
+              type="primary"
+              className="w-40 px-4 h-10 flex items-center justify-center font-bold text-white text-lg !bg-[#198754] rounded-lg focus:outline-none focus:shadow-outline"
+              htmlType="submit"
+              loading={loading}
             >
               Create
-            </button>
+            </Button>
           </div>
-        </form>
+        </Form>
       </div>
     </AppLayout>
   );

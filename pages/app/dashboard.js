@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { Button, Progress } from 'antd';
 
@@ -14,7 +14,12 @@ const Dashboard = () => {
   const [securedScore, setsecuredScore] = useState(0);
   const [change, setchange] = useState(0);
 
-  // Get infomation here via swr
+  // Get infomation here via 
+  
+  useEffect(() => {
+    window.scrollTo(0,0)
+  }, [])
+  
   
   return (
     <AppLayout>
