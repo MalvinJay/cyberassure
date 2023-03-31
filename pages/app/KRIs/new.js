@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 import { Button, Select, Form, Input, DatePicker, notification } from 'antd'
 import api from "../../../services/config"
 import AppLayout from "../../../src/components/Layouts/appLayout";
@@ -6,6 +7,7 @@ import AppLayout from "../../../src/components/Layouts/appLayout";
 const { RangePicker } = DatePicker;
 
 const CreateKRI = () => {
+  const router = useRouter();
   const [form] = Form.useForm();
 
   const [loading, setloading] = useState(false);
@@ -55,12 +57,7 @@ const CreateKRI = () => {
   const onFinish = async (values) => {
     try {
       form.validateFields();
-      setloading(true);
-
-      // "objective_title": "Migrate all applications to the AWS1",
-      // "kri_type_id" : 2,
-      // "target_date": "2023-05-12 10:47:12",
-      // "comment": "This must be achieved ASAP"      
+      setloading(true);    
       
       api.post('/kri/create-kri', {
         ...values,
@@ -72,6 +69,7 @@ const CreateKRI = () => {
 
         if (res.data.status) {
           notification.success({ message: "KRI Created Successfully" });
+          router.push('/app/KRIs/all');
         } else {
           notification.error({ message:  res?.response?.data?.message})
         }
