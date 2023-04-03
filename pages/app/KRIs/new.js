@@ -52,17 +52,18 @@ const CreateKRI = () => {
       name: "Access List",
       type: "corporate"
     },
-  ]
+  ];
 
   const onFinish = async (values) => {
     try {
       form.validateFields();
       setloading(true);    
       
-      api.post('/kri/create-kri', {
+      api.post('/kri/create-kri',
+      {
         ...values,
         kri_type_id: Number(values.kri_type_id),
-        target_date: values.target_date[1]
+        target_date: `${values.target_date[0]} - ${values.target_date[1]}`
       })
       .then((res) => {
         setloading(false);

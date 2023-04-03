@@ -85,7 +85,7 @@ const MyTask = () => {
             <div className="py-10">
               <RegisterTable 
                 bordered={false}
-                customClass="" 
+                customclassName="" 
                 columns={columns}
                 dataSource={dataSource}
               />

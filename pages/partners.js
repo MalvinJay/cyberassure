@@ -29,7 +29,7 @@ const Partners = () => {
             />
           </div>
 
-          <div class="max-w-screen-xl mx-auto px-4 md:px-10 md:py-10 lg:py-16">
+          <div className="max-w-screen-xl mx-auto px-4 md:px-10 md:py-10 lg:py-16">
             <div className="" data-aos="fade-up" data-aos-duration="800">
               <p className="font-semibold leading-loose text-2xl text-center pb-10 mx-auto">
                 <span>

@@ -1,26 +1,16 @@
 import useSWR from 'swr';
 import api from "../services/config";
 
-const fetcher = (url, payload = null, params) => {
-  const requestParams = { 
-    method: params?.method || 'GET'
-  }
-  if (requestParams.method !== 'GET' && payload) requestParams.body = JSON.stringify(payload) 
+// Use axios instance as fetcher
 
-  api[params.method?.toLowerCase() || 'get'](url, requestParams).then((res) => { res.data });
-}
-
-export const useRequest = (url, payload, params) => {
-  const address = api.getUri() + url;
-  console.log('url:', url);
-
-  const { data, error } = useSWR(
-    address, 
-    fetcher(address, payload, params),
-    {
-      revalidateOnFocus: false,
-      revalidateIfStale: false
-    }
+export const useRequest = (url, params, config={}) => {
+  const fetcher = async (url, params) => api.get(url, params).then(res => res.data);
+  
+  const { isLoading, data, error, mutate } = useSWR(
+    api.getUri() + url, 
+    fetcher(api.getUri() + url, params),
+    config
   );
-  return { data, error };
+
+  return { isLoading, data, error, mutate };
 };

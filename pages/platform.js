@@ -13,17 +13,17 @@ const Platform = () => {
 
       <DefaultLayout>
         <main className="">
-          <section class="w-full bg-default dark:bg-gray-900 md:h-screen flex items-center">
-            <div class="max-w-screen-xl mx-auto grid px-4 lg:gap-8 xl:gap-0 md:grid-cols-12">
-              <div class="mr-auto place-self-center lg:col-span-7">
-                  <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl dark:text-white md:pr-20">
+          <section className="w-full bg-default dark:bg-gray-900 md:h-screen flex items-center">
+            <div className="max-w-screen-xl mx-auto grid px-4 lg:gap-8 xl:gap-0 md:grid-cols-12">
+              <div className="mr-auto place-self-center lg:col-span-7">
+                  <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl dark:text-white md:pr-20">
                   Gain 360 degrees oversight on Enterprise security posture.
                   </h1>
-                  <p class="max-w-2xl mt-6 mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-4xl dark:text-gray-400 md:pr-20">
+                  <p className="max-w-2xl mt-6 mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-4xl dark:text-gray-400 md:pr-20">
                     Make security decisions through metrics and data 
                   </p>
               </div>
-              <div class="lg:mt-0 lg:col-span-5 lg:flex">
+              <div className="lg:mt-0 lg:col-span-5 lg:flex">
                 <Image
                   width={678}
                   height={402}
@@ -37,15 +37,15 @@ const Platform = () => {
             </div>
           </section>    
 
-          <section class="w-full bg-white dark:bg-gray-900 flex items-center py-4 md:py-16 lg:py-24">
-            <div class="max-w-screen-xl mx-auto grid px-4 lg:gap-8 lg:gap-x-0 xl:gap-y-12 md:grid-cols-12">
-              <div class="mr-auto place-self-center lg:col-span-7">
-                <p class="font-medium dark:text-white md:pr-20 lg:pr-40 !leading-normal text-lg lg:text-4xl" data-aos="fade-right">
+          <section className="w-full bg-white dark:bg-gray-900 flex items-center py-4 md:py-16 lg:py-24">
+            <div className="max-w-screen-xl mx-auto grid px-4 lg:gap-8 lg:gap-x-0 xl:gap-y-12 md:grid-cols-12">
+              <div className="mr-auto place-self-center lg:col-span-7">
+                <p className="font-medium dark:text-white md:pr-20 lg:pr-40 !leading-normal text-lg lg:text-4xl" data-aos="fade-right">
                   Automate Cyber and Information Security within the enterprise without chasing 
                   process and system owners.
                 </p>
               </div>
-              <div class="lg:mt-0 lg:col-span-5 lg:flex">
+              <div className="lg:mt-0 lg:col-span-5 lg:flex">
                 <Image
                   width={678}
                   height={402}
@@ -56,7 +56,7 @@ const Platform = () => {
                 />
               </div>  
 
-              <div class="col-start-1 lg:col-end-6 lg:flex lg:py-16">
+              <div className="col-start-1 lg:col-end-6 lg:flex lg:py-16">
                 <Image
                   width={482}
                   height={461}
@@ -66,19 +66,19 @@ const Platform = () => {
                   alt="automate_security" 
                 />                
               </div>   
-              <div class="ml-auto place-self-center col-span-5 col-end-13">
-                <p class="font-medium dark:text-white md:px-10 lg:px-20 !leading-snug text-lg lg:text-3xl" data-aos="fade-right">
+              <div className="ml-auto place-self-center col-span-5 col-end-13">
+                <p className="font-medium dark:text-white md:px-10 lg:px-20 !leading-snug text-lg lg:text-3xl" data-aos="fade-right">
                   Identify inefficiencies and improve security posture.
                 </p>
               </div>  
 
-              <div class="mr-auto place-self-center lg:col-span-6 mt-4">
-                <p class="font-medium dark:text-white md:pr-20 text-lg lg:text-3xl" data-aos="fade-right">
+              <div className="mr-auto place-self-center lg:col-span-6 mt-4">
+                <p className="font-medium dark:text-white md:pr-20 text-lg lg:text-3xl" data-aos="fade-right">
                   Integrate security risk indicators through APIs into platforms and security solutions. 
                   Prioritize risk and response capabilities. 
                 </p>
               </div>
-              <div class="lg:mt-0 lg:col-span-6 lg:flex lg:py-16">
+              <div className="lg:mt-0 lg:col-span-6 lg:flex lg:py-16">
                 <Image
                   width={678}
                   height={402}
@@ -91,8 +91,8 @@ const Platform = () => {
             </div>
           </section>  
 
-          <section class="w-full bg-white dark:bg-gray-900 flex items-center py-4 md:pb-16 lg:pb-24">
-            <div class="max-w-screen-xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-12">
+          <section className="w-full bg-white dark:bg-gray-900 flex items-center py-4 md:pb-16 lg:pb-24">
+            <div className="max-w-screen-xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-12">
               <div className="md:pr-16 xl:pr-24 col-start-1 col-end-13 md:col-end-7">
                 <h2 className="leading-normal text-lg lg:text-4xl font-medium">Task Management</h2>
                 
@@ -122,8 +122,8 @@ const Platform = () => {
             </div>
           </section>
 
-          <section class="w-full bg-white dark:bg-gray-900 flex items-center py-4 md:pb-16 lg:pb-24">
-            <div class="max-w-screen-xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-12">
+          <section className="w-full bg-white dark:bg-gray-900 flex items-center py-4 md:pb-16 lg:pb-24">
+            <div className="max-w-screen-xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-12">
               <div className="md:pr-16 col-start-1 col-end-13 md:col-end-7 border-r border-black">
                 <h3 className="font-semibold ml-10 text-2xl">Benefits of OrgPosture Platform</h3>
                 <ul className="lg:pl-2 list-disc pt-6 text-xl">

@@ -1,61 +1,68 @@
+"use client"
+
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { Form, Input, Button, Select, DatePicker, notification } from "antd";
-import { useRequest } from "../../hooks/useRequest"
+// import useSWR from 'swr';
+import api from "../../services/config";
 
 import AppLayout from "@/components/Layouts/appLayout";
-import api from "../../services/config";
+import { useDispatch, useSelector } from "react-redux";
+import { getProfile } from "redux/features/profileSlice";
 
 const { RangePicker } = DatePicker;
 
+const rangePresets = [
+    {
+    label: 'Datepicker',
+    value: <RangePicker picker="week" />
+    },
+    {
+    label: 'Weekly',
+    value: <RangePicker picker="week" />
+    },
+    {
+    label: 'Monthly',
+    value: <RangePicker picker="month" />,
+    },
+    {
+    label: 'Quarterly',
+    value: <RangePicker picker="quarter" />,
+    },
+    {
+    label: 'Annually',
+    value: <RangePicker picker="year" />,
+    }
+];
+
+const landingPage = [
+    {
+    name: "KRI",
+    value: "kri"
+    },
+    {
+    name: "Dashboard",
+    value: "dashboard"
+    },
+    {
+    name: "Task",
+    value: "task"
+    },
+    {
+    name: "Risk Register",
+    value: "risk"
+    },
+];
+
 const Profile = () => {
+    const dispatch = useDispatch();
     const [form] = Form.useForm();
+
+    const { profile } = useSelector((state) => state.profile);
+
     const [loading, setloading] = useState(false);
-    const [profileLoaded, setProfileLoaded] = useState(false);
 
-    const rangePresets = [
-        {
-        label: 'Datepicker',
-        value: <RangePicker picker="week" />
-        },
-        {
-        label: 'Weekly',
-        value: <RangePicker picker="week" />
-        },
-        {
-        label: 'Monthly',
-        value: <RangePicker picker="month" />,
-        },
-        {
-        label: 'Quarterly',
-        value: <RangePicker picker="quarter" />,
-        },
-        {
-        label: 'Annually',
-        value: <RangePicker picker="year" />,
-        }
-    ];
-
-    const landingPage = [
-        {
-        name: "KRI",
-        value: "kri"
-        },
-        {
-        name: "Dashboard",
-        value: "dashboard"
-        },
-        {
-        name: "Task",
-        value: "task"
-        },
-        {
-        name: "Risk Register",
-        value: "risk"
-        },
-    ];
-
-    const onFinish = async (values) => {    
+    const onFinish = async (values) => {
         try {
           form.validateFields();
     
@@ -73,20 +80,16 @@ const Profile = () => {
         } catch (error) {
           console.error('Error validating fields:', error);
         }
-    };    
-
-    // Fetch user profile
-    const url = "user/user-profile"
-    const { data, error } = useRequest(profileLoaded ? url : null, null, { method: 'GET'});
-    console.log('Data:', data, 'Error:', error);
-
-    console.log('Profile re-rendered');
+    };
 
     useEffect(() => {
-        setProfileLoaded(true);
-    }, [])
+      form.setFieldsValue(profile);
+    }, [profile]);
     
-    
+    useEffect(() => {
+        dispatch(getProfile());
+    }, []);
+
     return (
         <AppLayout>
             <div className="w-full flex items-stretch py-5 px-8">
@@ -139,7 +142,7 @@ const Profile = () => {
                             />                
                         </Form.Item>    
 
-                        <Form.Item label="Business Name" name="business">
+                        <Form.Item label="Organization Name" name="org_name">
                             <Input 
                                 type="text" 
                                 id="location" 
@@ -159,19 +162,19 @@ const Profile = () => {
                             />                
                         </Form.Item>  
 
-                        <Form.Item label="Department" name="department">
+                        <Form.Item label="Department" name="dept_name">
                             <Input 
                                 type="text" 
-                                name="location" 
+                                name="dept_name" 
                                 className="w-full px-3 py-3 mb-3 text-sm leading-tight text-gray-700 border border-primary/80 rounded appearance-none focus:outline-none focus:shadow-outline"
                                 placeholder="Department"
                             />              
                         </Form.Item>  
 
-                        <Form.Item label="Role" name="role">
+                        <Form.Item label="Role" name="role_name">
                             <Input 
                                 id="text" 
-                                name="text" 
+                                name="role_name" 
                                 className="w-full px-3 py-3 mb-3 text-sm leading-tight text-gray-700 border border-primary/80 rounded appearance-none focus:outline-none focus:shadow-outline"
                                 placeholder="Role"
                             />                
@@ -185,7 +188,7 @@ const Profile = () => {
                                 style={{ height: '43px' }}
                             >
                                 {landingPage.map((el, index) => (
-                                <Select.Option key={index}>{el.name}</Select.Option>
+                                    <Select.Option key={index}>{el.name}</Select.Option>
                                 ))}
                             </Select>              
                         </Form.Item>

@@ -28,7 +28,7 @@ const ConsultingServices = () => {
                 />
             </div>
 
-            <div class="max-w-screen-xl mx-auto px-4 md:p-10 lg:p-16 grid grid-cols-1 sm:grid-cols-12">
+            <div className="max-w-screen-xl mx-auto px-4 md:p-10 lg:p-16 grid grid-cols-1 sm:grid-cols-12">
                 <div className="md:pr-16 xl:pr-24 md:col-span-6" data-aos="fade-left">
                     <h3 className="font-semibold text-2xl">IT Advisory</h3>
                     <ul className="text-xl lg:pl-10 list-disc pb-10">                    

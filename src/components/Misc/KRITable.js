@@ -3,7 +3,7 @@ import { Table } from "antd";
 
 const KRITable = ({
   bordered = true,
-  customClass="kri-update",
+  customclassName="kri-update",
   columns=[],
   dataSource=[]
 }) => {

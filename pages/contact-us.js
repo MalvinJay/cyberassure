@@ -17,8 +17,8 @@ const ContactUs = () => {
 
       <DefaultLayout>
         <main className="">
-          <section class="w-full bg-white dark:bg-gray-900 min-h-screen">
-            <div class="max-w-screen-xl mx-auto">
+          <section className="w-full bg-white dark:bg-gray-900 min-h-screen">
+            <div className="max-w-screen-xl mx-auto">
                 <div className="w-full md:w-1/2 h-[180px] relative">
                     <Image
                         className="object-contain w-full" 

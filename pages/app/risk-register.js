@@ -101,7 +101,7 @@ const RiskRegister = () => {
             <div className="py-10">
               <RegisterTable 
                 bordered={false}
-                customClass="kri-update risk-register" 
+                customclassName="kri-update risk-register" 
                 columns={columns}
                 dataSource={dataSource}
               />

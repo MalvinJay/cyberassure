@@ -56,10 +56,10 @@ const Index = () => {
 
       <DefaultLayout>
         <main className="">
-          <section class="w-full bg-default dark:bg-gray-900 md:h-screen flex items-center">
-            <div class="max-w-screen-xl mx-auto grid px-4 lg:gap-8 xl:gap-0 md:grid-cols-12">
-              <div class="mr-auto place-self-center lg:col-span-7">
-                  <h1 class="max-w-2xl mb-4 text-4xl font-extrabold md:text-5xl !leading-tight dark:text-white md:pr-20">
+          <section className="w-full bg-default dark:bg-gray-900 md:h-screen flex items-center">
+            <div className="max-w-screen-xl mx-auto grid px-4 lg:gap-8 xl:gap-0 md:grid-cols-12">
+              <div className="mr-auto place-self-center lg:col-span-7">
+                  <h1 className="max-w-2xl mb-4 text-4xl font-extrabold md:text-5xl !leading-tight dark:text-white md:pr-20">
                     We help you set your Corporate Goals, Measure your Progress and
                     &nbsp;<span className="text-primary">Achieve Results</span>
                   </h1>
@@ -70,7 +70,7 @@ const Index = () => {
                     <Button type="default" className="text-lg text-primary border-primary h-10 px-6 dark:text-white dark:border-white">See how it works</Button>
                   </div>
               </div>
-              <div class="lg:mt-0 lg:col-span-5 lg:flex">
+              <div className="lg:mt-0 lg:col-span-5 lg:flex">
                 <Image
                   width={678}
                   height={402}
@@ -83,8 +83,8 @@ const Index = () => {
             </div>
           </section>    
 
-          <section class="w-full bg-white dark:bg-gray-900 py-4 md:py-16">
-            <div class="max-w-screen-xl mx-auto px-4">
+          <section className="w-full bg-white dark:bg-gray-900 py-4 md:py-16">
+            <div className="max-w-screen-xl mx-auto px-4">
               <div className="w-full sm:w-2/3 xl:w-1/2 mx-auto" 
                 data-aos="fade-up"
               >
@@ -96,7 +96,7 @@ const Index = () => {
               </div>
             </div>
 
-            <div class="max-w-screen-xl mx-auto">
+            <div className="max-w-screen-xl mx-auto">
               <div className="text-primary dark:text-white pt-10 pl-10">
                 <h2 className="text-4xl text-primary dark:text-white font-semibold">Orgposture</h2>
                 <p className='text-lg pt-2'>Make data driven security decisions</p>
@@ -104,7 +104,7 @@ const Index = () => {
 
               <div className="w-full grid sm:grid-cols-2 md:grid-cols-3 gap-10 lg:gap-20 px-4 py-4 md:py-16">
                 {orgPostureList.map((el, index) => (
-                  <div class="text-center mx-auto flex flex-col items-center space-y-10" key={index}>
+                  <div className="text-center mx-auto flex flex-col items-center space-y-10" key={index}>
                     <Image
                       width={108}
                       height={102}
@@ -114,7 +114,7 @@ const Index = () => {
                       alt={el.name}
                     />
 
-                    <p class="w-full lg:w-2/3 mx-auto text-center font-medium dark:text-white !leading-normal text-lg" data-aos="fade-up">
+                    <p className="w-full lg:w-2/3 mx-auto text-center font-medium dark:text-white !leading-normal text-lg" data-aos="fade-up">
                       {el.info}
                     </p>                  
                   </div>
@@ -122,7 +122,7 @@ const Index = () => {
               </div>
             </div>
 
-            <div class="max-w-screen-xl mx-auto">
+            <div className="max-w-screen-xl mx-auto">
               <div className="w-full sm:w-2/3 xl:w-2/5 mx-auto" data-aos="fade-up">
                 <h2 className="font-bold leading-snug text-3xl text-center mx-auto">
                   Manage security strategy, people, process and technology  on one platform
@@ -130,7 +130,7 @@ const Index = () => {
               </div>
 
               <div className="grid px-4 lg:gap-8 lg:gap-x-0 xl:gap-y-12 md:grid-cols-12 pt-10">
-                <div class="mr-auto col-start-1 lg:col-end-7" data-aos="fade-up" data-aos-duration="1500">
+                <div className="mr-auto col-start-1 lg:col-end-7" data-aos="fade-up" data-aos-duration="1500">
                   <Image
                     width={600}
                     height={312}
@@ -148,7 +148,7 @@ const Index = () => {
                   </div>
                 </div>
 
-                <div class="col-span-5 col-end-13" data-aos="fade-up" data-aos-duration="1500">
+                <div className="col-span-5 col-end-13" data-aos="fade-up" data-aos-duration="1500">
                   <Image
                     width={452}
                     height={319}
@@ -162,7 +162,7 @@ const Index = () => {
                   </p>
                 </div>
 
-                <div class="mr-auto col-start-1 lg:col-end-7" data-aos="fade-up" data-aos-duration="1500">
+                <div className="mr-auto col-start-1 lg:col-end-7" data-aos="fade-up" data-aos-duration="1500">
                   <Image
                     width={600}
                     height={312}
@@ -176,7 +176,7 @@ const Index = () => {
                   </p>                
                 </div>
 
-                <div class="col-span-5 col-end-13" data-aos="fade-up" data-aos-duration="1500">
+                <div className="col-span-5 col-end-13" data-aos="fade-up" data-aos-duration="1500">
                   <Image
                     width={452}
                     height={319}
@@ -193,7 +193,7 @@ const Index = () => {
               </div>
             </div>
 
-            <div class="max-w-screen-xl mx-auto px-4 py-4 md:py-16">
+            <div className="max-w-screen-xl mx-auto px-4 py-4 md:py-16">
               <h2 className="font-bold leading-snug text-3xl text-center mx-auto">
                 Resources
               </h2>

@@ -18,9 +18,9 @@ const ContactUs = () => {
 
       <DefaultLayout>
         <main className="">
-          <section class="w-full bg-default dark:bg-gray-900 min-h-screen">
-            <div class="max-w-screen-xl mx-auto w-full p-10">
-              <h1 class="text-center text-4xl font-extrabold tracking-tight leading-none md:text-5xl dark:text-white md:pr-20">
+          <section className="w-full bg-default dark:bg-gray-900 min-h-screen">
+            <div className="max-w-screen-xl mx-auto w-full p-10">
+              <h1 className="text-center text-4xl font-extrabold tracking-tight leading-none md:text-5xl dark:text-white md:pr-20">
                 About Us
               </h1>
               <p className="text-lg pt-10">
@@ -43,8 +43,8 @@ const ContactUs = () => {
             </div>
           </section>
 
-          <section class="w-full bg-white dark:bg-gray-900 min-h-screen">
-            <div class="max-w-screen-xl mx-auto w-full p-10">
+          <section className="w-full bg-white dark:bg-gray-900 min-h-screen">
+            <div className="max-w-screen-xl mx-auto w-full p-10">
               <h3 className="text-2xl text-black dark:text-white font-semibold">Our vision</h3>
               
               <p className="leading-relaxed text-black dark:text-white pt-3">
