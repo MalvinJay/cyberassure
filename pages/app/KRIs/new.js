@@ -1,70 +1,81 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Button, Select, Form, Input, DatePicker, notification } from 'antd'
+import dayjs from 'dayjs';
+
 import api from "../../../services/config"
 import AppLayout from "../../../src/components/Layouts/appLayout";
 
 const { RangePicker } = DatePicker;
+
+const viewership = [
+  {
+    name: "Executive Management",
+    type: "corporate"
+  },
+  {
+    name: "All Employees",
+    type: "corporate"
+  },
+  {
+    name: "Only Me",
+    type: "personal"
+  },
+  {
+    name: "Access List",
+    type: "corporate"
+  },
+];
 
 const CreateKRI = () => {
   const router = useRouter();
   const [form] = Form.useForm();
 
   const [loading, setloading] = useState(false);
+  const [type, setType] = useState("date");
 
   const rangePresets = [
     {
-      label: 'Datepicker',
-      value: <RangePicker picker="week" />
+      label: <div onClick={() => setType('date')}>Day</div>,
+      value: dayjs()
     },
     {
-      label: 'Weekly',
-      value: <RangePicker picker="week" />
+      label: <div onClick={() => setType('week')}>Weekly</div>,
+      value: dayjs()
     },
     {
-      label: 'Monthly',
-      value: <RangePicker picker="month" />,
+      label: <div onClick={() => setType('month')}>Monthly</div>,
+      value: dayjs()
     },
     {
-      label: 'Quarterly',
-      value: <RangePicker picker="quarter" />,
+      label: <div onClick={() => setType('quarter')}>Quarterly</div>,
+      value: dayjs()
     },
     {
-      label: 'Annually',
-      value: <RangePicker picker="year" />,
+      label: <div onClick={() => setType('year')}>Annually</div>,
+      value: dayjs()
     }
-  ];
-
-  const viewership = [
-    {
-      name: "Executive Management",
-      type: "corporate"
-    },
-    {
-      name: "All Employees",
-      type: "corporate"
-    },
-    {
-      name: "Only Me",
-      type: "personal"
-    },
-    {
-      name: "Access List",
-      type: "corporate"
-    },
   ];
 
   const onFinish = async (values) => {
     try {
       form.validateFields();
-      setloading(true);    
+      setloading(true);  
       
-      api.post('/kri/create-kri',
-      {
+      function formatDate(date) {
+        if (date) return new Date(date)?.toDateString()?.slice(4,)
+        else return ''
+      }
+      
+      const payload = {
         ...values,
         kri_type_id: Number(values.kri_type_id),
-        target_date: `${values.target_date[0]} - ${values.target_date[1]}`
-      })
+        // target_date: `${ formatDate(values.target_date[0]) } - ${formatDate(values.target_date[1])}`
+        // target_date: `${values.target_date[0]} - ${values.target_date[1]}`
+        target_date: values.target_date[1]
+      };
+      
+      api.post('/kri/create-kri', payload)
       .then((res) => {
         setloading(false);
 
@@ -72,19 +83,37 @@ const CreateKRI = () => {
           notification.success({ message: "KRI Created Successfully" });
           router.push('/app/KRIs/all');
         } else {
-          notification.error({ message:  res?.response?.data?.message})
+          notification.error({ 
+            message: <span className="capitalize">{res?.response?.data?.status || 'Failed'}</span>,
+            description: res?.response?.data?.message || 'Error creating KRI, please try again or contact support.',
+          })
         }
       }, (error) => {
         setloading(false);
-        notification.error({ message: error?.response?.data?.message })
+        notification.error({ 
+          message: <span className="capitalize">{error?.response?.data?.status || 'Failed'}</span>,
+          description: error?.response?.data?.message || 'Error creating KRI, please try again or contact support.',
+        })
       })
       .catch((error) => {
         console.error('Error creating kri:', error)
+        notification.error({ 
+          message: <span className="capitalize">{error?.response?.data?.status || 'Failed'}</span>,
+          description: error?.response?.data?.message || 'Error creating KRI, please try again or contact support.',
+        })
       })
     } catch (error) {
       console.error('Error creating kri', error);
     }
+  }; 
+  
+  const PickerWithType = ({ type, onChange, className }) => {
+    return <RangePicker className={className} picker={type} onChange={onChange} presets={rangePresets} />
   };  
+
+  useEffect(() => {
+    console.log('Pathname:', router.query)
+  }, [])
 
   return (
     <AppLayout>
@@ -130,7 +159,7 @@ const CreateKRI = () => {
             >
               <Select 
                 className="w-full h-10 text-sm leading-tight text-gray-700 border-primary/80 rounded appearance-none focus:outline-none focus:shadow-outline"
-                placeholder="Title of what uyou want to achieve"
+                placeholder="Title of what you want to achieve"
                 size="large"
                 style={{ height: '43px' }}
               >
@@ -140,20 +169,14 @@ const CreateKRI = () => {
             </Form.Item>
 
             <Form.Item className="w-1/2 pl-4" 
-              label={
-                <span className="block mb-2 text-sm font-bold text-gray-700">
-                  Target Date
-                </span>
-              }
+              label={<span className="block mb-2 text-sm font-bold text-gray-700">Target Date</span>}
               name="target_date"
               rules={[ {required: true, message: 'Provide target date'}]}
             >
-              <RangePicker
-                onChange={(date1, dates2) => {
-                  console.log('date1:', date1, 'dates2:', dates2);
-                }}
+              <PickerWithType 
+                type={type}
                 className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border border-primary/80 rounded appearance-none focus:outline-none focus:shadow-outline"
-                presets={rangePresets}
+                onChange={(value) => console.log(value)}
               />
             </Form.Item>
           </div>

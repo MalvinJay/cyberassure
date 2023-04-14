@@ -1,59 +1,29 @@
-import React from "react";
-import AppLayout from "../../../src/components/Layouts/appLayout";
-import AuthHead from "../../../src/components/Misc/AuthHead";
-import KRIItem from "../../../src/components/Misc/KRI-Item";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getKRIs } from "redux/features/krisSlice";
+
+import AppLayout from "components/Layouts/appLayout";
+import AuthHead from "components/Misc/AuthHead";
+import KRIItem from "components/Misc/KRI-Item";
 
 const CorporateKRIs = () => {
-  const corporateKPIs = [
-    {
-      task: "Number of Projects on time and within Budget ",
-      timerange:  "Q3 - 2022",
-      start: "Jul 01",
-      end: "Sep 30",
-      status: "Pending Approval",
-      slug_id: "Number_of_Projects"
-    },
-    {
-      task: "Percentage of expected project benefits achieved",
-      timerange:  "Q3 - 2022",
-      start: "Jul 01",
-      end: "Sep 30",
-      status: "Pending Approval",
-      slug_id: "Percentage_of_expected"
-    },
-    {
-      task: "Percentage of projects using enterprise architecture services",
-      timerange:  "Q3 - 2022",
-      start: "Jul 01",
-      end: "Sep 30",
-      status: "Pending Approval",
-      slug_id: "Percentage_of_projects"
-    },
-    {
-      task: "Number of vulnerabilities discovered",
-      timerange:  "Q3 - 2022",
-      start: "Jul 01",
-      end: "Sep 30",
-      status: "Pending Approval",
-      slug_id: "Number_of_vulnerabilities"
-    },
-    {
-      task: "Frequency of programme/projects status reviews",
-      timerange:  "Q3 - 2022",
-      start: "Jul 01",
-      end: "Sep 30",
-      status: "Pending Approval",
-      slug_id: "Frequency_of_programme"
-    },
-    {
-      task: "Percentage of projects reviewed that meet target quality goals and objectives",
-      timerange:  "Q3 - 2022",
-      start: "Jul 01",
-      end: "Sep 30",
-      status: "Pending Approval",
-      slug_id: "Percentage_of_projects"
-    }
-];
+  const dispatch = useDispatch();
+  const { list } = useSelector((state) => state.kris);
+  const [loading, setloading] = useState(true);
+
+  const fetchKRIs = async () => {
+    setloading(true);
+    dispatch(getKRIs())
+    .then(() => {
+      setloading(false);
+    }, () => {
+      setloading(false);
+    })
+  };
+
+  useEffect(() => {
+    fetchKRIs();
+  }, []);
 
   return (
     <AppLayout>
@@ -63,14 +33,22 @@ const CorporateKRIs = () => {
         <div className="w-full pt-16 py-5 px-8">
           <h2 className="font-semibold text-xl">Corporate Key Risk Indicators</h2>
 
-          <div className="pt-4">
-            {corporateKPIs.map((el, index) => (
-              <KRIItem 
-                key={index}
-                {...el}
-              />
-            ))}
-          </div>
+          {loading ? 
+            <div className='absolute inset-0 flex items-center justify-center bg-white bg-opacity-25 min-h-[35rem]'>
+              <div className="w-20 h-20 rounded-full border-4 border-gray-300 border-t-white animate-spin flex items-center">
+              </div>
+            </div>
+          :
+            <div className="pt-4">
+              {list?.filter(el => el.kri_type_id === 2)?.length > 0 ? (
+                list?.filter(el => el.kri_type_id === 2)?.map((el, index) => <KRIItem key={index} {...el} />)
+              ) : (
+                <div className="p-10 text-center">
+                  No corporate KRIs available
+                </div>
+              )}
+            </div>
+          }
         </div>
       </section>
     </AppLayout>
