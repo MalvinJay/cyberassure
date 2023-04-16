@@ -73,9 +73,9 @@ a {
   border-radius: 0 !important;
   border-color: black !important;
 }
-.kri-update .ant-table-wrapper .ant-table-tbody > tr > td {
+/* .kri-update .ant-table-wrapper .ant-table-tbody > tr > td {
   border-bottom: none !important;
-}
+} */
 .risk-register .ant-table-wrapper .ant-table-thead > tr > th {
   background: #3789B4 !important;
 }

@@ -18,3 +18,24 @@ export function getQuater(date) {
 
     return quater;
 }
+
+export const base64BinaryBuffer = (file, output, callback) => {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result));
+  
+    switch (output) {
+      case 'base64':
+        reader.readAsDataURL(file)
+        break
+      case 'binary':
+        reader.readAsBinaryString(file)
+        break
+      case 'buffer':
+        reader.readAsArrayBuffer(file)
+        break
+  
+      default:
+        reader.readAsBinaryString(file)
+        break
+    }
+  }

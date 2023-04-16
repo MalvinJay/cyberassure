@@ -45,7 +45,7 @@ const AllKRIs = () => {
 
               <div className="my-4">
                 {list?.filter(el => el.kri_type_id === 1).length > 0 ? (
-                  list?.filter(el => el.kri_type_id === 1)?.map((el, index) => <KRIItem key={index} {...el} />)
+                  list?.filter(el => el.kri_type_id === 1)?.map((el, index) => <KRIItem key={index} {...el} handleUpdateComplete={fetchKRIs} />)
                 ) : (
                   <div className="p-10 text-center">No personal KRIs available</div>
                 )}

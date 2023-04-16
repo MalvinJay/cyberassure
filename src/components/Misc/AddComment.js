@@ -2,7 +2,8 @@ import React from "react";
 
 const AddComment = ({ 
     width="w-full md:w-1/2",
-    rows=2
+    rows=2,
+    handleInputChange
 }) => {
   return (
     <div className={`mt-4 border border-primary shadow-cs ${width}`}>
@@ -11,12 +12,13 @@ const AddComment = ({
       </div>
 
       <textarea
-        autoFocus
+        // autoFocus
         name=""
         id=""
         cols="5"
         rows={rows}
-        className="pt-4 border-t border-primary w-full p-4 outline-none shadow-inner"
+        className="border-t border-primary w-full p-2 outline-none shadow-inner"
+        onChange={(e) => handleInputChange(e.target.value)}
       ></textarea>
     </div>
   );
