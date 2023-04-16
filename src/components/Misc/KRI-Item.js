@@ -19,6 +19,7 @@ const KRIItem = ({
   objective_title = "",
   target_date = "",
   approval_status = "",
+  kri_type_id,
   showTime = true,
   showAddkey = true,
   handleUpdateComplete = () => {},
@@ -64,7 +65,7 @@ const KRIItem = ({
   const [dataSource, setDataSource] = useState([]);
 
   const handleClick = (e) => {
-    router.push(`/app/KRIs/approve?q=${id}`);
+    router.push(`/app/KRIs/approve?q=${id}&type=${kri_type_id}`);
   };
 
   const handleRevealKIs = (e) => {
@@ -87,7 +88,6 @@ const KRIItem = ({
       .then(
         (res) => {
           setloading(false);
-          console.log("Key Results:", res.payload);
           setDataSource(res.payload);
         },
         () => {
@@ -227,14 +227,16 @@ const KRIItem = ({
           </div>
         )}
 
-        <div>
-          <div
-            className={`${
-              approval_status ? "visible" : "invisible"
-            } ${approval_status === 'pending' ? 'bg-danger' : 'bg-green-900'} text-white p-2 rounded-lg text-base capitalize`}
-          >
-            {approval_status} Approval
-          </div>
+        <div className="min-w-[10rem]">
+            {kri_type_id === 2 && (
+                <div
+                    className={`${
+                    approval_status ? "visible" : "invisible"
+                    } ${approval_status === 'pending' ? 'bg-danger' : 'bg-green-900'} text-white p-2 rounded-lg text-base capitalize`}
+                >
+                    {approval_status} Approval
+                </div>
+            )}
         </div>
       </div>
 

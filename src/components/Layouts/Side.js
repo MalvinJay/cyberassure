@@ -116,7 +116,7 @@ const Side = ({ shrink=false, setshrink}) => {
     },
   ];
 
-  console.log('side is re-rendering...')
+  // console.log('side is re-rendering...')
 
   return (
     <>
