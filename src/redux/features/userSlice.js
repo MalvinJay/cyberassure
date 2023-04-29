@@ -1,16 +1,17 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import api from "../../../services/config";
 
 const initialState = {
-    access_token: "",
-    expires_in: 2220,
-    refresh_expires_in: 1800,
-    refresh_token: "",
-    token_type: "Bearer",
-    id_token: "",
-    "not-before-policy": 0,
-    session_state: "",
-    scope: ""
+  user: {},
+  users: []
 };
+
+export const getUsers = createAsyncThunk('user/getUsers', 
+  async (cache=false) => {
+    const response = await api.get("user/get-users");
+    return response?.data?.message;
+  }
+);
 
 export const userSlice = createSlice({
   name: "user",
@@ -18,9 +19,14 @@ export const userSlice = createSlice({
   reducers: {
     reset: () => initialState,
     setUser: (state, action) => {
-      state = { ...action.payload }
+      state.user = action.payload
     },
-  }
+  },
+  extraReducers: (builder) => {
+    builder.addCase(getUsers.fulfilled, (state, action) => {
+      state.users = action.payload
+    })
+  }  
 });
 
 export const {

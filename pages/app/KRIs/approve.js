@@ -16,41 +16,12 @@ const KRIApproval = () => {
   const router = useRouter();
 
   const { list } = useSelector((state) => state.kris);
+  const { departments } = useSelector((state) => state.departments);
 
   const [current, setcurrent] = useState(2);
   const [loading, setloading] = useState(true);
   const [comment, setcomment] = useState(null);
 
-  const departments = [
-    {
-      id: 1,
-      name: "ENTERPRISE SECURITY POSTURE",
-    },
-    {
-      id: 2,
-      name: "PMO",
-    },
-    {
-      id: 3,
-      name: "CYBERSECURITY",
-    },
-    {
-      id: 4,
-      name: "INFORMATION TECH",
-    },
-    {
-      id: 5,
-      name: "HUMAN RESOURCE",
-    },
-    {
-      id: 6,
-      name: " AUDIT",
-    },
-    {
-      id: 7,
-      name: "PROJECT MGT",
-    },
-  ];
 
   const fetchKeyResults = async (id) => {
     setloading(true);
