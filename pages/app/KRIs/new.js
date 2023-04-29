@@ -132,7 +132,7 @@ const CreateKRI = () => {
             name="objective_title"
             label={
               <span
-              className="block mb-2 text-sm font-bold text-gray-700"
+              className="block mb-2 text-base font-bold text-gray-700"
             >
               Objective Title
             </span>
@@ -141,7 +141,7 @@ const CreateKRI = () => {
           >
             <Input
               name="objective"
-              className="w-full px-3 py-3 mb-3 text-sm leading-tight text-gray-700 border border-primary/80 rounded appearance-none focus:outline-none focus:shadow-outline"
+              className="w-full px-3 py-3 mb-3 text-base leading-tight text-gray-700 border border-primary/80 rounded appearance-none focus:outline-none focus:shadow-outline"
               type="text"
               placeholder="Title of what you want to achieve "
             />
@@ -151,14 +151,14 @@ const CreateKRI = () => {
             <Form.Item className="mb-4 w-1/2 md:mb-0 pr-4" 
               name="kri_type_id"
               label={
-                <span className="block mb-2 text-sm font-bold text-gray-700">
+                <span className="block mb-2 text-base font-bold text-gray-700">
                   Who is this objective for
                 </span>
               }
               rules={[ {required: true, message: 'Provide target audience'}]}
             >
               <Select 
-                className="w-full h-10 text-sm leading-tight text-gray-700 border-primary/80 rounded appearance-none focus:outline-none focus:shadow-outline"
+                className="w-full h-10 text-base leading-tight text-gray-700 border-primary/80 rounded appearance-none focus:outline-none focus:shadow-outline"
                 placeholder="Title of what you want to achieve"
                 size="large"
                 style={{ height: '43px' }}
@@ -169,13 +169,13 @@ const CreateKRI = () => {
             </Form.Item>
 
             <Form.Item className="w-1/2 pl-4" 
-              label={<span className="block mb-2 text-sm font-bold text-gray-700">Target Date</span>}
+              label={<span className="block mb-2 text-base font-bold text-gray-700">Target Date</span>}
               name="target_date"
               rules={[ {required: true, message: 'Provide target date'}]}
             >
               <PickerWithType 
                 type={type}
-                className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border border-primary/80 rounded appearance-none focus:outline-none focus:shadow-outline"
+                className="w-full px-3 py-2 text-base leading-tight text-gray-700 border border-primary/80 rounded appearance-none focus:outline-none focus:shadow-outline"
                 onChange={(value) => console.log(value)}
               />
             </Form.Item>
@@ -187,7 +187,7 @@ const CreateKRI = () => {
               name="comment"
               label={
                 <span
-                  className="block mb-2 text-sm font-bold text-gray-700"
+                  className="block mb-2 text-base font-bold text-gray-700"
                 >
                   Who can view this KRI
                 </span>
@@ -195,7 +195,7 @@ const CreateKRI = () => {
               rules={[ {required: true, message: 'Select who can view this KRI'}]}
             >
               <Select
-                className="w-full h-10 text-sm leading-tight text-gray-700 border-primary/80 rounded appearance-none focus:outline-none focus:shadow-outline"
+                className="w-full h-10 text-base leading-tight text-gray-700 border-primary/80 rounded appearance-none focus:outline-none focus:shadow-outline"
                 placeholder="Only me"
                 size="large"
                 style={{ height: '43px' }}

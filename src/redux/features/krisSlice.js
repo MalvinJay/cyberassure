@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import api from "../../../services/config";
 
 const initialState = {
@@ -6,7 +6,7 @@ const initialState = {
 };
 
 export const getKRIs = createAsyncThunk('kris/getKRIs', 
-  async () => {
+  async (cache=false) => {
     const response = await api.get("kri/get-kris");
     return response?.data?.message;
   }

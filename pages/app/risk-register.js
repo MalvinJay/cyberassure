@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "antd";
 
@@ -8,8 +8,10 @@ import DashboardFilter from "@/components/Misc/DashboardHead";
 
 import ExportEntity from "@/components/Misc/ExportEntity";
 import RegisterTable from "@/components/Misc/KRITable";
+import api from "../../services/config";
 
 const RiskRegister = () => {
+
   const columns = [
     {
       title: "Risk Description ",
@@ -53,18 +55,43 @@ const RiskRegister = () => {
     },
   ];
 
-  const dataSource = [
-    {
-      description: "A vulnerable CRM Application Server on the internet",
-      linked_kri: "Number of vulnerabilities",
-      risk: "Denial of Service",
-      risk_level: "High",
-      risk_response: "Disconnect Server from Internet",
-      status: "Open",
-      risk_owner: "COO",
-      target_date: "upload file",
-    }
-  ];
+  const [dataSource, setList] = useState([
+    // {
+    //   description: "A vulnerable CRM Application Server on the internet",
+    //   linked_kri: "Number of vulnerabilities",
+    //   risk: "Denial of Service",
+    //   risk_level: "High",
+    //   risk_response: "Disconnect Server from Internet",
+    //   status: "Open",
+    //   risk_owner: "COO",
+    //   target_date: "upload file",
+    // }
+  ]);
+
+  const fetchRiskRegisters = async (filters={}) => {
+    // setloading(true);
+    api.get('/task/get-risks')
+    .then((res) => {
+      // setloading(false);
+      console.log('risks:', res.data)
+      // const list = res?.data?.message?.map((el) => {
+      //   return {
+      //     tasks: el.task_name,
+      //     assigned_by: el.assigned_by,
+      //     assigned_to: el.id,
+      //     level_of_priority: el.level_of_priority,
+      //     due_ate: formatDate(el?.target_date)
+      //   }
+      // })
+      // setList(list)
+    }, () => {
+      // setloading(false);
+    })
+  };  
+
+  useEffect(() => {
+    fetchRiskRegisters();
+  }, [])
 
   return (
     <AppLayout>
@@ -74,9 +101,9 @@ const RiskRegister = () => {
 
         <div className="w-full pt-32 pb-20 px-8">
           <div className="flex justify-between items-center">
-            <Link href="/app/KRIs/new">
-              <button className="h-10 text-white bg-primary rounded-lg border-0 py-2 px-4 focus:outline-none hover:bg-primary/90 text-lg space-x-4 inline-flex items-center">
-                <span>Create Risk Register</span>
+            <Link href="/app/risk-register/new">
+              <button className="text-white bg-primary rounded-lg border-0 py-1 px-4 focus:outline-none hover:bg-primary/90 text-lg space-x-4 inline-flex items-center leading-tight">
+                <span>Create Risk <br /> Register</span>
                 <svg
                   width="16"
                   height="16"
@@ -94,23 +121,24 @@ const RiskRegister = () => {
 
             <h2 className="font-bold text-2xl ">Risk Register</h2>
 
-            <ExportEntity />
+            <ExportEntity name="Import CSV" />
           </div>
 
           <div>
             <div className="py-10">
               <RegisterTable 
                 bordered={false}
-                customclassName="kri-update risk-register" 
+                customclassName="risk-register" 
                 columns={columns}
                 dataSource={dataSource}
+                addRecord={false}
               />
 
               <div className="pt-2 flex justify-end">
                 <Button
                   type="primary"
                   shape="default"
-                  className="bg-primary text-white px-16 rounded-none font-bold text-base flex items-center"
+                  className="bg-secondary text-white px-16 rounded-none font-bold text-base flex items-center shadow-inner"
                 >
                   Save
                 </Button>

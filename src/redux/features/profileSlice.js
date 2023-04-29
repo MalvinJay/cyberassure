@@ -2,16 +2,18 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../../../services/config";
 
 const initialState = {
-  id: "",
-  email: "",
-  first_name: "",
-  last_name: "",
-  org_name: "",
-  ext_id: "",
-  role_name: "",
-  dept_name: "",
-  created_at: "",
-  updated_at: ""
+  profile: {
+    id: "",
+    email: "",
+    first_name: "",
+    last_name: "",
+    org_name: "",
+    ext_id: "",
+    role_name: "",
+    dept_name: "",
+    created_at: "",
+    updated_at: ""
+  }
 };
 
 // Custom action thunks
@@ -28,13 +30,12 @@ export const profileSlice = createSlice({
   reducers: {
     reset: () => initialState,
     setProfile: (state, action) => {
-      state = { ...action.payload }
+      state.profile = action.payload
     }
   },
-
   extraReducers: (builder) => {
     builder.addCase(getProfile.fulfilled, (state, action) => {
-      state = { ...action.payload }
+      state.profile = action.payload
     })
   }
 });
