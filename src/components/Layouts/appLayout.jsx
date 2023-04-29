@@ -1,13 +1,20 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, memo } from "react";
 import Header from "./Header";
 import Side from "./Side";
 import 'antd/dist/reset.css';
+
 import { useDispatch, useSelector } from "react-redux";
+
 import { getProfile } from "redux/features/profileSlice";
+import { getDepartments } from "redux/features/departmentSlice";
+import { getOrganization } from "redux/features/organizationSlice";
 
 const AppLayout = ({ children }) => {
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.profile);
+  // const { departments } = useSelector((state) => state.departments);
+
   const [shrink, setshrink] = useState(false); // Use context for this in the future
 
   useEffect(() => {
@@ -15,6 +22,12 @@ const AppLayout = ({ children }) => {
       dispatch(getProfile())
     }
   }, [profile])
+
+  useEffect(() => {
+    dispatch(getDepartments())
+    dispatch(getOrganization())
+  }, [])
+
   
   return (
     <section className="w-full">
