@@ -2,6 +2,7 @@ import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
+// import { setupListeners } from '@reduxjs/toolkit/query'
 
 // Reducers
 import { userSlice } from "./features/userSlice";
@@ -10,13 +11,18 @@ import { krisSlice } from "./features/krisSlice";
 import { departmentSlice } from "./features/departmentSlice";
 import { organizationSlice } from "./features/organizationSlice";
 
+// RTK services
+// import { baseApi } from "./services/api/baseApi";
+// import { userApi } from "./services/api/userData";
+
 // Reducers
 const rootReducer = combineReducers({
-  [userSlice.name]:         userSlice.reducer,
-  [profileSlice.name]:      profileSlice.reducer,
-  [krisSlice.name]:         krisSlice.reducer,
-  [departmentSlice.name]:   departmentSlice.reducer,
+  [userSlice.name]        :   userSlice.reducer,
+  [profileSlice.name]     :   profileSlice.reducer,
+  [krisSlice.name]        :   krisSlice.reducer,
+  [departmentSlice.name]  :   departmentSlice.reducer,
   [organizationSlice.name]:   organizationSlice.reducer,
+  // [userApi.reducerPath]   :   userApi.reducer
 });
 
 // config the store
@@ -24,7 +30,8 @@ const makeConfiguredStore = () =>
   configureStore({
     reducer: rootReducer,
     devTools: process.env.NODE_ENV !== "production",
-  });
+    // middleware: (getDefaultMiddleware) => [...getDefaultMiddleware(), userApi.middleware]
+});
 
 export const makeStore = () => {
   const isServer = typeof window === "undefined";
@@ -49,5 +56,9 @@ export const makeStore = () => {
     return store;
   }
 };
+
+// optional, but required for refetchOnFocus/refetchOnReconnect behaviors
+// see `setupListeners` docs - takes an optional callback as the 2nd arg for customization
+// setupListeners(makeStore.dispatch)
 
 export const wrapper = createWrapper(makeStore);

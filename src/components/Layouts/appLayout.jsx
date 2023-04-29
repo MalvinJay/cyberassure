@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProfile } from "redux/features/profileSlice";
 import { getDepartments } from "redux/features/departmentSlice";
 import { getOrganization } from "redux/features/organizationSlice";
+// import { useGetUserProfileQuery } from "redux/services/api/userData";
 
 const AppLayout = ({ children }) => {
   const dispatch = useDispatch();
@@ -16,6 +17,8 @@ const AppLayout = ({ children }) => {
   // const { departments } = useSelector((state) => state.departments);
 
   const [shrink, setshrink] = useState(false); // Use context for this in the future
+  // const { data, isLoading, error } = useGetUserProfileQuery();
+  // console.log('Fetching user info:', data);
 
   useEffect(() => {
     if (!profile.id) {
