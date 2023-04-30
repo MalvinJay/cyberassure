@@ -5,7 +5,9 @@ import { useRouter } from 'next/router';
 import { Dropdown } from "antd";
 import Cookies from "js-cookie";
 
-const Header = ({ profile={} }) => {
+const Header = ({ 
+  profile={}
+}) => {
   const router = useRouter();
 
   const dropdownItems = [

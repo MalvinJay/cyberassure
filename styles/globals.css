@@ -99,6 +99,29 @@ div[data-highcharts-chart="1"] {
   animation: appear 2s;
   transition: opacity 1s, visibility 1s;
 }
+
+.business--info .ant-form-item .ant-form-item-control-input-content {
+  display: flex !important;
+  justify-content: end !important;
+}
+
+/* Custom styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 5px;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background: #c8baba;
+  margin: 0 1px !important;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
 @keyframes appear {
   from { opacity: 0 }
   to { opacity: 1 }
