@@ -19,7 +19,7 @@ const Signup = () => {
       setloading(true);
       const formData = { ...values };
 
-      api.post('/user/forgot-email', formData)
+      api.post('user/forgot-email', formData)
       .then((res) => {
         setloading(false);
         notification.success({ message: "Successfully Created User" })

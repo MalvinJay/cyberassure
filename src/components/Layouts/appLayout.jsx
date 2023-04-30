@@ -15,7 +15,6 @@ const AppLayout = ({ children }) => {
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.profile);
   const { shrink } = useSelector((state) => state.general);
-  // const { departments } = useSelector((state) => state.departments);
 
   // const { data, isLoading, error } = useGetUserProfileQuery();
   // console.log('Fetching user info:', data);

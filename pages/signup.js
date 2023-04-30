@@ -18,7 +18,7 @@ const Signup = () => {
       form.validateFields();
       setloading(true);
 
-      api.post('/user/sign-up', { 
+      api.post('user/sign-up', { 
         ...values,
         role_id : 1
       })

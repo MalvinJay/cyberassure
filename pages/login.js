@@ -45,7 +45,7 @@ const Signin = () => {
       form.validateFields();
       setloading(true);
       
-      api.post('/user/login', values)
+      api.post('user/login', values)
       .then((res) => {
         setloading(false);
 

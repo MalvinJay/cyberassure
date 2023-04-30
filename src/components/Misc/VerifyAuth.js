@@ -1,5 +1,5 @@
 import { Button, Modal, notification } from 'antd';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import OtpInput from "react-otp-input";
 
 // Redux
@@ -20,7 +20,7 @@ const VerifyAuth = ({
     // Send OTP to phone
     setload(true);
 
-    api.post('/otp/resend', { email })
+    api.post('otp/resend', { email })
     .then(() => {
       setload(false);
       notification.success({ message: "Otp sent successfully" });
@@ -35,7 +35,7 @@ const VerifyAuth = ({
   const handleVerify = (code) => {
     setload(true);
 
-    api.post('/user/confirm-sign-up', { 
+    api.post('user/confirm-sign-up', { 
       email, 
       otp_code: code 
     })
@@ -51,16 +51,16 @@ const VerifyAuth = ({
   }
 
   return (
-      <Modal
-        className="w-full sm:w-1/2 md:w-64"
-        open={show}
-        closable={false}
-        centered
-        footer={null}
-        onCancel={() => {
-          setshow(false);
-        }}
-      >
+    <Modal
+      className="w-full sm:w-1/2 md:w-64"
+      open={show}
+      closable={false}
+      centered
+      footer={null}
+      onCancel={() => {
+        setshow(false);
+      }}
+    >
       <section className="w-full mx-auto bg-white">
         <div className="pb-8 flex items-center space-x-4">
           <label htmlFor="title" className="text-3xl font-bold">

@@ -82,7 +82,7 @@ const CreateTask = () => {
         target_date: values?.target_date[1]
       };
       
-      api.post('/task/create-task', payload)
+      api.post('task/create-task', payload)
       .then((res) => {
         setloading(false);
 

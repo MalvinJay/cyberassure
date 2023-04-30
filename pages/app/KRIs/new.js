@@ -75,7 +75,7 @@ const CreateKRI = () => {
         target_date: values.target_date[1]
       };
       
-      api.post('/kri/create-kri', payload)
+      api.post('kri/create-kri', payload)
       .then((res) => {
         setloading(false);
 

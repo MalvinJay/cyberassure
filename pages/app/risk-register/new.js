@@ -74,7 +74,7 @@ const CreateRiskRegister = () => {
         target_date: values?.target_date[1]
       };
       
-      api.post('/task/create-risk', payload)
+      api.post('task/create-risk', payload)
       .then((res) => {
         setloading(false);
 
