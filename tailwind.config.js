@@ -10,6 +10,7 @@ module.exports = {
     extend: {
       minWidth: {
         '4': '1rem',
+        '12': '3rem',
         '16': '4rem',
         '20': '5rem',
         '32': '8rem'
