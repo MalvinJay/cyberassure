@@ -10,6 +10,7 @@ import { profileSlice } from "./features/profileSlice";
 import { krisSlice } from "./features/krisSlice";
 import { departmentSlice } from "./features/departmentSlice";
 import { organizationSlice } from "./features/organizationSlice";
+import { generalSlice } from "./features/generalSlice";
 
 // RTK services
 // import { baseApi } from "./services/api/baseApi";
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   [krisSlice.name]        :   krisSlice.reducer,
   [departmentSlice.name]  :   departmentSlice.reducer,
   [organizationSlice.name]:   organizationSlice.reducer,
+  [generalSlice.name]:   generalSlice.reducer,
   // [userApi.reducerPath]   :   userApi.reducer
 });
 
@@ -41,7 +43,7 @@ export const makeStore = () => {
     // we need it only on client side
     const persistConfig = {
       key: "orgposture",
-      whitelist: ["user", "profile", "departments"], // make sure it does not clash with server keys
+      whitelist: ["user", "profile", "general", "departments"], // make sure it does not clash with server keys
       storage,
     };
 

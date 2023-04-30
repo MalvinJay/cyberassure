@@ -1,9 +1,19 @@
 import React from "react";
+import { Popover } from "antd";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-const Side = ({ shrink=false, setshrink}) => {
+import { useSelector, useDispatch } from "react-redux";
+import { setShrink } from "redux/features/generalSlice";
+
+const Side = () => {
+  const dispatch = useDispatch();
   const router = useRouter();
+  const { shrink } = useSelector((state) => state.general);
+
+  const handleClick = () => {
+    dispatch(setShrink(!shrink))
+  }
 
   const MyRoutes = [
     {
@@ -116,8 +126,6 @@ const Side = ({ shrink=false, setshrink}) => {
     },
   ];
 
-  // console.log('side is re-rendering...')
-
   return (
     <>
       <div className="transition duration-700 ease-in-out">
@@ -207,7 +215,7 @@ const Side = ({ shrink=false, setshrink}) => {
         }
 
           <svg className="cursor-pointer" width="30" height="18" viewBox="0 0 30 18" fill="none" xmlns="http://www.w3.org/2000/svg"
-            onClick={() => setshrink(!shrink)}
+            onClick={() => handleClick()}
           >
             <rect width="30" height="4" fill="white" />
             <rect y="7" width="30" height="4" fill="white" />
@@ -234,14 +242,21 @@ const Side = ({ shrink=false, setshrink}) => {
                 key={index}
                 className={`px-2 py-1 hover:bg-gray-200 rounded-md ${router.route === route.route ? "bg-gray-200" : ""} ${shrink ? 'mx-1':''}`}
               >
-                <Link
-                  href={route.route}
-                  aria-label="dashboard"
-                  className={`relative py-1 space-x-4 rounded-xl flex items-center ${shrink ?'justify-center':''}`}
+                <Popover 
+                  key={route?.name || index}
+                  trigger="hover"
+                  placement="right"
+                  content={<div className="cursor-pointer font-bold">{route?.name}</div>}
                 >
-                  {route.icon}
-                  {!shrink && <span className="-mr-1 font-medium">{route.name}</span>}
-                </Link>
+                  <Link
+                    href={route.route}
+                    aria-label="dashboard"
+                    className={`relative py-1 space-x-4 rounded-xl flex items-center ${shrink ?'justify-center':''}`}
+                  >
+                    {route.icon}
+                    {!shrink && <span className="-mr-1 font-medium">{route.name}</span>}
+                  </Link>
+                </Popover>
               </li>
             ))}
           </ul>
@@ -262,13 +277,13 @@ const Side = ({ shrink=false, setshrink}) => {
                   fill="#5C5C5C"
                 />
               </svg>
-              {!shrink && <span className="group-hover:text-gray-700">Settings</span>}
+              {!shrink && <span className="group-hover:text-gray-600 font-medium">Settings</span>}
             </Link>
           </li>
           <li>
             <Link
               href="/app/account"
-              className="py-1 flex items-center space-x-4 rounded-md text-gray-600 group"
+              className="py-1 flex items-center space-x-4 rounded-md group-hover:text-gray-600 font-medium"
             >
               <svg
                 width="21"

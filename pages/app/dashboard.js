@@ -9,28 +9,30 @@ import SRHighlists from "@/components/Misc/SRHighlists";
 import ChartComponent from "@/components/Misc/ChartComponent";
 import AddComment from "@/components/Misc/AddComment";
 
+import { useSelector } from "react-redux";
+
 const Dashboard = () => {
-  const [defaultView] = useState(false);
   const [securedScore, setsecuredScore] = useState(0);
   const [change, setchange] = useState(0);
-
-  // Get infomation here via 
+  const { defaultView } = useSelector((state) => state.general);
   
   useEffect(() => {
     window.scrollTo(0,0)
-  }, [])
-  
+  }, []);
   
   return (
     <AppLayout>
       <section className="relative w-full">
         <AuthHead />
-        <DashboardFilter />
 
-        <div className="w-full flex items-start flex-wrap pt-32 p-5">
+        {!defaultView && (
+          <DashboardFilter />
+        )}
+
+        <div className={`w-full flex items-start flex-wrap p-5 ${defaultView ? '':'sm:py-24'}`}>
           <div className="md:w-5/12">
             {defaultView ? 
-              <div className="py-8 px-6 space-y-6 rounded-xl bg-default-2 h-screen flex justify-center items-center">
+              <div className="py-8 px-6 space-y-6 rounded-xl bg-default-2 shadow-xl h-screen flex justify-center items-center">
                 <div className="text-center font-medium">
                   <p className="pb-4 text-4xl text-primary">Orgposture </p>
                   <p className="pt-3 text-2xl">Secure Score</p>
@@ -106,22 +108,24 @@ const Dashboard = () => {
                   >
                     Update KRI
                   </Button>
-              </div>
+                </div>
               </>
             }
           </div>
         </div>
 
-        <div className="w-full flex items-start flex-wrap px-5 pb-10">
-          <div className="md:w-5/12">
-            <div className="h-[40vh]">
-              <ChartComponent />
+        {!defaultView && (
+          <div className="w-full flex items-start flex-wrap px-5 pb-10">
+            <div className="md:w-5/12">
+              <div className="h-[40vh]">
+                <ChartComponent />
+              </div>
+            </div>
+            <div className="md:w-7/12 pl-5">
+              <AddComment width="w-full" rows={5} />
             </div>
           </div>
-          <div className="md:w-7/12 pl-5">
-            <AddComment width="w-full" rows={5} />
-          </div>
-        </div>
+        )}
       </section>
     </AppLayout>
   );

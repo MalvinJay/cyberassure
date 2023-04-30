@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { Dropdown } from "antd";
 import Cookies from "js-cookie";
 
-const Header = () => {
+const Header = ({ profile={} }) => {
   const router = useRouter();
 
   const dropdownItems = [
@@ -121,7 +121,11 @@ const Header = () => {
 
               <div className="flex items-center justify-center">
                 <p className="px-4 mb-0 font-medium">
-                  Daniel <br /> Ameyaw
+                  {profile.first_name || profile.last_name ? 
+                      <>{profile?.first_name} <br /> {profile?.last_name}</>
+                  :
+                      <></>
+                  }
                 </p>
                 <svg
                   width="13"
