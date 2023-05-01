@@ -119,7 +119,7 @@ const CreateTask = () => {
   };  
 
   useEffect(() => {
-    console.log('Pathname:', router.query);
+    // console.log('Pathname:', router.query);
     getUsers()
   }, [])
 

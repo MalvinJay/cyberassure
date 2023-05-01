@@ -22,7 +22,7 @@ const Header = ({
     {
       key: '2',
       label: (
-        <Link href="/app/settings" className="py-1 text-base">
+        <Link href="/admin/business-information" className="py-1 text-base">
           Settings
         </Link>
       )

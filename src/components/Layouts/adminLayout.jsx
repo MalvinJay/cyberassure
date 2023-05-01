@@ -16,18 +16,19 @@ const AppLayout = ({
   title=null
 }) => {
   const dispatch = useDispatch();
+
   const { profile } = useSelector((state) => state.profile);
   const { shrink } = useSelector((state) => state.general);
+  const { departments } = useSelector((state) => state.departments);
+  const { organization } = useSelector((state) => state.organization);
 
   useEffect(() => {
-    if (!profile.id) {
-      dispatch(getProfile())
-    }
-  }, [profile])
+    if (!profile.id) dispatch(getProfile())
+  }, [profile]);
 
   useEffect(() => {
-    dispatch(getDepartments())
-    dispatch(getOrganization())
+    if (departments?.length <= 0) dispatch(getDepartments())
+    if (organization?.length <= 0) dispatch(getOrganization())
   }, [])
   
   return (

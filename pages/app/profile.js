@@ -135,8 +135,8 @@ const Profile = () => {
                         <Form.Item label="Time Zone" name="timezone">
                             <Input 
                                 type="text" 
-                                id="fname" 
-                                name="fname" 
+                                id="time_zone" 
+                                name="time_zone" 
                                 className="w-full px-3 py-3 mb-3 text-sm leading-tight text-gray-700 border border-primary/80 rounded appearance-none focus:outline-none focus:shadow-outline"
                                 placeholder="Timezone"
                             />                
