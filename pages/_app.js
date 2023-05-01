@@ -8,6 +8,7 @@ import { useStore } from "react-redux";
 
 import '../styles/globals.css'
 import "aos/dist/aos.css";
+import "../styles/antd.custom.scss"
 
 const MyApp = ({ Component, pageProps }) => {
   const store = useStore();
