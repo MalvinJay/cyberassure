@@ -440,30 +440,32 @@ const Side = ({ type="app" }) => {
             </ul>          
 
             <div className="pt-2 mt-10 border-t border-gray-2">
-              <ul className="space-y-2 tracking-wide">
-                {subMenu.map((route, index) => (
-                  <li
-                    key={index}
-                    className={`py-1 hover:bg-gray-200 rounded-md ${router.route === route.route ? "bg-gray-200" : ""} ${shrink ? 'mx-1':'pl-2'}`}
-                  >
-                    <Popover 
-                      key={route?.name || index}
-                      trigger="hover"
-                      placement="right"
-                      content={<div className="cursor-pointer font-bold">{route?.name}</div>}
+              {type === 'app' && (
+                <ul className="space-y-2 tracking-wide">
+                  {subMenu.map((route, index) => (
+                    <li
+                      key={index}
+                      className={`py-1 hover:bg-gray-200 rounded-md ${router.route === route.route ? "bg-gray-200" : ""} ${shrink ? 'mx-1':'pl-2'}`}
                     >
-                      <Link
-                        href={route.route ?? '/app/dashboard'}
-                        aria-label="dashboard"
-                        className={`relative py-1 space-x-3 rounded-xl flex items-center ${shrink ? 'justify-center':''}`}
+                      <Popover 
+                        key={route?.name || index}
+                        trigger="hover"
+                        placement="right"
+                        content={<div className="cursor-pointer font-bold">{route?.name}</div>}
                       >
-                        {route.icon}
-                        {!shrink && <span className="-mr-1 font-medium">{route.name}</span>}
-                      </Link>
-                    </Popover>
-                  </li>                
-                ))}
-              </ul>
+                        <Link
+                          href={route.route ?? '/app/dashboard'}
+                          aria-label="dashboard"
+                          className={`relative py-1 space-x-3 rounded-xl flex items-center ${shrink ? 'justify-center':''}`}
+                        >
+                          {route.icon}
+                          {!shrink && <span className="-mr-1 font-medium">{route.name}</span>}
+                        </Link>
+                      </Popover>
+                    </li>                
+                  ))}
+                </ul>
+              )}
 
               {!shrink && 
                 <div className="relative w-full bg-white rounded-xl mt-10 p-5 pt-6 text-center">
