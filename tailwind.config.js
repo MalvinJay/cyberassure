@@ -27,7 +27,7 @@ module.exports = {
         'black-1': '#5C5C5C',
         'default': '#F4F4F4',
         'default-2': '#FAFAFA',
-        'danger':  '#FF0000'
+        'danger1':  '#FF0000'
       },
       dropShadow: {
         '3xl': '0 35px 35px rgba(0, 0, 0, 0.25)',
