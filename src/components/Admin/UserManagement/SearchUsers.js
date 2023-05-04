@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Input } from "antd";
 
 const { Search } = Input;
-const SearchUsers = () => {
+const SearchUsers = ({ placeholder="Search Users..." }) => {
   const [loading, setloading] = useState(false);
 
   const onSearch = (value) => {
@@ -16,7 +16,7 @@ const SearchUsers = () => {
 
   return (
     <Search
-      placeholder="Search Users..."
+      placeholder={placeholder}
       allowClear
       onSearch={onSearch}
       size="large"
