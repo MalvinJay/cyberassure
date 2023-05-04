@@ -97,7 +97,7 @@ const SideMenu = ({ type="app" }) => {
     getItem(<MenuLabel label='API Access' link="/admin/developer/api-keys" icon={<MenuIcon />} />, 'api_access', <></>),
     getItem(<MenuLabel label='Security' link="/admin/security" icon={<MenuIcon />} />, 'security', <></>),
     getItem(<MenuLabel label='Password Change' link="/admin/password-change" icon={<MenuIcon />} />, 'password_change', <></>),
-    getItem(<MenuLabel label='Language' link="/admin/language" icon={<MenuIcon />} />, 'language', <></>),
+    getItem(<MenuLabel label='Language' link="/admin/languages" icon={<MenuIcon />} />, 'language', <></>),
     getItem(<MenuLabel label='Billing' link="/admin/billing" icon={<MenuIcon />} />, 'billing', <></>),
   ];
   const menuList = type === 'app' ? appRoutes : adminRoutes;
