@@ -104,18 +104,12 @@ const NewUser = () => {
                     User ID
                 </span>
                 }
-                rules={[
-                {
-                    required: true,
-                    message: "Provide description for this risk register",
-                },
-                ]}
             >
                 <Input
                 name="risk_description"
                 className="w-full px-3 py-3 text-base leading-tight text-gray-700 border border-primary/80 rounded appearance-none focus:outline-none focus:shadow-outline"
                 type="text"
-                disabled
+                readOnly
                 placeholder="Auto Generated"
                 />
             </Form.Item>
