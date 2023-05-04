@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { Space, Table } from 'antd';
 
 import AdminLayout from "@/components/Layouts/adminLayout";
 import { useDispatch, useSelector } from 'react-redux';
 
-// import api from '../../services/config';
 import { getUsers } from 'redux/features/userSlice';
-import SearchUsers from '@/components/Admin/UserManagement/SearchUsers';
-import Link from 'next/link';
 
+import SearchUsers from '@/components/Admin/UserManagement/SearchUsers';
+import UsersFilter from '@/components/Admin/UserManagement/UsersFilter';
 
 const UserManagement = () => {
   const dispatch = useDispatch();
@@ -21,11 +21,12 @@ const UserManagement = () => {
   const [show, setshow] = useState(false);
   const [loading, setloading] = useState(false)
   
+  // Static list, move to contants
   const columns = [
     {
       title: 'User ID',
       dataIndex: 'id',
-      width: 80,
+      width: 90,
       fixed: 'left',
       key: 'id'
     },
@@ -54,32 +55,32 @@ const UserManagement = () => {
       key: 'gender',
     },
     {
-      title: 'Phone',
-      dataIndex: 'phone',
-      key: 'phone',
-    },
-    {
-      title: 'Head of Dept.',
-      dataIndex: 'head_of_dept',
-      key: 'head_of_dept',
-    },
-    {
-      title: 'Department',
-      dataIndex: 'department',
-      width: 200,
-      key: 'department',
-    },    
+      title: 'Organization',
+      dataIndex: 'organization',
+      width: 160,
+      key: 'organization',
+    },   
     {
       title: 'Role',
       width: 100,
       dataIndex: 'role',
       key: 'role',
-    },
+    },     
     {
-      title: 'Organization',
-      dataIndex: 'organization',
+      title: 'Department',
+      dataIndex: 'department',
       width: 200,
-      key: 'organization',
+      key: 'department',
+    },     
+    {
+      title: 'Head of Dept.',
+      dataIndex: 'head_of_dept',
+      key: 'head_of_dept',
+    },   
+    {
+      title: 'Phone',
+      dataIndex: 'phone',
+      key: 'phone',
     },
     {
       title: 'Action',
@@ -106,6 +107,43 @@ const UserManagement = () => {
       ),
     },
   ];
+
+  const filterTypes = [
+    {
+      name: "Manager",
+      options: [
+        {
+          name: "Manager 1",
+          value: "manager_1"
+        }
+      ]
+    },
+    {
+      name: "Department",
+      options: departments
+    },
+    {
+      name: "Job Title",
+      options: [
+        {
+          name: "Software Engineer",
+          value: "software_engineer"
+        },
+        {
+          name: "Product Manager",
+          value: "product_manager"
+        },
+        {
+          name: "Chief Executive Officer",
+          value: "ceo"
+        }
+      ]
+    },
+    {
+      name: "Role",
+      options: roles
+    }
+  ]
   
   const handleEdit = (info={}) => {
     // Redirect to new user page
@@ -122,7 +160,7 @@ const UserManagement = () => {
         name: el.first_name + ' ' + el.last_name,
         status: el.is_active ? 'Active' : 'Inactive',
         gender: el.gender || 'N/A',
-        phone: el.phone,
+        phone: el.phone || "N/A",
         head_of_dept: el?.head_of_dept || 'N/A',
         job_title: el.job_title || 'N/A',
         role: roles?.find((it) => it?.id === el?.id)?.name ?? "N/A",
@@ -154,6 +192,8 @@ const UserManagement = () => {
             </Link>
             <SearchUsers />
           </div>
+
+          <UsersFilter filterTypes={filterTypes} />
 
           <div className="grid grid-cols-6 gap-y-5 gap-x-3 pt-5 pb-10">
             {roles.map((el) => (
