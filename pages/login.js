@@ -4,13 +4,15 @@ import Link from 'next/link'
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Button, Form, Input, notification } from 'antd'
-import api from "../services/config"
-import Cookies from 'js-cookie';
+import useAuth from "../Context/auth";
+// import api from "../services/config"
+// import Cookies from 'js-cookie';
 
 import DefaultLayout from '../src/components/Layouts/defaultLayout'
 import VerifyAuth from "@/components/Misc/VerifyAuth";
 
 const Signin = () => {
+  const { login } = useAuth();
   const [form] = Form.useForm();
   const router = useRouter();
 
@@ -41,56 +43,62 @@ const Signin = () => {
   ];
 
   const onFinish = async (values) => {
+    form.validateFields();
     try {
-      form.validateFields();
       setloading(true);
-      
-      api.post('user/login', values)
-      .then((res) => {
-        setloading(false);
 
-        if (res.data.status) {
-          notification.success({ message: "Login Success" });
+      // api.post('user/login', values)
+      // .then((res) => {
+      //   setloading(false);
+
+      //   if (res.data.status) {
+      //     notification.success({ message: "Login Success" });
   
-          // Set user auth stuff here in cookies
-          Cookies.set('token', res?.data?.message?.access_token);
-          Cookies.set('user', JSON.stringify(res?.data?.message));
-          api.defaults.headers.Authorization = `Bearer ${res?.data?.message?.access_token}`
+      //     // Set user auth stuff here in cookies
+      //     Cookies.set('token', res?.data?.message?.access_token);
+      //     Cookies.set('user', JSON.stringify(res?.data?.message));
+      //     api.defaults.headers.Authorization = `Bearer ${res?.data?.message?.access_token}`
 
-          router.push('/app/dashboard');
-        } else {
-          notification.error({ message: <div className='capitalize'>{error?.response?.data?.message}</div> })
-          const { status_code } = error?.response?.data;
+      //     router.push('/app/dashboard');
+      //   } else {
+      //     notification.error({ message: <div className='capitalize'>{error?.response?.data?.message}</div> })
+      //     const { status_code } = error?.response?.data;
 
-          switch (status_code) {
-            case 1006:
-              setshow(true);
-              break;
+      //     switch (status_code) {
+      //       case 1006:
+      //         setshow(true);
+      //         break;
           
-            default:
-              break;
-          }
-        }
-      }, (error) => {
-        setloading(false);
-        notification.error({ message: <div className='capitalize'>{error?.response?.data?.message}</div> })
+      //       default:
+      //         break;
+      //     }
+      //   }
+      // }, (error) => {
+      //   setloading(false);
+      //   notification.error({ message: <div className='capitalize'>{error?.response?.data?.message}</div> })
 
-        const { status_code } = error?.response?.data;
+      //   const { status_code } = error?.response?.data;
 
-        switch (status_code) {
-          case 1006:
-            setshow(true);
-            break;
-          case 1007:
-            // Do nothing, just display error message
-            break;
+      //   switch (status_code) {
+      //     case 1006:
+      //       setshow(true);
+      //       break;
+      //     case 1007:
+      //       // Do nothing, just display error message
+      //       break;
         
-          default:
-            break;
-        }
-      })
-      .catch((error) => {
-        console.error('Error signing in:', error)
+      //     default:
+      //       break;
+      //   }
+      // })
+      // .catch((error) => {
+      //   console.error('Error signing in:', error)
+      // })
+
+      login(values?.email, values?.password)
+      .then((res) => {
+        console.log('Login Response:', res)
+        router.push('/app/dashboard');
       })
     } catch (error) {
       console.error('Error validating fields:', error);
