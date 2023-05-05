@@ -23,11 +23,11 @@ const Languages = () => {
     },
     {
       name: "Japan",
-      enabled: true,
+      enabled: false,
     },
     {
       name: "Bahasa",
-      enabled: true,
+      enabled: false,
     }
   ];
 

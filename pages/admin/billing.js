@@ -32,14 +32,8 @@ const Billing = () => {
   ];
 
   return (
-    <AdminLayout title="Meetings">
+    <AdminLayout title="Billing">
       <div className="w-full grid grid-cols-1 py-12 px-6 gap-5">
-        {meetingConfigs.map((el, index) => (
-          <div key={index} className="w-full space-x-4">
-            <Switch defaultChecked={el.enabled} onChange={() => {}} />
-            <span className='text-lg font-semibold'>{el.name}</span>
-          </div>
-        ))}
       </div>
     </AdminLayout>
   )
