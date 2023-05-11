@@ -94,6 +94,7 @@ const SideMenu = ({ type="app" }) => {
       getItem(<MenuLabel label='Terminated Users' link="/admin/user-termination" />, 'termination_of_users')
     ]),
     getItem(<MenuLabel label='Departments' link="/admin/departments" icon={<MenuIcon />} />, 'departments', <></>),
+    getItem(<MenuLabel label='Organizations' link="/admin/organizations" icon={<MenuIcon />} />, 'organizations', <></>),
     getItem(<MenuLabel label='API Access' link="/admin/developer/api-keys" icon={<MenuIcon />} />, 'api_access', <></>),
     getItem(<MenuLabel label='Security' link="/admin/security" icon={<MenuIcon />} />, 'security', <></>),
     getItem(<MenuLabel label='Password Change' link="/admin/password-change" icon={<MenuIcon />} />, 'password_change', <></>),
