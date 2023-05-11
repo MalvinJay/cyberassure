@@ -5,10 +5,12 @@ import Image from "next/image";
 import { Form, Input, Button, Select, DatePicker, notification } from "antd";
 // import useSWR from 'swr';
 import api from "../../services/config";
+import { base64BinaryBuffer } from "../../services/utils";
 
 import AppLayout from "@/components/Layouts/appLayout";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfile } from "redux/features/profileSlice";
+import Uploader from "@/components/Misc/Uploader";
 
 const { RangePicker } = DatePicker;
 
@@ -61,6 +63,7 @@ const Profile = () => {
     const { profile } = useSelector((state) => state.profile);
 
     const [loading, setloading] = useState(false);
+    const [photo, setphoto] = useState(null)
 
     const onFinish = async (values) => {
         try {
@@ -81,6 +84,36 @@ const Profile = () => {
           console.error('Error validating fields:', error);
         }
     };
+
+    const handleFileUpload = (e) => {
+        const file = e.target.files
+    
+        // Check if file size exceeds 5mb threshold
+        if (Number(file[0]?.size || 1) / 10 ** 6 > 5.0) {
+          return notification.error({
+            message: 'File size exceeds 5mb',
+            description: "Uploaded file exceeds 5mb. Kindly uploaded a different photo with less size"
+          })
+        }
+    
+        let allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i
+    
+        // Allowing file type
+        if (allowedExtensions.exec(file[0]?.name?.toString())) {
+          base64BinaryBuffer(file[0],'base64', (generated_file) => {
+            console.log('Uploaded file:', generated_file);
+            setphoto(generated_file)
+          })
+    
+        } else {
+          notification.error(
+            {
+             message: 'Type Not Allowed',
+             description: `Only jpg, jpeg, png or gif files are allowed`,
+            }
+          )
+        }
+      };    
 
     useEffect(() => {
       form.setFieldsValue(profile);
@@ -188,7 +221,7 @@ const Profile = () => {
                                 style={{ height: '43px' }}
                             >
                                 {landingPage.map((el, index) => (
-                                    <Select.Option key={index}>{el.name}</Select.Option>
+                                    <Select.Option key={index} value={el.value}>{el.name}</Select.Option>
                                 ))}
                             </Select>              
                         </Form.Item>
@@ -208,13 +241,15 @@ const Profile = () => {
 
                 <div className="w-full sm:w-1/3 pt-10">
                     <div className="w-full relative">
-                        <Image
-                            width={250}
-                            height={250}
-                            className="object-contain ml-auto bg-default"
-                            src="/assets/images/profile.svg"
-                            alt="profile pic"
-                        />
+                        <Uploader handleUpload={handleFileUpload}>
+                            <Image
+                                src={photo ?? "/assets/images/profile.svg"}
+                                width={250}
+                                height={250}
+                                className="object-contain ml-auto bg-default"
+                                alt="profile pic"
+                            />
+                        </Uploader>
                     </div>
                 </div>
 
