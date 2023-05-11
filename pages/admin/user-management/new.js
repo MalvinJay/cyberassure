@@ -81,8 +81,6 @@ const NewUser = () => {
     }
   };
 
-//   useEffect(() => {
-//   }, []);
 
   return (
     <AdminLayout>

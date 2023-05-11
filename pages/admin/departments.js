@@ -74,7 +74,7 @@ const BusinessInformation = () => {
       console.log('payload:', payload);
 
       // Check editMode
-      const url = editMode ? `department/update-departmen/${payload?.id}` : 'department/create-department';
+      const url = editMode ? `department/update-department/${payload?.id}` : 'department/create-department';
 
       if (!editMode) {
         api.post(url, payload)
