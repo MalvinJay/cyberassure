@@ -65,6 +65,7 @@ const KRIItem = ({
   const [dataSource, setDataSource] = useState([]);
 
   const handleClick = (e) => {
+    if (router.pathname.includes('/approve')) return;
     router.push(`/app/KRIs/approve?q=${id}&type=${kri_type_id}`);
   };
 
@@ -228,14 +229,14 @@ const KRIItem = ({
         )}
 
         <div className="min-w-[10rem]">
-            {kri_type_id === 2 && (
-                <div
-                    className={`${
-                    approval_status ? "visible" : "invisible"
-                    } ${approval_status === 'pending' ? 'bg-danger' : 'bg-green-900'} text-white p-2 rounded-lg text-base capitalize`}
-                >
-                    {approval_status} Approval
-                </div>
+            {kri_type_id === 2 && !router.pathname.includes('/approve') && (
+              <div
+                className={`${
+                approval_status ? "visible" : "invisible"
+                } ${approval_status === 'decline' ? 'bg-danger' : approval_status === 'pending' ? 'bg-orange-500' : 'bg-green-900'} text-white p-2 rounded-lg text-base capitalize`}
+              >
+                {approval_status} Approval
+              </div>
             )}
         </div>
       </div>

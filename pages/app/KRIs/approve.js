@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { Button, notification } from "antd";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getKRByKRIId } from "redux/features/krisSlice";
+import { getKRByKRIId, getKRIs } from "redux/features/krisSlice";
 
 import AppLayout from "components/Layouts/appLayout";
 import AddComment from "components/Misc/AddComment";
@@ -19,8 +19,9 @@ const KRIApproval = () => {
   const { departments } = useSelector((state) => state.departments);
 
   const [current, setcurrent] = useState(2);
-  const [loading, setloading] = useState(true);
+  const [loading, setloading] = useState(false);
   const [comment, setcomment] = useState(null);
+  const [Key_Results, setKey_Results] = useState(null);
 
 
   const fetchKeyResults = async (id) => {
@@ -68,7 +69,7 @@ const KRIApproval = () => {
 
           if (res.data.status) {
             notification.success({
-              message: "KRI Approved!",
+              message: type === 'decline' ? "KRI Declined!" : "KRI Approved"
             });
           } else {
             notification.error({
@@ -116,9 +117,12 @@ const KRIApproval = () => {
   };
 
   useEffect(() => {
-    const kri_id = router.query;
-    fetchKeyResults(kri_id?.q);
-  }, []);
+    // const kri_id = router.query;
+    // fetchKeyResults(kri_id?.q);
+    if (list.length <= 0) dispatch(getKRIs(true))
+
+    console.log('KRIs to be approved:', list);
+  }, [list]);
 
   return (
     <AppLayout>
@@ -156,20 +160,22 @@ const KRIApproval = () => {
           <h2 className="font-semibold text-xl">Key Risk Indicators</h2>
 
           <div className="pt-4">
-            {list?.filter(el => el.kri_type_id === router?.query?.type) ? (
-              list?.filter(el => el.kri_type_id === router?.query?.type)?.length > 0 ? (
-                list?.filter(el => el.kri_type_id === router?.query?.type)?.map((el, index) => (
-                  <KRIItem
-                    key={index}
-                    {...el}
-                    showTime={false}
-                    showAddkey={false}
-                  />
-                ))
-              ) : (
-                <div className="py-10">No key results available</div>
-              )
-            ) : (
+            {list ?
+              <>
+                {list?.filter(el => el.kri_type_id === 2 && el.approval_status !== 'approve')?.length > 0 ?
+                  list?.filter(el => el.kri_type_id === 2 && el.approval_status !== 'approve')?.map((el, index) => (
+                    <KRIItem
+                      key={index}
+                      {...el}
+                      showTime={false}
+                      showAddkey={false}
+                    />
+                  ))
+                :
+                  <div className="py-10">No key results available</div>
+                }
+              </>
+            : (
               <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-25 min-h-[35rem]">
                 <div className="w-20 h-20 rounded-full border-4 border-gray-300 border-t-white animate-spin flex items-center"></div>
               </div>
@@ -190,6 +196,7 @@ const KRIApproval = () => {
                   size="large"
                   className="bg-[#198754] text-white w-auto md:w-2/5"
                   loading={loading}
+                  disabled={list?.filter(el => el?.kri_type_id === 2 && el?.approval_status !== 'approve')?.length <= 0}
                   onClick={() => callToActionKRI("approve")}
                 >
                   Approve
@@ -199,6 +206,7 @@ const KRIApproval = () => {
                   size="large"
                   className="bg-danger text-white w-auto md:w-2/5"
                   loading={loading}
+                  disabled={list?.filter(el => el?.kri_type_id === 2 && el?.approval_status !== 'approve')?.length <= 0}
                   onClick={() => callToActionKRI("decline")}
                 >
                   Decline
