@@ -17,15 +17,32 @@ import { generalSlice } from "./features/generalSlice";
 // import { userApi } from "./services/api/userData";
 
 // Reducers
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
   [userSlice.name]        :   userSlice.reducer,
   [profileSlice.name]     :   profileSlice.reducer,
   [krisSlice.name]        :   krisSlice.reducer,
   [departmentSlice.name]  :   departmentSlice.reducer,
   [organizationSlice.name]:   organizationSlice.reducer,
-  [generalSlice.name]:   generalSlice.reducer,
+  [generalSlice.name]     :   generalSlice.reducer,
   // [userApi.reducerPath]   :   userApi.reducer
 });
+
+const rootReducer = (state, action) => {
+  if (action.type === 'RESET') {
+    state = undefined;
+    
+    storage.removeItem('persist:user');
+    storage.removeItem('persist:profile');
+    storage.removeItem('persist:kris');
+    storage.removeItem('persist:general');
+    storage.removeItem('persist:departments');
+    storage.removeItem('persist:organization');
+
+    return appReducer(state, action);
+  }
+
+  return appReducer(state, action);
+};
 
 // config the store
 const makeConfiguredStore = () =>
@@ -43,7 +60,7 @@ export const makeStore = () => {
     // we need it only on client side
     const persistConfig = {
       key: "orgposture",
-      whitelist: ["user", "profile", "general", "departments"], // make sure it does not clash with server keys
+      whitelist: ["user", "profile", "kris", "general", "departments", "organization"], // make sure it does not clash with server keys
       storage,
     };
 

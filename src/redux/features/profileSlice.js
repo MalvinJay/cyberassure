@@ -17,8 +17,12 @@ const initialState = {
 };
 
 // Custom action thunks
-export const getProfile = createAsyncThunk('profile/getProfile', 
-  async () => {
+export const getProfile = createAsyncThunk('user/getUserProfile', 
+  async (cache=true, thunkAPI) => {
+    // Check if profile already has data, return it else make network request
+    const { profile } = thunkAPI.getState();
+    if (cache && profile?.profile?.id) return profile?.profile;
+
     const response = await api.get("user/get-user-profile");
     return response?.data?.message;
   }

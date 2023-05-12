@@ -3,12 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from 'next/router';
 import { Dropdown } from "antd";
-import Cookies from "js-cookie";
+import { useAuth } from "../../../Context/auth";
 
 const Header = ({ 
   profile={}
 }) => {
-  const router = useRouter();
+  const { logout } = useAuth();
 
   const dropdownItems = [
     {
@@ -42,11 +42,7 @@ const Header = ({
   ];
 
   const handleLogout = () => {
-    Cookies.remove('token');
-    Cookies.remove('user');
-    localStorage.clear();
-    
-    router.push('/')
+    logout()
   }
 
   const MenuOverlay = () => (

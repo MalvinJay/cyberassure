@@ -13,7 +13,7 @@ const CorporateKRIs = () => {
 
   const fetchKRIs = async () => {
     setloading(true);
-    dispatch(getKRIs(true))
+    dispatch(getKRIs())
     .then(() => {
       setloading(false);
     }, () => {

@@ -6,7 +6,10 @@ const initialState = {
 };
 
 export const getKRIs = createAsyncThunk('kris/getKRIs', 
-  async (cache=false) => {
+  async (cache=true, thunkAPI) => {
+    const { kris } = thunkAPI.getState();
+    if (cache && kris?.list?.length > 0) return kris?.list;
+
     const response = await api.get("kri/get-kris");
     return response?.data?.message;
   }

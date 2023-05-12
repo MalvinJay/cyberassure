@@ -5,6 +5,7 @@ import dayjs from 'dayjs';
 
 import api from "../../../services/config"
 import AppLayout from "../../../src/components/Layouts/appLayout";
+import { getKRIs } from "redux/features/krisSlice";
 
 const { RangePicker } = DatePicker;
 
@@ -80,6 +81,7 @@ const CreateKRI = () => {
         setloading(false);
 
         if (res.data.status) {
+          dispatch(getKRIs(true))
           notification.success({ message: "KRI Created Successfully" });
           router.push('/app/KRIs/all');
         } else {
