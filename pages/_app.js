@@ -1,36 +1,37 @@
 import React, { useEffect, memo } from 'react';
 import { ThemeProvider } from 'next-themes'
 import { DefaultSeo } from 'next-seo'
-import AOS from "aos";
 import { wrapper } from 'redux/store';
 import { PersistGate } from "redux-persist/integration/react";
 import { useStore } from "react-redux";
+import AOS from "aos";
 
 import '../styles/globals.css'
 import "aos/dist/aos.css";
 import "../styles/antd.custom.scss"
 
+import LoadingScreen from '@/components/ui/LoadingScreen';
+
 const MyApp = ({ Component, pageProps }) => {
   const store = useStore();
 
   useEffect(() => {
+    const abortController = new AbortController();
+    
     AOS.init({
       easing: "ease-out-cubic",
       once: true,
       offset: 50,
     });
+
+    return () => {
+      abortController.abort();
+    }
   }, []);
   
   return (
     <main className='relative'>
-      <PersistGate persistor={store.__persistor} 
-        loading={
-          <div className='absolute inset-0 flex items-center justify-center bg-white bg-opacity-25 min-h-[35rem]'>
-            <div className="w-20 h-20 rounded-full border-4 border-gray-300 border-t-white animate-spin flex items-center">
-            </div>
-          </div>
-        }
-      >
+      <PersistGate persistor={store.__persistor} loading={<LoadingScreen />}>
         <ThemeProvider storageKey="light" attribute="class">
           <DefaultSeo
             defaultTitle="Org Posture"

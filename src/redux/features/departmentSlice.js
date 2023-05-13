@@ -5,8 +5,11 @@ const initialState = {
     departments: []
 };
 
-export const getDepartments = createAsyncThunk('kris/getDepartments', 
-  async (cache=false) => {
+export const getDepartments = createAsyncThunk('department/getDepartments', 
+  async (cache=false, thunkAPI) => {
+    const { departments } = thunkAPI.getState();
+    if (cache && departments?.departments?.length > 0) return departments?.departments;
+
     const response = await api.get("department/get-departments");
     return response?.data?.message;
   }

@@ -14,8 +14,8 @@ const AuthHead = ({ offsetTop=64, showFilter=true }) => {
     const { users } = useSelector((state) => state.user);
 
     useEffect(() => {
-      dispatch(getUsers())
-    }, [])
+        if (users?.length <= 0) dispatch(getUsers())
+    }, [users, dispatch]);
     
     return (
         <Affix offsetTop={offsetTop}>
@@ -54,7 +54,7 @@ const AuthHead = ({ offsetTop=64, showFilter=true }) => {
             <div className="flex items-center">
                 <span className="text-[#878787] font-bold">Team Members</span>
                 <div className="flex items-center space-x-1">
-                    {users.slice(0,4).map((el, index) => (
+                    {users?.slice(0,4).map((el, index) => (
                         <Popover key={el?.id || index} content={<div className="cursor-pointer font-bold">{el?.first_name} {el?.last_name}</div>} trigger="hover">
                             <svg width="40" height="38" viewBox="0 0 40 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path

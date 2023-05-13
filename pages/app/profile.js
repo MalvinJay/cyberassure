@@ -65,20 +65,24 @@ const Profile = () => {
     const [loading, setloading] = useState(false);
     const [photo, setphoto] = useState(null)
 
+    const fetchProfile = (cache=true) => {
+        dispatch(getProfile(cache));
+    }
+
     const onFinish = async (values) => {
         try {
           form.validateFields();
     
           setloading(true);
-    
-          api.post('user/user-profile', { ...values })
+          api.put('user/user-profile', { ...values })
           .then((res) => {
             setloading(false);
-            notification.success({ message: "User profile updated successfully" })
+            notification.success({ message: "User profile updated successfully" });
+            fetchProfile(false);
           }, (error) => {
-            console.error('Error posting user info:', error)
+            console.error('Error posting user info:', error);
             setloading(false);
-            notification.error({ message: "Error updating profile" })
+            notification.error({ message: "Error updating profile" });
           })
         } catch (error) {
           console.error('Error validating fields:', error);
@@ -120,7 +124,7 @@ const Profile = () => {
     }, [profile]);
     
     useEffect(() => {
-        dispatch(getProfile());
+        fetchProfile();
     }, []);
 
     return (

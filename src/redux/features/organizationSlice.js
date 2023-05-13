@@ -5,8 +5,12 @@ const initialState = {
     organization: []
 };
 
-export const getOrganization = createAsyncThunk('kris/getOrganizations', 
-  async (cache=false) => {
+export const getOrganization = createAsyncThunk('organization/getOrganizations', 
+  async (cache=false, thunkAPI) => {
+    // Cache mechanism
+    const { organization } = thunkAPI.getState();
+    if (cache && organization?.organization?.length > 0) return organization?.organization;
+
     const response = await api.get("organization/get-organizations");
     return response?.data?.message;
   }
