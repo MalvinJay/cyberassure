@@ -131,4 +131,4 @@ const Dashboard = () => {
   );
 };
 
-export default AppLayout;
+export default Dashboard;
