@@ -39,38 +39,50 @@ export const AuthProvider = ({ children, requiresAuth=true }) => {
     }, []);
 
     const login = async (email, password) => {
-        const { data } = await api.post('user/login', { email, password });
+        return new Promise((resolve, reject) => {
+            return api.post('user/login', { email, password })
+            .then(async (res) => {
+                setLoading(false);
 
-        if (data) {
-            if (data.status) {
-                notification.success({ message: "Login Success" });
-        
-                // Set user auth stuff here in cookies
-                Cookies.set('token', data?.message?.access_token);
-                Cookies.set('user', JSON.stringify(data?.message));
-                api.defaults.headers.Authorization = `Bearer ${data?.message?.access_token}`
-
-                router.push('/app/dashboard');
-            } else {
-                notification.error({ message: <div className='capitalize'>{data?.response?.data?.message}</div> })
-                const { status_code } = data?.response?.data;
-
-                switch (status_code) {
-                    case 1006:
-                    setshow(true);
-                    break;
+                if (res.data) {
+                    if (res.data.status) {
+                        notification.success({ message: "Login Success" });
                 
-                    default:
-                    break;
+                        // Set user auth stuff here in cookies
+                        Cookies.set('token', res?.data?.message?.access_token);
+                        Cookies.set('user', JSON.stringify(res?.data?.message));
+                        api.defaults.headers.Authorization = `Bearer ${res?.data?.message?.access_token}`
+        
+                        router.push('/app/dashboard');
+                    } else {
+                        notification.error({ message: <div className='capitalize'>{res?.data?.response?.data?.message}</div> })
+                        const { status_code } = res?.data?.response?.data;
+        
+                        switch (status_code) {
+                            case 1006:
+                            setshow(true);
+                            break;
+                        
+                            default:
+                            break;
+                        }
+                    }
+
+                    const { payload: user } = await dispatch(getProfile());
+                    setUser(user);
                 }
-            }
 
-            const { payload: user } = await dispatch(getProfile());
-            setUser(user)
-        }
-        setLoading(false);
-
-        return data;
+                resolve(res.data.data);
+            }, (err) => {
+                setLoading(false);
+                notification.error({ message: <div className='capitalize'>{err?.response?.data?.message}</div> })
+                reject(err);
+            })
+            .catch((error) => {
+                setLoading(false);
+                reject(error);
+            })
+        })
     };
 
     const logout = () => {        

@@ -50,59 +50,18 @@ const Signin = () => {
     try {
       setloading(true);
 
-      // api.post('user/login', values)
-      // .then((res) => {
-      //   setloading(false);
-
-      //   if (res.data.status) {
-      //     notification.success({ message: "Login Success" });
-  
-      //     // Set user auth stuff here in cookies
-      //     Cookies.set('token', res?.data?.message?.access_token);
-      //     Cookies.set('user', JSON.stringify(res?.data?.message));
-      //     api.defaults.headers.Authorization = `Bearer ${res?.data?.message?.access_token}`
-
-      //     router.push('/app/dashboard');
-      //   } else {
-      //     notification.error({ message: <div className='capitalize'>{error?.response?.data?.message}</div> })
-      //     const { status_code } = error?.response?.data;
-
-      //     switch (status_code) {
-      //       case 1006:
-      //         setshow(true);
-      //         break;
-          
-      //       default:
-      //         break;
-      //     }
-      //   }
-      // }, (error) => {
-      //   setloading(false);
-      //   notification.error({ message: <div className='capitalize'>{error?.response?.data?.message}</div> })
-
-      //   const { status_code } = error?.response?.data;
-
-      //   switch (status_code) {
-      //     case 1006:
-      //       setshow(true);
-      //       break;
-      //     case 1007:
-      //       // Do nothing, just display error message
-      //       break;
-        
-      //     default:
-      //       break;
-      //   }
-      // })
-      // .catch((error) => {
-      //   console.error('Error signing in:', error)
-      // })
-
       login(values?.email, values?.password)
       .then((res) => {
-        console.log('Login Response:', res)
-        router.push('/app/dashboard');
-      })
+        console.log('Login Response:', res);
+        // router.push('/app/dashboard');
+      }, (err) => {
+        console.log('Err in login page:', err);
+        setloading(false);
+      })   
+      .catch((error) => {
+        console.log('Error in login page:', error);
+        setloading(false);
+      })  
     } catch (error) {
       console.error('Error validating fields:', error);
     }
