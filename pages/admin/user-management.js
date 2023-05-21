@@ -181,7 +181,7 @@ const UserManagement = () => {
   }
 
   useEffect(() => {
-    const list = users.map((el) => {
+    const list = users?.map((el) => {
       return {
         ...el,
         name: el.first_name + ' ' + el.last_name,
