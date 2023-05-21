@@ -60,11 +60,11 @@ export const AuthProvider = ({ children, requiresAuth=true }) => {
         
                         switch (status_code) {
                             case 1006:
-                            setshow(true);
-                            break;
+                                setshow(true);
+                                break;
                         
                             default:
-                            break;
+                                break;
                         }
                     }
 
@@ -72,13 +72,21 @@ export const AuthProvider = ({ children, requiresAuth=true }) => {
                     setUser(user);
                 }
 
-                resolve(res.data.data);
+                console.log('Response in then:', res);
+                resolve(res?.data?.data);
             }, (err) => {
                 setLoading(false);
-                notification.error({ message: <div className='capitalize'>{err?.response?.data?.message}</div> })
+                console.log('Error in then:', err?.data);
+
+                notification.error({ 
+                    message: <div className='capitalize'>{err?.response?.data?.message || 'Error'}</div>,
+                    description: "An error occured whiles logging in, kindly try again or contact support"
+                });
                 reject(err);
             })
             .catch((error) => {
+                console.log('Error in catch:', error?.data);
+
                 setLoading(false);
                 reject(error);
             })
@@ -115,8 +123,8 @@ export const ProtectRoute = ({ children }) => {
     const { isAuthenticated, isLoading, user } = useAuth();
     const router = useRouter();
 
-    console.log('isAuthenticated?', isAuthenticated);
-    console.log('user?', user);
+    // console.log('isAuthenticated?', isAuthenticated);
+    // console.log('user?', user);
 
     if (isLoading && !isAuthenticated) {
       return <div className='h-full w-full'><LoadingScreen /></div>;
