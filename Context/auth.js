@@ -53,7 +53,7 @@ export const AuthProvider = ({ children, requiresAuth=true }) => {
                         Cookies.set('user', JSON.stringify(res?.data?.message));
                         api.defaults.headers.Authorization = `Bearer ${res?.data?.message?.access_token}`
         
-                        router.push('/app/dashboard');
+                        router.push('/app/home');
                     } else {
                         notification.error({ message: <div className='capitalize'>{res?.data?.response?.data?.message}</div> })
                         const { status_code } = res?.data?.response?.data;
