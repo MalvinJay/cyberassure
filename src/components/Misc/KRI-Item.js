@@ -261,7 +261,7 @@ const KRIItem = ({
               size="large"
               type="primary"
               shape="default"
-              className="bg-primary text-white !px-20 rounded-none mt-3"
+              className="bg-primary text-white !px-10 font-bold text-sm rounded-none mt-3"
               loading={loading}
               onClick={() => addUpdateKeyResults()}
             >

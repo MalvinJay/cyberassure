@@ -78,14 +78,19 @@ const SideMenu = ({ type="app" }) => {
     </div>
   );
   const appRoutes = [
+    getItem(<MenuLabel label='Home' link='/app/home' icon={<MenuIcon />} />, 'home', <></>),
     getItem(<MenuLabel label='Dashboard' link='/app/dashboard' icon={<DashboardIcon />} />, 'dashboard', <></>),
     getItem(<MenuLabel label='Risk Register' link='/app/risk-register' icon={<MenuIcon />} />, 'risk_register', <></>),
     getItem(<MenuLabel label='All KRIs' link="/app/KRIs/all" icon={<MenuIcon />} />, 'all_kris', <></>),
     getItem(<MenuLabel label='Corporate KRIs' link="/app/KRIs/corporate" icon={<MenuIcon />} />, 'coporate_kris', <></>),
     getItem(<MenuLabel label='My KRIs' link="/app/KRIs/my-kris" icon={<MenuIcon />} />, 'api_access', <></>),
+    getItem(<MenuLabel label='Cybersecurity Strategy' link="/app/security-strategy" icon={<MenuIcon />} />, 'security_strategy', <></>, [
+      getItem(<MenuLabel label='Strategy and risk alignment' link="/app/security-strategy/strategy-and-risk-alignment" />, 'strategy_and_risk_alignment')
+    ]),
     getItem(<MenuLabel label='Tasks' link="/app/tasks" icon={<MenuIcon />} />, 'task', <></>)
   ];
   const adminRoutes = [
+    getItem(<MenuLabel label='Home' link='/app/home' icon={<MenuIcon />} />, 'home', <></>),
     getItem(<MenuLabel label='Business information' link='/admin/business-information' icon={<MenuIcon />} />, 'bus_info', <></>),
     getItem(<MenuLabel label='Risk Heat Map' link='/admin/risk-heat-map' icon={<MenuIcon />} />, 'risk_heat_map', <></>),
     getItem(<MenuLabel label='Meetings' link="/admin/meetings" icon={<MenuIcon />} />, 'meetings', <></>),

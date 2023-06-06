@@ -31,6 +31,10 @@ a {
   text-decoration: none;
 }
 
+a:hover {
+  color: inherit !important
+}
+
 * {
   box-sizing: border-box;
 }
@@ -77,6 +81,7 @@ a {
 } */
 .risk-register .ant-table-wrapper .ant-table-thead > tr > th {
   background: #3789B4 !important;
+  border-radius: 0px !important;
 }
 .risk-register .ant-table-wrapper .ant-table-thead > tr > th::before {
  width: 0!important; 
@@ -84,7 +89,11 @@ a {
 .risk-register .ant-table-wrapper .ant-table-tbody > tr > td, 
 .risk-register .ant-table-wrapper .ant-table-thead > tr > th {
   margin: 10px !important;
-  border: 3px solid white !important
+  border: 3px solid white !important;
+  background: #D9D9D9;
+}
+.risk-register .ant-table-wrapper .ant-table-tbody > tr.ant-table-row:hover > td {
+  background: rgba(217, 217, 217, 0.8) !important;
 }
 div[data-highcharts-chart="1"] {
   height: inherit !important;

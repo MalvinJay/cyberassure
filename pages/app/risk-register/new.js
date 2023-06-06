@@ -9,8 +9,6 @@ import { getKRIs } from "redux/features/krisSlice";
 import api from "../../../services/config"
 import AppLayout from "../../../src/components/Layouts/appLayout";
 
-const { RangePicker } = DatePicker;
-
 const viewership = [
   {
     name: "High",
@@ -23,6 +21,24 @@ const viewership = [
   {
     name: "Low",
     value: "low"
+  }
+];
+const riskTreatmentOption = [
+  {
+    name: "Accept",
+    value: "accept"
+  },
+  {
+    name: "Avoid",
+    value: "avoid"
+  },
+  {
+    name: "Transfer",
+    value: "transfer"
+  },
+  {
+    name: "Mitigate",
+    value: "mitigate"
   }
 ];
 
@@ -70,8 +86,7 @@ const CreateRiskRegister = () => {
       setloading(true);
       
       const payload = {
-        ...values,
-        target_date: values?.target_date[1]
+        ...values
       };
       
       api.post('task/create-risk', payload)
@@ -104,10 +119,6 @@ const CreateRiskRegister = () => {
     } catch (error) {
       console.error('Error creating task', error);
     }
-  }; 
-  
-  const PickerWithType = ({ type, onChange, className }) => {
-    return <RangePicker className={className} picker={type} onChange={onChange} presets={rangePresets} />
   };  
 
   useEffect(() => {
@@ -143,7 +154,7 @@ const CreateRiskRegister = () => {
                 name="risk_description"
                 className="w-full px-3 py-3 mb-3 text-base leading-tight text-gray-700 border border-primary/80 rounded appearance-none focus:outline-none focus:shadow-outline"
                 type="text"
-                placeholder="Select Task to Assign to a team member or others"
+                placeholder="A description of risk"
               />
             </Form.Item>  
 
@@ -158,7 +169,7 @@ const CreateRiskRegister = () => {
             >
               <Select 
                 className="w-full h-10 text-base leading-tight text-gray-700 border-primary/80 rounded appearance-none focus:outline-none focus:shadow-outline"
-                placeholder="Select team member"
+                placeholder="Select linked KRI"
                 size="large"
                 style={{ height: '43px' }}
               >
@@ -236,12 +247,18 @@ const CreateRiskRegister = () => {
               }
               rules={[ {required: true, message: 'Provide treatment option'}]}
             >
-              <Input
+              <Select 
                 name="risk_treatment_option"
-                className="w-full px-3 py-3 mb-3 text-base leading-tight text-gray-700 border border-primary/80 rounded appearance-none focus:outline-none focus:shadow-outline"
-                type="text"
-                placeholder="Risk response"
-              />
+                aria-label="risk treatment option"
+                className="w-full h-10 text-base leading-tight text-gray-700 border-primary/80 rounded appearance-none focus:outline-none focus:shadow-outline"
+                placeholder="Select option"
+                size="large"
+                style={{ height: '43px' }}
+              >
+                {riskTreatmentOption?.map((el, index) => (
+                  <Select.Option key={index} value={el.name}>{el.name}</Select.Option>
+                ))}
+              </Select>
             </Form.Item>                   
           </div>
 
@@ -254,12 +271,12 @@ const CreateRiskRegister = () => {
             >
               <Select 
                 className="w-full h-10 text-base leading-tight text-gray-700 border-primary/80 rounded appearance-none focus:outline-none focus:shadow-outline"
-                placeholder="Select Priority"
+                placeholder="Select status"
                 size="large"
                 style={{ height: '43px' }}
               >
                 <Select.Option key="open" value="open">Open</Select.Option>
-                <Select.Option key="close" value="closed">Closed</Select.Option>
+                <Select.Option key="closed" value="closed">Closed</Select.Option>
               </Select>              
             </Form.Item>  
 
@@ -269,16 +286,12 @@ const CreateRiskRegister = () => {
               label={<span className="block mb-2 text-base font-bold text-gray-700">Risk Owner</span>}
               rules={[ {required: true, message: 'Select who owns this risk'}]}
             >
-              <Select 
-                className="w-full h-10 text-base leading-tight text-gray-700 border-primary/80 rounded appearance-none focus:outline-none focus:shadow-outline"
-                placeholder="Select Priority"
-                size="large"
-                style={{ height: '43px' }}
-              >
-                <Select.Option key="coo" value="coo">COO</Select.Option>
-                <Select.Option key="project_manager" value="project_manager">Project Manager</Select.Option>
-                <Select.Option key="risk_manager" value="risk_manager">Risk Manager</Select.Option>
-              </Select>              
+              <Input
+                name="risk_owner"
+                className="w-full px-3 py-3 mb-3 text-base leading-tight text-gray-700 border border-primary/80 rounded appearance-none focus:outline-none focus:shadow-outline"
+                type="text"
+                placeholder="Provide risk owner"
+              />
             </Form.Item>
           </div>
 
@@ -287,9 +300,9 @@ const CreateRiskRegister = () => {
             name="target_date"
             rules={[ {required: true, message: 'Provide target date'}]}
           >
-            <PickerWithType 
-              type={type}
-              className="w-full px-3 py-2 text-base leading-tight text-gray-700 border border-primary/80 rounded appearance-none focus:outline-none focus:shadow-outline"
+            <DatePicker 
+              // type={type}
+              className="w-full px-3 py-[10px] text-base leading-tight text-gray-700 border border-primary/80 rounded appearance-none focus:outline-none focus:shadow-outline"
               onChange={(value) => console.log(value)}
             />
           </Form.Item>     

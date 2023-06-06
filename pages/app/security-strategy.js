@@ -9,62 +9,57 @@ import DashboardFilter from "@/components/Misc/DashboardHead";
 import ExportEntity from "@/components/Misc/ExportEntity";
 import RegisterTable from "@/components/Misc/KRITable";
 import api from "../../services/config";
+import Image from "next/image";
 
-const RiskRegister = () => {
+const SecurityStrategy = () => {
 
   const columns = [
     {
-      title: "Risk Description ",
-      dataIndex: "description",
-      key: "description",
+      title: "Security Plan Area",
+      dataIndex: "plan_area",
+      key: "plan_area",
     },
     {
-      title: "Linked KRI",
-      dataIndex: "linked_kri",
-      key: "linked_kri",
+      title: "Category",
+      dataIndex: "category",
+      key: "category",
     },
     {
-      title: "Risk",
-      dataIndex: "risk",
-      key: "risk",
+      title: "Strategy ID",
+      dataIndex: "strategy_id",
+      key: "strategy_id",
     },
     {
-      title: "Risk Level",
-      dataIndex: "risk_level",
-      key: "risk_level",
+      title: "Unit owner",
+      dataIndex: "unit_owner",
+      key: "unit_owner",
     },
     {
-      title: "Risk Response",
-      dataIndex: "risk_response",
-      key: "risk_response",
+      title: "Initiative / Key Result",
+      dataIndex: "initiative_Key_result",
+      key: "initiative_Key_result",
     },
     {
-      title: "Status",
-      dataIndex: "status",
-      key: "status",
+      title: "Start by",
+      dataIndex: "start_by",
+      key: "start_by",
     },
     {
-      title: "Risk Owner",
-      dataIndex: "risk_owner",
-      key: "risk_owner",
-    },
-    {
-      title: "Target Date",
-      dataIndex: "target_date",
-      key: "target_date",
-    },
+      title: "Delivered by",
+      dataIndex: "delivered_by",
+      key: "delivered_by",
+    }
   ];
 
   const [dataSource, setList] = useState([
     {
-      description: "A vulnerable CRM Application Server on the internet",
-      linked_kri: "Number of vulnerabilities",
-      risk: "Denial of Service",
-      risk_level: "High",
-      risk_response: "Disconnect Server from Internet",
-      status: "Open",
-      risk_owner: "COO",
-      target_date: "upload file",
+      plan_area: "Identify",
+      category: "Asset Management",
+      strategy_id: "ID-001",
+      unit_owner: "Cybersecurity",
+      initiative_Key_result: "Establish and maintain an Ericsson wide software inventory",
+      start_by: "Q1 - 2023",
+      delivered_by: "Q4 - 2023",
     }
   ]);
 
@@ -97,11 +92,11 @@ const RiskRegister = () => {
     <AppLayout>
       <section className="relative">
         <AuthHead />
-        <DashboardFilter />
+        {/* <DashboardFilter /> */}
 
-        <div className="w-full pt-14 pb-20 px-8">
+        <div className="w-full pt-6 pb-20 px-8">
           <div className="flex justify-between items-center">
-            <Link href="/app/risk-register/new">
+            {/* <Link href="/app/risk-register/new">
               <button className="text-white bg-primary rounded-lg border-0 py-1 px-4 focus:outline-none hover:bg-primary/90 text-lg space-x-4 inline-flex items-center leading-tight">
                 <span>Create Risk <br /> Register</span>
                 <svg
@@ -117,32 +112,26 @@ const RiskRegister = () => {
                   />
                 </svg>
               </button>
-            </Link>
+            </Link> */}
 
-            <h2 className="font-bold text-2xl ">Risk Register</h2>
+            <h2 className="font-bold text-2xl ">Cybersecurity Strategy and Tactical Plan</h2>
 
-            <ExportEntity name="Import CSV" />
+            {/* <ExportEntity name="Import CSV" /> */}
           </div>
 
           <div>
-            <div className="py-10">
+            <div className="py-10 flex items-start gap-2">
               <RegisterTable 
                 bordered={false}
-                customClass="risk-register" 
+                customClass="risk-register"
                 columns={columns}
                 dataSource={dataSource}
                 addRecord={false}
               />
-
-              {/* <div className="pt-2 flex justify-end">
-                <Button
-                  type="primary"
-                  shape="default"
-                  className="bg-secondary text-white px-16 rounded-none font-bold text-base flex items-center shadow-inner"
-                >
-                  Save
-                </Button>
-              </div> */}
+              
+              <div className="mt-4">
+                <Image width={19} height={19} className="cursor-pointer" src="/assets/images/edit_table.svg" alt="edit_table" />
+              </div>
             </div>
           </div>
         </div>
@@ -151,4 +140,4 @@ const RiskRegister = () => {
   );
 };
 
-export default RiskRegister;
+export default SecurityStrategy;
