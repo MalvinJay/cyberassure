@@ -29,7 +29,7 @@ const Dashboard = () => {
           <DashboardFilter />
         )}
 
-        <div className={`w-full flex items-start flex-wrap p-5 ${defaultView ? '':'sm:py-24'}`}>
+        <div className={`w-full flex items-start flex-wrap p-5 ${defaultView ? '':'sm:pt-24'}`}>
           <div className="md:w-5/12">
             {defaultView ? 
               <div className="py-8 px-6 space-y-6 rounded-xl bg-default-2 shadow-xl h-screen flex justify-center items-center">
@@ -101,7 +101,7 @@ const Dashboard = () => {
 
                 <div className="min-w-32 flex justify-end mt-4">
                   <Button 
-                    href={`/app/KRIs/update/innovare`} 
+                    href={`/app/KRIs`} 
                     type="primary" 
                     shape="default" 
                     className="bg-primary text-white px-16 rounded-none font-bold text-base flex items-center"
