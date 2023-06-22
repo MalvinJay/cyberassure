@@ -81,7 +81,7 @@ const SideMenu = ({ type="app" }) => {
     getItem(<MenuLabel label='Home' link='/app/home' icon={<MenuIcon />} />, 'home', <></>),
     getItem(<MenuLabel label='Dashboard' link='/app/dashboard' icon={<DashboardIcon />} />, 'dashboard', <></>),
     getItem(<MenuLabel label='Risk Register' link='/app/risk-register' icon={<MenuIcon />} />, 'risk_register', <></>),
-    getItem(<MenuLabel label='All KRIs' link="/app/KRIs/all" icon={<MenuIcon />} />, 'all_kris', <></>),
+    // getItem(<MenuLabel label='All KRIs' link="/app/KRIs/all" icon={<MenuIcon />} />, 'all_kris', <></>),
     getItem(<MenuLabel label='Corporate KRIs' link="/app/KRIs/corporate" icon={<MenuIcon />} />, 'coporate_kris', <></>),
     getItem(<MenuLabel label='My KRIs' link="/app/KRIs/my-kris" icon={<MenuIcon />} />, 'api_access', <></>),
     getItem(<MenuLabel label='Cybersecurity Strategy' link="/app/security-strategy" icon={<MenuIcon />} />, 'security_strategy', <></>, [

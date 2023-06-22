@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Button, notification } from "antd";
-import {
-  CaretDownOutlined,
-  CaretUpOutlined,
-  PlusCircleOutlined,
-} from "@ant-design/icons";
+import { CaretDownOutlined, CaretUpOutlined, PlusCircleOutlined } from "@ant-design/icons";
 
 import KRITable from "./KRITable";
 import AddComment from "./AddComment";
@@ -15,6 +11,7 @@ import { getKRByKRIId, getKRIs } from "redux/features/krisSlice";
 import { useDispatch } from "react-redux";
 
 const KRIItem = ({
+  cta="update",
   id = "",
   objective_title = "",
   target_date = "",
@@ -22,6 +19,8 @@ const KRIItem = ({
   kri_type_id,
   showTime = true,
   showAddkey = true,
+  enableUpdate=false,
+  showReveal=false,
   handleUpdateComplete = () => {},
 }) => {
   const dispatch = useDispatch();
@@ -65,8 +64,13 @@ const KRIItem = ({
   const [dataSource, setDataSource] = useState([]);
 
   const handleClick = (e) => {
-    if (router.pathname.includes('/approve')) return;
-    router.push(`/app/KRIs/approve?q=${id}&type=${kri_type_id}`);
+    if (cta === "update") {
+      if (router.pathname.includes('/app/KRIs/update')) return;
+      router.push('/app/KRIs/update');
+    } else {
+      if (router.pathname.includes('/approve')) return;
+      router.push(`/app/KRIs/approve?q=${id}&type=${kri_type_id}`);
+    }
   };
 
   const handleRevealKIs = (e) => {
@@ -117,10 +121,11 @@ const KRIItem = ({
 
             if (res.data.status) {
               notification.success({
-                message: "Key Results Created Successfully",
+                message: "Key Results Added Successfully",
               });
               fetchKeyResults();
               // handleUpdateComplete()
+              router.reload()
             } else {
               notification.error({
                 message: (
@@ -170,8 +175,12 @@ const KRIItem = ({
     fetchKeyResults();
   }, []);
 
+  useEffect(() => {
+    if (showReveal) setrevealKRIs(true)
+  }, [showReveal])
+
   return (
-    <section className="hover:bg-slate-50 rounded-lg px-5">
+    <section id={`kri-${id}`} className="hover:bg-slate-50 rounded-lg px-5">
       <div
         className="flex items-center justify-between py-3 cursor-pointer"
         onClick={handleClick}
@@ -197,6 +206,7 @@ const KRIItem = ({
               </clipPath>
             </defs>
           </svg>
+
           <div className="pt-3">
             <h2 className="font-bold text-lg mb-0">{objective_title}</h2>
 
@@ -229,15 +239,15 @@ const KRIItem = ({
         )}
 
         <div className="min-w-[10rem]">
-            {kri_type_id === 2 && !router.pathname.includes('/approve') && (
-              <div
-                className={`${
-                approval_status ? "visible" : "invisible"
-                } ${approval_status === 'decline' ? 'bg-danger' : approval_status === 'pending' ? 'bg-orange-500' : 'bg-green-900'} text-white p-2 rounded-lg text-base capitalize`}
-              >
-                {approval_status} Approval
-              </div>
-            )}
+          {kri_type_id === 2 && !router.pathname.includes('/approve') && (
+            <div
+              className={`${
+              approval_status ? "visible" : "invisible"
+              } ${approval_status === 'decline' ? 'bg-danger' : approval_status === 'pending' ? 'bg-orange-500' : 'bg-green-900'} text-white p-2 rounded-lg text-base capitalize`}
+            >
+              {approval_status} Approval
+            </div>
+          )}
         </div>
       </div>
 
@@ -250,24 +260,26 @@ const KRIItem = ({
             loading={loading}
           />
 
-          <div className="pt-2 flex justify-between items-start">
-            <AddComment
-              handleInputChange={(val) => {
-                setInfo({ comment: val });
-              }}
-            />
+          {enableUpdate && (
+            <div className="pt-2 flex justify-between items-start">
+              <AddComment
+                handleInputChange={(val) => {
+                  setInfo({ comment: val });
+                }}
+              />
 
-            <Button
-              size="large"
-              type="primary"
-              shape="default"
-              className="bg-primary text-white !px-10 font-bold text-sm rounded-none mt-3"
-              loading={loading}
-              onClick={() => addUpdateKeyResults()}
-            >
-              Save
-            </Button>
-          </div>
+              <Button
+                size="large"
+                type="primary"
+                shape="default"
+                className="bg-primary text-white !px-10 font-bold text-sm rounded-none mt-3"
+                loading={loading}
+                onClick={() => addUpdateKeyResults()}
+              >
+                Save
+              </Button>
+            </div>
+          )}
         </div>
       )}
     </section>

@@ -9,14 +9,22 @@ import SRHighlists from "@/components/Misc/SRHighlists";
 import ChartComponent from "@/components/Misc/ChartComponent";
 import AddComment from "@/components/Misc/AddComment";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getKRIs } from "redux/features/krisSlice";
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
+  const { list } = useSelector((state) => state.kris);
+  const { defaultView } = useSelector((state) => state.general);
+
   const [securedScore, setsecuredScore] = useState(0);
   const [change, setchange] = useState(0);
-  const { defaultView } = useSelector((state) => state.general);
   
   useEffect(() => {
+    dispatch(getKRIs({ 
+      page: 1,
+      limit: 10
+    }))
     window.scrollTo(0,0)
   }, []);
   
@@ -97,11 +105,11 @@ const Dashboard = () => {
               </>
             :
               <>
-                <SRHighlists />
+                <SRHighlists kris={list} />
 
                 <div className="min-w-32 flex justify-end mt-4">
                   <Button 
-                    href={`/app/KRIs`} 
+                    href={`/app/KRIs/update`} 
                     type="primary" 
                     shape="default" 
                     className="bg-primary text-white px-16 rounded-none font-bold text-base flex items-center"

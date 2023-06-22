@@ -45,13 +45,13 @@ const DashboardFilter = () => {
             </g>
             <defs>
             <linearGradient id="paint0_linear_70_8908" x1="17.1108" y1="14.2738" x2="17.1108" y2="26.038" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#35B8F1"/>
-            <stop offset="1" stop-color="#28A8EA"/>
+            <stop stopColor="#35B8F1"/>
+            <stop offset="1" stopColor="#28A8EA"/>
             </linearGradient>
             <linearGradient id="paint1_linear_70_8908" x1="2.7185" y1="5.95712" x2="11.4964" y2="21.5402" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#1784D9"/>
-            <stop offset="0.5" stop-color="#107AD5"/>
-            <stop offset="1" stop-color="#0A63C9"/>
+            <stop stopColor="#1784D9"/>
+            <stop offset="0.5" stopColor="#107AD5"/>
+            <stop offset="1" stopColor="#0A63C9"/>
             </linearGradient>
             <clipPath id="clip0_70_8908">
             <rect width="27.2899" height="26.6243" fill="white" transform="translate(0.292969 0.34375)"/>
@@ -82,9 +82,9 @@ const DashboardFilter = () => {
             </g>
             <defs>
             <linearGradient id="paint0_linear_70_8930" x1="2.62547" y1="5.83534" x2="12.4283" y2="22.7846" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#5A62C3"/>
-            <stop offset="0.5" stop-color="#4D55BD"/>
-            <stop offset="1" stop-color="#3940AB"/>
+            <stop stopColor="#5A62C3"/>
+            <stop offset="0.5" stopColor="#4D55BD"/>
+            <stop offset="1" stopColor="#3940AB"/>
             </linearGradient>
             <clipPath id="clip0_70_8930">
             <rect width="29.2867" height="27.2899" fill="white" transform="translate(0.0224609 0.671875)"/>

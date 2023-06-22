@@ -6,9 +6,11 @@ import AppLayout from "components/Layouts/appLayout";
 import AuthHead from "components/Misc/AuthHead";
 import KRIItem from "components/Misc/KRI-Item";
 import DashboardFilter from "@/components/Misc/DashboardHead";
+import { useRouter } from "next/router";
 
 const KRIs = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const { list } = useSelector((state) => state.kris);
   const [loading, setloading] = useState(true);
 
@@ -22,16 +24,19 @@ const KRIs = () => {
     })
   };
 
-  // useEffect(() => {
-  //   const KriID = decryptId(encryptedId, 'cyberssure@2023');
-  //   console.log('KRIID:', KriID);
-  // }, [])
-
   useEffect(() => {
     fetchKRIs();
-    const KriID = decryptId(encryptedId, 'cyberssure@2023');
-    console.log('KRIID:', KriID);
   }, []);
+
+  useEffect(() => {
+    if (router.query.q) {
+        const queryItem = document.getElementById(`kri-${router?.query?.q}`);
+        if (queryItem) {
+            queryItem.scrollTop = 180
+        }
+    }
+  }, [router.query])
+  
 
   return (
     <AppLayout>
@@ -48,7 +53,16 @@ const KRIs = () => {
           :
             <div className="pt-4">
               {list?.filter(el => el.kri_type_id === 2)?.length > 0 ? (
-                list?.filter(el => el.kri_type_id === 2)?.map((el, index) => <KRIItem key={index} {...el} />)
+                list?.filter(el => el.kri_type_id === 2)?.map((el, index) => 
+                    <KRIItem 
+                        key={index} 
+                        {...el} 
+                        showTime={false}
+                        approval_status=""
+                        enableUpdate={true}
+                        showReveal={router?.query?.q === `${el?.id}`}
+                    />
+                )
               ) : (
                 <div className="p-10 text-center">
                   No KRIs available

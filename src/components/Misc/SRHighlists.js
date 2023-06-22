@@ -1,7 +1,13 @@
-import React from 'react'
-import { Table, Progress } from 'antd'
+'use client';
 
-const SRHighlists = () => {
+import React, { memo } from 'react'
+import { Table, Progress } from 'antd'
+import { useRouter } from 'next/router';
+// import { useRequest } from '../../../hooks/useRequest';
+
+const SRHighlists = ({ kris=[] }) => {
+    const router = useRouter();
+
     const columns = [
         {
           title: 'ID',
@@ -62,21 +68,43 @@ const SRHighlists = () => {
             name: 'Percentage of projects reviewed that meet target quality goals and objectives',
             status: '0',
         }
-    ]
+    ];
 
-  return (
-    <div className="w-full bg-gray-3 p-4">
-        <h2 className="font-bold text-xl text-center">Security Risk  Highlights</h2>
-        
-        <div className="risk">
-            <Table 
-                dataSource={dataSource} 
-                columns={columns} 
-                pagination={false} 
-            />
+    // const { isLoading, data, error } = useRequest('kris', 'kri/get-kris');
+    // console.log('Data:', data);
+    // if (isLoading) return <div>Loading...</div>
+
+    return (
+        <div className="w-full bg-gray-3 p-4">
+            <h2 className="font-bold text-xl text-center">Security Risk  Highlights</h2>
+            
+            <div className="risk">
+                <Table 
+                    dataSource={
+                        kris?.map((el) => {
+                            return {
+                                key: el.id,
+                                name: el.objective_title,
+                                status: el.approval_status === 'Pending' ? 30 : el.approval_status === 'approved' ? 70 : 0
+                            }
+                        })
+                    } 
+                    columns={columns} 
+                    pagination={{
+                        total: 10
+                    }}
+                    rowClassName="cursor-pointer"
+                    onRow={(record) => {
+                        return {
+                          onClick: () => {
+                            router.push(`/app/KRIs/update?q=${record.key}`)
+                          }
+                        };
+                      }}
+                />
+            </div>
         </div>
-    </div>
-  )
+    )
 }
 
-export default SRHighlists
+export default memo(SRHighlists);

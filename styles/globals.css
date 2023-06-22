@@ -8,10 +8,6 @@
   @apply border-primary/80 rounded !important;
 }
 
-/* .ant-btn-primary:hover {
-  background-color: ;
-} */
-
 @tailwind utilities;
 
 html,

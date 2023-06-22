@@ -3,13 +3,22 @@ import api from "../services/config";
 
 // Use axios instance as fetcher
 
-export const useRequest = (url, params, config={}) => {
-  const fetcher = async (url, params) => api.get(url, params).then(res => res.data);
+export const useRequest = (key, url, params, config={}) => {
+  const fetcher = (url) => {
+    return new Promise((resolve, reject) => {
+      return api.get(url, params)
+      .then((res) => {
+        console.log(key, ':', res.data.message)
+        resolve(res.data.message)
+      }, (err) => reject(err))
+      .catch((error) => reject(error))
+    })
+  };
   
   const { isLoading, data, error, mutate } = useSWR(
-    api.getUri() + url, 
-    fetcher(api.getUri() + url, params),
-    config
+    key,
+    fetcher(url),
+    {...config}
   );
 
   return { isLoading, data, error, mutate };

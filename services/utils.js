@@ -1,3 +1,6 @@
+import AES from 'crypto-js/aes';
+import { enc } from 'crypto-js';
+
 export function formatDate(date) {
     if (date) return new Date(date)?.toDateString()?.slice(4,)
     else return ''
@@ -38,4 +41,50 @@ export const base64BinaryBuffer = (file, output, callback) => {
         reader.readAsBinaryString(file)
         break
     }
+}
+
+export const present = (value) => {
+  if (!value) {
+    return false
   }
+  if (typeof value === 'object') {
+    if (Object.keys(value).length > 0) {
+      return true
+    }
+    return false
+  }
+  if (Array.isArray(value) || typeof value === 'string') {
+    return value && value.length > 0
+  } 
+    return !!value
+}
+
+export const createQueryParams = (filters={}) => {
+  let query = '';
+
+  if (present(filters)) {
+    Object.keys(filters).forEach((key, index) => {
+      if (typeof filters[key] === 'undefined') {
+        query = '';
+      } else if (typeof filters[key] === 'object') {
+        filters[key].forEach(el => {
+          query += `${index != 0 ? '&':'?'}${key}[]=${el}`
+        });
+      } else {
+        query += `${index != 0 ? '&':'?'}${key}=${filters[key]}`
+      }
+    })
+  }
+
+  return query;
+}
+
+export const encryptId = (str, encryptionKey) => {
+  const ciphertext = AES.encrypt(str, encryptionKey);
+  return encodeURIComponent(ciphertext.toString());
+}
+
+export const decryptId = (str, encryptionKey) => {
+  const decodedStr = decodeURIComponent(str);
+  return AES.decrypt(decodedStr, encryptionKey).toString(enc.Utf8);
+}

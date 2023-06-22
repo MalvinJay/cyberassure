@@ -1,16 +1,21 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import api from "../../../services/config";
+import { createQueryParams } from "../../../services/utils";
 
 const initialState = {
   list: []
 };
 
 export const getKRIs = createAsyncThunk('kris/getKRIs', 
-  async (cache=true, thunkAPI) => {
+  async ( cache=true, thunkAPI) => {
     const { kris } = thunkAPI.getState();
     if (cache && kris?.list?.length > 0) return kris?.list;
 
-    const response = await api.get("kri/get-kris");
+    // const filters={ page: 1, limit: 10 }
+    let url = "kri/get-kris";
+    // url += createQueryParams(filters);
+
+    const response = await api.get(url);
     return response?.data?.message;
   }
 );
