@@ -28,12 +28,17 @@ const CorporateKRIs = () => {
     })
   }, [dispatch]);
 
-  const onClose = useCallback(() => {
+  const onClose = () => {
     setOpen(false);
-  }, [])
+  }
+
+  const onComplete = useCallback(() => {
+    onClose();
+    fetchKRIs(false);
+  }, [])  
 
   useEffect(() => {
-    fetchKRIs();
+    fetchKRIs(false);
   }, [fetchKRIs]);
 
   return (
@@ -67,7 +72,7 @@ const CorporateKRIs = () => {
               </div>
             </div>
           :
-            <div className="pt-4">
+            <div>
               {list?.filter(el => el.kri_type_id === 2)?.length > 0 ? (
                 list?.filter(el => el.kri_type_id === 2)?.map((el, index) => <KRIItem key={index} {...el} cta="approve" />)
               ) : (
@@ -80,7 +85,7 @@ const CorporateKRIs = () => {
         </div>
 
         <Drawer width={670} title={<h3 className="text-3xl font-bold">Create KRI</h3>} placement="right" onClose={onClose} open={open}>
-          <AddEditKRIs kriType={2} onComplete={onClose} />
+          <AddEditKRIs kriType={2} onComplete={onComplete} />
         </Drawer>        
       </section>
     </AppLayout>

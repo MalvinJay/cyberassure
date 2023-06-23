@@ -20,7 +20,7 @@ const MyKRIs = () => {
 
   const fetchKRIs = async () => {
     setloading(true);
-    dispatch(getKRIs())
+    dispatch(getKRIs(false))
     .then(() => {
       setloading(false);
     }, () => {
@@ -28,9 +28,14 @@ const MyKRIs = () => {
     })
   };
 
-  const onClose = useCallback(() => {
+  const onClose = () => {
     setOpen(false);
-  }, [])  
+  }
+
+  const onComplete = useCallback(() => {
+    onClose()
+    fetchKRIs();
+  }, [])
 
   useEffect(() => {
     fetchKRIs();
@@ -78,7 +83,7 @@ const MyKRIs = () => {
         </div>
 
         <Drawer width={670} title={<h3 className="text-3xl font-bold">Create KRI</h3>} placement="right" onClose={onClose} open={open}>
-          <AddEditKRIs kriType={1} onComplete={onClose} />
+          <AddEditKRIs kriType={1} onComplete={onComplete} />
         </Drawer>        
       </section>
     </AppLayout>
