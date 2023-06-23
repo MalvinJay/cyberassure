@@ -1,12 +1,12 @@
+'use client';
+
 import React, { useState, useEffect} from "react";
-import Link from "next/link";
 import { Button, Drawer } from "antd";
 
 import AppLayout from "@/components/Layouts/appLayout";
 import AuthHead from "@/components/Misc/AuthHead";
 import DashboardFilter from "@/components/Misc/DashboardHead";
 
-import ExportEntity from "@/components/Misc/ExportEntity";
 import RegisterTable from "@/components/Misc/KRITable";
 
 import { useDispatch } from "react-redux";
