@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import { useRouter } from "next/router";
 import { Button, Select, Form, Input, DatePicker, notification } from 'antd'
 import dayjs from 'dayjs';
@@ -220,4 +220,4 @@ const AddEditTask = ({ onComplete=()=>{} }) => {
   );
 };
 
-export default AddEditTask;
+export default memo(AddEditTask);
