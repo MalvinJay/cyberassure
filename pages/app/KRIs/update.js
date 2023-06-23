@@ -30,14 +30,16 @@ const KRIs = () => {
 
   useEffect(() => {
     if (router.query.q) {
-        const queryItem = document.getElementById(`kri-${router?.query?.q}`);
+      // Check if kri item is available on page and scroll into view the item
+      setTimeout(() => {
+        const queryItem = window.document.getElementById(`kri-${router.query?.q}`);
         if (queryItem) {
-            queryItem.scrollTop = 180
+          queryItem.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
         }
+      }, 100);
     }
-  }, [router.query])
+  }, [])
   
-
   return (
     <AppLayout>
       <section className="relative">
@@ -54,14 +56,14 @@ const KRIs = () => {
             <div className="pt-4">
               {list?.filter(el => el.kri_type_id === 2)?.length > 0 ? (
                 list?.filter(el => el.kri_type_id === 2)?.map((el, index) => 
-                    <KRIItem 
-                        key={index} 
-                        {...el} 
-                        showTime={false}
-                        approval_status=""
-                        enableUpdate={true}
-                        showReveal={router?.query?.q === `${el?.id}`}
-                    />
+                  <KRIItem 
+                    key={index} 
+                    {...el} 
+                    showTime={false}
+                    approval_status=""
+                    enableUpdate={true}
+                    showReveal={router?.query?.q === `${el?.id}`}
+                  />
                 )
               ) : (
                 <div className="p-10 text-center">

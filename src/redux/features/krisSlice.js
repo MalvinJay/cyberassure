@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import api from "../../../services/config";
-import { createQueryParams } from "../../../services/utils";
 
 const initialState = {
-  list: []
+  list: [],
+  key_results_cache: []
 };
 
 export const getKRIs = createAsyncThunk('kris/getKRIs', 
@@ -21,7 +21,11 @@ export const getKRIs = createAsyncThunk('kris/getKRIs',
 );
 
 export const getKRByKRIId = createAsyncThunk('kris/getKeyResults', 
-  async (id='') => {
+  async (id='', thunkAPI) => {
+    const { kris } = thunkAPI.getState();
+    const key_results_cache = kris?.key_results_cache?.find((el) => el.id === id)
+    if (key_results_cache) return key_results_cache?.list;
+
     const response = await api.get(`key-result/get-key-results?kri_id=${id}`);
     return response?.data?.message;
   }
@@ -46,6 +50,15 @@ export const krisSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getKRIs.fulfilled, (state, action) => {
       state.list = action.payload
+    }),
+    builder.addCase(getKRByKRIId.fulfilled, (state, action) => {
+      state.key_results_cache = [
+        ...state.key_results_cache,
+        {
+          id: action.meta.arg,
+          list: action.payload
+        }
+      ]
     })
   }
 });

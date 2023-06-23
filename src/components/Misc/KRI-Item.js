@@ -90,12 +90,10 @@ const KRIItem = ({
     setloading(true);
 
     dispatch(getKRByKRIId(id))
-      .then(
-        (res) => {
+      .then((res) => {
           setloading(false);
           setDataSource(res.payload);
-        },
-        () => {
+        }, () => {
           setloading(false);
         }
       )
@@ -172,8 +170,8 @@ const KRIItem = ({
   };
 
   useEffect(() => {
-    fetchKeyResults();
-  }, []);
+    if (revealKRIs) fetchKeyResults();
+  }, [revealKRIs]);
 
   useEffect(() => {
     if (showReveal) setrevealKRIs(true)
