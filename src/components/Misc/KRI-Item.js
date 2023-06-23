@@ -258,6 +258,7 @@ const KRIItem = ({
             dataSource={dataSource}
             setInfo={setInfo}
             loading={loading}
+            addRecord={enableUpdate}
           />
 
           {enableUpdate && (
